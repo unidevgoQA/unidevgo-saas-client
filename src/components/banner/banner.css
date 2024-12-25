@@ -53,6 +53,7 @@
   color: #fff;
   border: none;
   padding: 10px 20px;
+  width: 165px;
   border-radius: 30px;
   font-weight: bold;
   transition: background-color 0.3s ease;
@@ -66,4 +67,5 @@
 .image img {
   width: 100%;
   border-radius: 20px;
+  margin-bottom: 20px;
 }

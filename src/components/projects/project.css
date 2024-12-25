@@ -1,0 +1,82 @@
+/* project.css */
+
+/* Main container styling */
+.project {
+  background-color: var(--primary-color);
+  margin: 20px;
+  padding: 40px 20px;
+  color: white;
+  text-align: center;
+  border-radius: 20px; /* Rounded corners */
+}
+
+/* Tabs header section */
+.tabs-header {
+  margin-bottom: 20px;
+}
+
+/* Tabs content section */
+.tabs-content {
+  position: relative;
+  overflow: hidden;
+  margin: auto;
+  border-radius: 20px;
+  background-color: #3232e6; /* Background for active tab content */
+  padding: 50px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Individual tab panel */
+.tab-panel {
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease-in-out;
+}
+
+.tab-panel.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Image inside tab panel */
+.tab-panel img {
+  max-width: 70%;
+  border-radius: 10px;
+}
+
+/* Content wrapper inside tab panel */
+.tabs-content-img-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Text content wrapper */
+.title-wrapper {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  gap: 20px;
+  max-width: 50%;
+}
+
+/* Button styling */
+.btn-get-white {
+  background-color: #fff;
+  color: var(--primary-color);
+  width: 165px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-get-white:hover {
+  background-color: #ddd;
+}

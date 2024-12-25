@@ -1,0 +1,54 @@
+/* Container styling */
+.client-stats {
+  background-color: #ffffff; /* White background */
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Wrapper for the client stats */
+.client-stats-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap; /* Ensures responsiveness */
+  max-width: 1200px; /* Constrain content width */
+  width: 100%;
+}
+
+/* Individual stat item */
+.client-stats-item {
+  text-align: center;
+  flex: 1; /* Equal spacing for all items */
+  min-width: 200px; /* Ensure each block has a minimum size */
+}
+
+/* Client logo styling */
+.client-logo {
+  max-width: 100px;
+  margin-bottom: 15px;
+}
+
+/* Statistic text */
+.statistic {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #000;
+  margin: 10px 0;
+}
+
+/* Description text */
+.description {
+  font-size: 1rem;
+  color: #666666;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .client-stats-wrapper {
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px;
+  }
+}

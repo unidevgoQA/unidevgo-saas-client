@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import bannerImg from '../../assets/hero-section.avif';
+import bannerImg from "../../assets/hero-section.avif";
 import "./banner.css";
 const Banner = () => {
   const options = [
@@ -58,11 +58,10 @@ const Banner = () => {
             Get Started <FaLongArrowAltRight />
           </button>
         </div>
-        
       </div>
       <div className="image container mt-4">
-          <img src={bannerImg} alt="banner-img" />
-        </div>
+        <img src={bannerImg} alt="banner-img" />
+      </div>
     </div>
   );
 };
