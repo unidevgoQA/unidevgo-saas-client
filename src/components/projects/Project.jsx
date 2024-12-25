@@ -53,7 +53,7 @@ const Project = () => {
 
   return (
     <div className="project">
-      {/* Page heading */}
+      {/* section heading */}
       <div className="heading container">
         <h2 className="text-center mb-4">
           From projects to goals, <br />
@@ -73,14 +73,14 @@ const Project = () => {
             }}
             sx={{
               "& .MuiTab-root": {
-                color: "rgba(255, 255, 255, 0.7)", // Slightly transparent white for unselected tabs
+                color: "#fff", // Slightly transparent white for unselected tabs
                 fontSize: "1.1rem",
                 textTransform: "none",
                 fontWeight: "500",
                 fontFamily: '"Poppins", serif',
               },
               "& .Mui-selected": {
-                color: "#fff", // Solid white color for selected tab
+                color: "#fff !important", // Slightly transparent white for unselected tabs
               },
             }}
           >

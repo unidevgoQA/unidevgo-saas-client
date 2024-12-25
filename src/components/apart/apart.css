@@ -1,0 +1,100 @@
+/* Main container */
+.apart {
+  background-color: #000;
+  margin: 20px 20px 0px 20px;
+  border-radius: 20px;
+  text-align: center;
+}
+.hover-cards {
+  color: #fff;
+  padding: 60px;
+  text-align: center;
+  border-radius: 20px;
+}
+
+/* Section title */
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+/* Cards wrapper */
+.cards-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Individual card */
+.card {
+  background-color: #1a1a1a;
+  border-radius: 15px;
+  padding: 20px;
+  width: 500px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.card.hovered {
+  background-color: #292929;
+  transform: scale(1.05);
+}
+
+/* Default content */
+.default-content {
+  text-align: center;
+}
+
+.icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.default-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.default-content p {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+/* Hover content */
+.hover-content {
+  text-align: center;
+}
+
+.hover-content p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.hover-logo {
+  max-width: 80px;
+  margin: 10px auto;
+}
+
+.hover-footer {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cards-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .card {
+    width: 90%;
+  }
+}

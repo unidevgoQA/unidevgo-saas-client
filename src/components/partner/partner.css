@@ -1,0 +1,94 @@
+.partner {
+  padding: 60px 0px;
+}
+
+/* Main container */
+.accordion-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background-color: var(--bg-light-green-color);
+  padding: 40px;
+  border-radius: 10px;
+}
+
+/* Accordion content container */
+.accordion-content {
+  flex: 1;
+  max-width: 50%;
+}
+
+.section-title {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Accordion items */
+.accordion-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.accordion-item {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.accordion-item:hover {
+  transform: scale(1.02);
+}
+
+.accordion-item.active {
+  background-color: #e9ffea;
+}
+
+.accordion-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.accordion-description {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Image container */
+.accordion-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.accordion-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .accordion-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .accordion-content {
+    max-width: 100%;
+  }
+
+  .accordion-image {
+    margin-top: 20px;
+    width: 100%;
+  }
+}
