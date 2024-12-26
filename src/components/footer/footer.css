@@ -1,0 +1,147 @@
+.footer {
+  background-color: #fff; /* Light background */
+  color: #333; /* Dark text for contrast */
+  padding: 0px 60px;
+  margin-top: 60px;
+}
+
+.footer h6 {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.footer ul {
+  padding: 0;
+  list-style: none;
+}
+
+.footer ul li {
+  margin-bottom: 10px;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: #666;
+  font-size: 0.9rem;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.footer-link:hover {
+  color: #371edc; /* Primary color hover effect */
+  transform: translateX(3px); /* Slight move to the right */
+}
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+}
+
+.social-icon {
+  font-size: 1.5rem;
+  color: #371edc;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.social-icon:hover {
+  color: #fe4203; /* Change on hover */
+  transform: scale(1.2); /* Enlarge on hover */
+}
+
+.footer-bottom {
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.footer-bottom {
+  border-top: 1px solid #ddd;
+}
+
+.footer-language {
+  font-size: 0.9rem;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.footer-language:hover {
+  color: #371edc;
+}
+
+.footer-social-icons .social-icon {
+  font-size: 1.2rem;
+  color: #333;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.footer-social-icons .social-icon:hover {
+  color: #777eff;
+  transform: scale(1.1);
+}
+
+.certification-badges img {
+  height: 30px;
+  transition: transform 0.3s;
+}
+
+.certification-badges img:hover {
+  transform: scale(1.1);
+}
+
+.footer-links .footer-link {
+  font-size: 0.9rem;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.footer-links .footer-link:hover {
+  color: #371edc;
+  transform: translateX(2px);
+}
+
+.app-buttons .app-store-btn {
+  height: 40px;
+  transition: transform 0.3s;
+}
+
+.app-buttons .app-store-btn:hover {
+  transform: scale(1.1);
+}
+
+.footer-accessibility {
+  font-size: 0.9rem;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-accessibility:hover {
+  color: #fe4203;
+}
+/* App Buttons */
+.app-buttons .app-store-btn img {
+  height: 40px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.app-buttons .app-store-btn img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Accessibility Statement */
+.footer-accessibility {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.85rem;
+  transition: color 0.3s;
+}
+
+.footer-accessibility:hover {
+  color: #fe4203;
+}

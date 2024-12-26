@@ -1,0 +1,164 @@
+/* Main container */
+.slider-section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 3rem;
+  margin-bottom: 60px 0px;
+  color: var(--text-primary-color);
+}
+
+/* Swiper slide styling */
+.slider-card {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.slider-card:hover {
+  transform: scale(0.95);
+}
+
+/* Overlay color layer */
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Default fallback */
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.slider-card:hover .card-overlay {
+  opacity: 0.9; /* Increase overlay visibility on hover */
+}
+
+/* Default card content */
+.card-default-content {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-default-content img {
+  max-width: 75%;
+  border-radius: 8px;
+  margin-top: 10px;
+  transition: transform 0.3s ease;
+}
+
+.slider-card:hover .card-default-content img {
+  transform: scale(1.05);
+}
+
+/* Hover content */
+.card-hover-content {
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  position: absolute;
+  inset: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+.slider-card:hover .card-hover-content {
+  opacity: 1;
+}
+
+.card-hover-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.card-hover-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.card-hover-content ul li {
+  margin: 5px 0;
+}
+
+/* Hover button styling */
+.hover-button {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  width: 165px;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.hover-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}
+
+/* Custom Swiper Navigation Buttons */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  color: #fff; /* White arrow */
+  border-radius: 50%; /* Circular buttons */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+  transform: scale(1.1); /* Slightly enlarge the button on hover */
+}
+
+/* Adjust the arrow size */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px; /* Adjust the arrow size */
+  font-weight: bold;
+}
+
+/* Positioning */
+.swiper-button-next {
+  right: 10px; /* Adjust right position */
+}
+
+.swiper-button-prev {
+  left: 10px; /* Adjust left position */
+}
