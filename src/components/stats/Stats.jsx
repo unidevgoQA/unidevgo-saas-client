@@ -1,7 +1,8 @@
 import React from "react";
 import logo1 from "../../assets/client/client (1).avif";
 import logo2 from "../../assets/client/client (1).jpg";
-import logo3 from "../../assets/client/client (2).avif";
+import logo3 from "../../assets/client/client (1).png";
+
 import "./stats.css";
 
 // Sample data for the section
