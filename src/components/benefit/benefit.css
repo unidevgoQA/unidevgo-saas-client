@@ -1,0 +1,96 @@
+/* Enterprise Benefits Section */
+.benefits-section {
+  background: linear-gradient(#371edc, #170b68);
+  color: white;
+  padding: 120px 0px;
+  margin: 60px 0px;
+}
+.heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.section-title-benefit {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  flex: 1 1 auto;
+  max-width: 75%;
+}
+
+.talk-to-sales-btn {
+  color: white;
+  border-color: white;
+  padding: 0.6rem 1.2rem;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  border-radius: 30px;
+}
+
+.talk-to-sales-btn:hover {
+  background-color: white;
+  color: #201b4b;
+}
+
+.benefit-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1.5rem;
+  height: 100%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+}
+
+.benefit-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.benefit-icon {
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+.benefit-subtitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ccc;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.benefit-title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.benefit-description {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #ddd;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .heading-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .section-title {
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .talk-to-sales-btn {
+    margin-bottom: 1rem;
+  }
+
+  .benefit-card {
+    text-align: center;
+  }
+}

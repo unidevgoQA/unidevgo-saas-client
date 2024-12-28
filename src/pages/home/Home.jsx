@@ -1,6 +1,7 @@
 import React from "react";
 import Apart from "../../components/apart/Apart";
 import Banner from "../../components/banner/Banner";
+import Benefit from "../../components/benefit/Benefit";
 import Client from "../../components/client/Client";
 import Enterprise from "../../components/enterprise/Enterprise";
 import Feature from "../../components/feature/Feature";
@@ -17,8 +18,9 @@ const Home = () => {
       <Service/>
       <Stats/>
       <Project/>
-      <Apart/>
       <Partner/>
+      <Benefit/>
+      <Apart/>
       <Feature/>
       <Client/>
       <Enterprise/>

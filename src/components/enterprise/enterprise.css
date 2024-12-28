@@ -1,12 +1,12 @@
 /* General Section Styling */
 .enterprise-section {
-  background-color: var(--primary-color);
+  background-color: #1a1a1a;
   color: #ffffff;
   padding: 120px 20px;
   border-radius: 20px;
   position: relative;
   overflow: hidden;
-  margin: 40px 20px;
+  margin: 0px 20px;
 }
 
 /* Text Content Styling */
@@ -32,7 +32,7 @@
 
 .enterprise-section .cta-button {
   background-color: #ffffff;
-  color: var(--primary-color);
+  color: #1a1a1a;
   border: 2px solid transparent;
   padding: 10px 20px;
   border-radius: 25px;

@@ -49,9 +49,7 @@ const Apart = () => {
   return (
     <div className="apart">
       <div className="heading container">
-        <h2 className="text-center text-white mb-4 pt-5">
-        What sets us apart
-        </h2>
+        <h2 className="text-center text-black mb-4 pt-5">What sets us apart</h2>
       </div>
       <div className="hover-cards container">
         <div className="cards-wrapper">
@@ -76,9 +74,14 @@ const Apart = () => {
               ) : (
                 // Default content
                 <div className="default-content">
-                  <span style={{
-                    fontSize : '60px'
-                  }} className="icon">{<card.icon/>}</span>
+                  <span
+                    style={{
+                      fontSize: "60px",
+                    }}
+                    className="icon"
+                  >
+                    {<card.icon />}
+                  </span>
                   <h2 className="my-4">{card.title}</h2>
                   <p>{card.subtitle}</p>
                 </div>
