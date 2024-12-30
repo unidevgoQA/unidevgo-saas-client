@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import { LuHeartPulse, LuRocket, LuSettings } from "react-icons/lu";
+import { LuHeartPulse, LuMonitor, LuRocket, LuSettings, LuUsers } from "react-icons/lu";
 import logo1 from "../../assets/client/client (1).avif";
 import "./apart.css";
+// Data for the cards
 // Data for the cards
 const cardData = [
   {
@@ -15,7 +16,7 @@ const cardData = [
         "Customize automations, reports, and processes to your needs without compromising on governance and control.",
       logo: logo1,
       footer:
-        "monday.com supports over 200 use cases in 190 different industries",
+        "unidevgo supports over 200 use cases in 190 different industries",
     },
   },
   {
@@ -27,7 +28,7 @@ const cardData = [
       description:
         "Deliver faster ROI with easy-to-use tools tailored to your unique workflows and business needs.",
       logo: logo1,
-      footer: "monday.com accelerates workflows for diverse teams globally",
+      footer: "unidevgo accelerates workflows for diverse teams globally",
     },
   },
   {
@@ -39,7 +40,31 @@ const cardData = [
       description:
         "Flexibly design workflows that adapt to evolving needs while maintaining organizational standards.",
       logo: logo1,
-      footer: "monday.com offers unmatched customization for teams.",
+      footer: "unidevgo offers unmatched customization for teams.",
+    },
+  },
+  {
+    id: 4,
+    icon: LuMonitor, // Replace with actual icons or SVGs
+    title: "Seamless Integration",
+    subtitle: "Connect your favorite tools effortlessly",
+    hoverContent: {
+      description:
+        "Integrate with hundreds of tools and platforms to centralize data and streamline workflows.",
+      logo: logo1,
+      footer: "unidevgo integrates with over 300 apps and tools.",
+    },
+  },
+  {
+    id: 5,
+    icon: LuUsers, // Replace with actual icons or SVGs
+    title: "Team Collaboration",
+    subtitle: "Enhance teamwork and productivity",
+    hoverContent: {
+      description:
+        "Boost team collaboration with features designed to improve communication and project tracking.",
+      logo: logo1,
+      footer: "unidevgo fosters collaboration for teams of any size.",
     },
   },
 ];
@@ -77,6 +102,7 @@ const Apart = () => {
                   <span
                     style={{
                       fontSize: "60px",
+                      color : "#fff"
                     }}
                     className="icon"
                   >

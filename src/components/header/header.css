@@ -1,0 +1,16 @@
+.MuiDrawer-paper {
+  background-color: var(--primary-color);
+}
+
+.MuiListItemText-root {
+  color: white;
+}
+
+button.MuiButton-root {
+  text-transform: none;
+  font-family: "Poppins", serif;
+}
+
+.submenu {
+  display: none;
+}

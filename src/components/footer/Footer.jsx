@@ -6,7 +6,7 @@ import {
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 const Footer = () => {
