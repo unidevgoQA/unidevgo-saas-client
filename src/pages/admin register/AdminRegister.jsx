@@ -1,7 +1,21 @@
-import { Box, Button, Grid, InputAdornment, TextField, Typography } from "@mui/material";
-import React from "react";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { AiOutlineCamera } from "react-icons/ai";
+import {
+  AiOutlineCamera,
+  AiOutlineLock,
+  AiOutlineMail,
+  AiOutlineUser,
+} from "react-icons/ai";
 
 const AdminRegister = () => {
   const {
@@ -10,9 +24,17 @@ const AdminRegister = () => {
     formState: { errors },
   } = useForm();
 
+  const [fileName, setFileName] = useState("Upload Profile Image");
+
+  const onFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setFileName(file.name);
+    }
+  };
+
   const onSubmit = (data) => {
     console.log("Admin Registered:", data);
-    // Handle admin registration logic
   };
 
   return (
@@ -22,46 +44,53 @@ const AdminRegister = () => {
       alignItems="center"
       sx={{
         minHeight: "100vh",
-        background: "linear-gradient(#371edc, #170b68);",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        background: "linear-gradient(#170b68,#F1F1F1)",
+        padding: "20px",
       }}
     >
-      <Grid item xs={12} sm={8} md={6} lg={4}>
-        <Box className="register-box">
+      <Container maxWidth="sm">
+        <Box
+          sx={{
+            backgroundColor: "#ffffff",
+            borderRadius: "15px",
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            padding: "30px",
+          }}
+        >
           <Typography
             sx={{
               fontFamily: "Poppins, serif",
-              fontWeight: "600",
-              color: "var(--primary-color)",
+              fontWeight: 700,
+              color: "#371edc",
+              marginBottom: "10px",
             }}
-            variant="h2"
+            variant="h4"
             align="center"
-            className="register-header"
           >
-            REGISTER ADMIN
+            Admin Registration
           </Typography>
           <Typography
             sx={{
               fontFamily: "Poppins, serif",
-              fontWeight: "600",
-              marginY: "20px",
+              fontWeight: 500,
+              color: "#666666",
+              marginBottom: "30px",
+              textAlign: "center",
             }}
-            align="center"
-            className="register-subtext"
           >
-            Create an admin account.
+            Create an account for admin privileges.
           </Typography>
-          <form onSubmit={handleSubmit(onSubmit)} className="register-form">
+          <form onSubmit={handleSubmit(onSubmit)}>
             <TextField
               label="Full Name"
               variant="outlined"
               fullWidth
               InputProps={{
-                style: { fontFamily: "Poppins, serif", fontSize: "16px" },
-              }}
-              InputLabelProps={{
-                style: { fontFamily: "Poppins, serif", fontSize: "16px" },
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AiOutlineUser size={20} color="#371edc" />
+                  </InputAdornment>
+                ),
               }}
               {...register("name", { required: "Full Name is required" })}
               error={!!errors.name}
@@ -74,10 +103,11 @@ const AdminRegister = () => {
               variant="outlined"
               fullWidth
               InputProps={{
-                style: { fontFamily: "Poppins, serif", fontSize: "16px" },
-              }}
-              InputLabelProps={{
-                style: { fontFamily: "Poppins, serif", fontSize: "16px" },
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AiOutlineMail size={20} color="#371edc" />
+                  </InputAdornment>
+                ),
               }}
               {...register("email", {
                 required: "Email is required",
@@ -97,16 +127,17 @@ const AdminRegister = () => {
               type="password"
               fullWidth
               InputProps={{
-                style: { fontFamily: "Poppins, serif", fontSize: "16px" },
-              }}
-              InputLabelProps={{
-                style: { fontFamily: "Poppins, serif", fontSize: "16px" },
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AiOutlineLock size={20} color="#371edc" />
+                  </InputAdornment>
+                ),
               }}
               {...register("password", {
                 required: "Password is required",
                 minLength: {
                   value: 6,
-                  message: "Password must be at least 6 characters long",
+                  message: "Password must be at least 6 characters",
                 },
               })}
               error={!!errors.password}
@@ -114,51 +145,69 @@ const AdminRegister = () => {
               sx={{ marginBottom: "20px" }}
             />
 
-            <TextField
-              variant="outlined"
-              type="file"
-              fullWidth
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <AiOutlineCamera size={24} color="var(--primary-color)" />
-                  </InputAdornment>
-                ),
-                style: { fontFamily: "Poppins, serif", fontSize: "16px" },
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "20px",
               }}
-              InputLabelProps={{
-                style: { fontFamily: "Poppins, serif", fontSize: "16px" },
-              }}
-              {...register("profileImage", {
-                required: "Profile Image is required",
-              })}
-              error={!!errors.profileImage}
-              helperText={errors.profileImage?.message}
-              sx={{ marginBottom: "20px" }}
-            />
+            >
+              <IconButton
+                component="label"
+                sx={{
+                  backgroundColor: "#f0f0f0",
+                  borderRadius: "5px",
+                  padding: "10px",
+                }}
+              >
+                <AiOutlineCamera size={24} color="#371edc" />
+                <input
+                  hidden
+                  type="file"
+                  onChange={onFileChange}
+                  {...register("profileImage", {
+                    required: "Profile Image is required",
+                  })}
+                />
+              </IconButton>
+              <Typography
+                sx={{
+                  marginLeft: "8px",
+                  fontFamily: "Poppins, serif",
+                  color: "#666666",
+                  fontSize : '12px',
+                  border : '1px solid rgba(149, 149, 149, 0.67)',
+                  padding : '12px 10px',
+                  width : '100%',
+                  borderRadius : '4px'
+                }}
+              >
+                {fileName}
+              </Typography>
+            </Box>
 
             <Button
               type="submit"
               variant="contained"
               fullWidth
-              className="register-button"
               sx={{
-                padding: "8px",
-                fontSize: "14px",
-                height: "40px",
-                fontWeight: "bold",
-                textTransform: "none",
-                backgroundColor: "var(--primary-color)",
+                backgroundColor: "#371edc",
+                color: "#ffffff",
                 fontFamily: "Poppins, serif",
-                color: "white",
-                "&:hover": { backgroundColor: "#2c1bb6" },
+                fontWeight: "600",
+                textTransform: "none",
+                padding: "10px",
+                borderRadius: "5px",
+                "&:hover": {
+                  backgroundColor: "#2c1bb6",
+                },
               }}
             >
-              REGISTER
+              Register
             </Button>
           </form>
         </Box>
-      </Grid>
+      </Container>
     </Grid>
   );
 };
