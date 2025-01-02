@@ -41,7 +41,7 @@ return (
     alignItems="center"
     sx={{
       minHeight: "100vh",
-      background: "linear-gradient( #0E8667 ,#371edc)",
+      background: "linear-gradient(#371edc, #170b68);",
       padding: "20px",
     }}
   >

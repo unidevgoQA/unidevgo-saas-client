@@ -1,15 +1,15 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { Provider } from 'react-redux'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import store from './app/store.js'
-import './index.css'
-import AdminRegister from './pages/admin register/AdminRegister.jsx'
-import CompanyRegister from './pages/company register/CompanyRegister.jsx'
-import EmployeeRegister from './pages/employee register/EmployeeRegister.jsx'
-import Home from './pages/home/Home.jsx'
-import Login from './pages/login/Login.jsx'
-
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import store from "./app/store.js";
+import "./index.css";
+import Dashboard from "./layout/dashboard/Dashboard.jsx";
+import AdminRegister from "./pages/admin register/AdminRegister.jsx";
+import CompanyRegister from "./pages/company register/CompanyRegister.jsx";
+import EmployeeRegister from "./pages/employee register/EmployeeRegister.jsx";
+import Home from "./pages/home/Home.jsx";
+import Login from "./pages/login/Login.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,19 +28,25 @@ const router = createBrowserRouter([
     path: "/employee-register",
     element: <EmployeeRegister />,
   },
-  
+
   {
     path: "/admin-register",
     element: <AdminRegister />,
   },
-  
+
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+     
+    ],
+  },
 ]);
 
-
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </Provider>
-  </StrictMode>,
-)
+  </StrictMode>
+);

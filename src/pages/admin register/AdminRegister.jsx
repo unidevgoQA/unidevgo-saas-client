@@ -44,7 +44,7 @@ const AdminRegister = () => {
       alignItems="center"
       sx={{
         minHeight: "100vh",
-        background: "linear-gradient(#170b68,#F1F1F1)",
+        background: "linear-gradient(#371edc, #170b68);",
         padding: "20px",
       }}
     >

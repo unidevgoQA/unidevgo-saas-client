@@ -48,7 +48,7 @@ const EmployeeRegister = () => {
       alignItems="center"
       sx={{
         minHeight: "100vh",
-        background: "linear-gradient(#F1F1F1,#170b68)",
+        background: "linear-gradient(#371edc, #170b68);",
         padding: "20px",
       }}
     >
