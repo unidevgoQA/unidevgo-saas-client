@@ -1,6 +1,6 @@
 /* Main container styling */
 .project {
-  background-color: var(--primary-color);
+  background: linear-gradient(#371edc, #170b68);
   margin: 20px;
   padding: 40px 20px;
   color: white;

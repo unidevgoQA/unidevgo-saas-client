@@ -1,12 +1,12 @@
 import {
-    AppBar,
-    Avatar,
-    Box,
-    IconButton,
-    Menu,
-    MenuItem,
-    Toolbar,
-    Tooltip,
+  AppBar,
+  Avatar,
+  Box,
+  IconButton,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Tooltip,
 } from "@mui/material";
 import React, { useState } from "react";
 import { FiBell, FiMenu } from "react-icons/fi";
@@ -30,7 +30,7 @@ const Topbar = ({ toggleDrawer }) => {
       position="fixed"
       sx={{
         zIndex: 1201,
-        backgroundColor: "var(--primary-color)", // Use primary color variable
+        background: "linear-gradient(#371edc, #170b68);",
         color: "#fff", // Black text/icons
         boxShadow: "0 1px 4px rgba(0, 0, 0, 0)",
       }}

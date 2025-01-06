@@ -42,8 +42,8 @@ const Sidebar = ({ isDrawerOpen }) => {
       text: "Employees",
       icon: <FiUsers />,
       children: [
-        { text: "All Employees", icon: <FiUser />, path: "/employees/all" },
-        { text: "Add Employee", icon: <FiUserPlus />, path: "/employees/add" },
+        { text: "All Employees", icon: <FiUser />, path: "employees/all" },
+        { text: "Add Employee", icon: <FiUserPlus />, path: "employees/add" },
         { text: "Edit Employee", icon: <FiEdit />, path: "/employees/edit" },
         { text: "Employee Shift", icon: <FiClock />, path: "/employees/shift" },
         { text: "Employee Profile", icon: <FiFileText />, path: "/employees/profile" },
@@ -55,6 +55,7 @@ const Sidebar = ({ isDrawerOpen }) => {
     { text: "Clients", icon: <FiUser />, path: "/clients" },
     { text: "Payroll", icon: <FiSettings />, path: "/payroll" },
     { text: "Leaders", icon: <FiUsers />, path: "/leaders" },
+    { text: "All Companies", icon: <FiUser />, path: "companies/all" },
     { text: "Jobs", icon: <FiFolder />, path: "/jobs" },
   ];
 
@@ -67,7 +68,7 @@ const Sidebar = ({ isDrawerOpen }) => {
         "& .MuiDrawer-paper": {
           width: isDrawerOpen ? drawerWidth : collapsedDrawerWidth,
           boxSizing: "border-box",
-          backgroundColor: "var(--primary-color)", // Use primary color variable
+          background: "linear-gradient(#371edc, #170b68);",
           color: "#FFF",
           overflowX: "hidden",
           transition: "width 0.3s ease",

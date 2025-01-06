@@ -47,23 +47,22 @@ const EmployeeRegister = () => {
       justifyContent="center"
       alignItems="center"
       sx={{
-        minHeight: "100vh",
-        background: "linear-gradient(#371edc, #170b68);",
+        // minHeight: "100vh",
+        // background: "linear-gradient(#371edc, #170b68);",
         padding: "20px",
       }}
     >
-      <Container maxWidth="sm">
+      <Container maxWidth="lg">
         <Box
           sx={{
             backgroundColor: "#ffffff",
             borderRadius: "15px",
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-            padding: "30px",
+            // boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            padding: "10px 30px",
           }}
         >
           <Typography
             sx={{
-              fontFamily: "Poppins, serif",
               fontWeight: 700,
               color: "#371edc",
               marginBottom: "10px",
@@ -75,7 +74,6 @@ const EmployeeRegister = () => {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Poppins, serif",
               fontWeight: 500,
               color: "#666666",
               marginBottom: "30px",

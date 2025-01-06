@@ -66,7 +66,7 @@ const Header = () => {
     <AppBar
       position="sticky"
       sx={{
-        backgroundColor: "var(--primary-color)",
+        background: "linear-gradient(#371edc, #170b68);",
         boxShadow: "none",
         fontFamily: "Poppins, serif",
         marginTop: "20px",
