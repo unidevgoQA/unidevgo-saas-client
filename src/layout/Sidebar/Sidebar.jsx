@@ -46,7 +46,7 @@ const Sidebar = ({ isDrawerOpen }) => {
         { text: "Add Employee", icon: <FiUserPlus />, path: "employees/add" },
         { text: "Edit Employee", icon: <FiEdit />, path: "/employees/edit" },
         { text: "Employee Shift", icon: <FiClock />, path: "/employees/shift" },
-        { text: "Employee Profile", icon: <FiFileText />, path: "/employees/profile" },
+        { text: "Employee Profile", icon: <FiFileText />, path: "employees/profile" },
       ],
     },
     { text: "Leave Management", icon: <FiClipboard />, path: "/leave-management" },
@@ -56,6 +56,9 @@ const Sidebar = ({ isDrawerOpen }) => {
     { text: "Payroll", icon: <FiSettings />, path: "/payroll" },
     { text: "Leaders", icon: <FiUsers />, path: "/leaders" },
     { text: "All Companies", icon: <FiUser />, path: "companies/all" },
+    { text: "Company Profile", icon: <FiUser />, path: "company/profile" },
+    { text: "Edit Company", icon: <FiEdit />, path: "company/edit" },
+    { text: "Admin Profile", icon: <FiUser />, path: "admin/profile" },
     { text: "Jobs", icon: <FiFolder />, path: "/jobs" },
   ];
 
@@ -68,7 +71,7 @@ const Sidebar = ({ isDrawerOpen }) => {
         "& .MuiDrawer-paper": {
           width: isDrawerOpen ? drawerWidth : collapsedDrawerWidth,
           boxSizing: "border-box",
-          background: "linear-gradient(#371edc, #170b68);",
+          background: "var(--primary-color)",
           color: "#FFF",
           overflowX: "hidden",
           transition: "width 0.3s ease",

@@ -9,7 +9,6 @@ import {
     TableCell,
     TableContainer,
     TableHead,
-    TablePagination,
     TableRow,
     TextField,
     Tooltip,
@@ -18,7 +17,17 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import React, { useState } from "react";
-import { FaDownload, FaEdit, FaEnvelope, FaGem, FaHome, FaPhone, FaPlus, FaTrashAlt, FaUserAlt } from "react-icons/fa";
+import {
+    FaDownload,
+    FaEdit,
+    FaEnvelope,
+    FaGem,
+    FaHome,
+    FaPhone,
+    FaPlus,
+    FaTrashAlt,
+    FaUserAlt,
+} from "react-icons/fa";
 
 const companies = [
   {
@@ -75,25 +84,26 @@ const companies = [
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   fontWeight: "bold",
-  backgroundColor: "#f5f5f5",
+  backgroundColor: "var(--bg-grey-color)",
 }));
 
 const StyledSearchBox = styled(TextField)({
   marginBottom: "1rem",
   width: "100%",
   maxWidth: "300px",
-  borderRadius: "20px",
+  borderRadius: "5px",
   backgroundColor: "white",
+  border: "1px solid var(--primary-color)",
 });
 
 const ActionBar = styled(Box)({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  backgroundColor: "#f5f5f5",
-  padding: "0.5rem 1rem",
+  // backgroundColor: "var(--bg-grey-color)",
+  padding: "1rem 0rem",
   borderRadius: "8px",
-  marginBottom: "1rem",
+  margin: "1rem 0rem",
   flexWrap: "wrap",
   gap: "10px",
 });
@@ -150,10 +160,16 @@ const AllCompanies = () => {
   };
 
   return (
-    <Box sx={{ backgroundColor: "#f8f8f8", padding: "1rem" }}>
+    <Box sx={{ padding: "1rem",
+        borderRadius: "10px",}}>
       <Typography
+        sx={{
+          fontWeight: 700,
+          color: "#371edc",
+          marginBottom: "10px",
+        }}
         variant="h4"
-        sx={{ marginBottom: "1rem", color: "#371edc", textAlign: isMobile ? "center" : "left" }}
+        align="center"
       >
         All Companies
       </Typography>
@@ -184,10 +200,7 @@ const AllCompanies = () => {
           <TableHead>
             <TableRow>
               <StyledTableCell>
-                <Checkbox
-                  checked={selectedAll}
-                  onChange={handleSelectAll}
-                />
+                <Checkbox checked={selectedAll} onChange={handleSelectAll} />
               </StyledTableCell>
               {!isMobile && <StyledTableCell>Image</StyledTableCell>}
               <StyledTableCell>Name</StyledTableCell>
@@ -218,37 +231,53 @@ const AllCompanies = () => {
                     </TableCell>
                   )}
                   <TableCell>
-                    <FaUserAlt style={{ marginRight: 8 , color : 'var(--primary-color)' }} />
+                    <FaUserAlt
+                      style={{ marginRight: 8, color: "var(--primary-color)" }}
+                    />
                     {company.name}
                   </TableCell>
                   <TableCell>
-                    <FaEnvelope style={{ marginRight: 8 , color : 'var(--primary-color)' }} />
+                    <FaEnvelope
+                      style={{ marginRight: 8, color: "var(--primary-color)" }}
+                    />
                     {company.email}
                   </TableCell>
                   {!isMobile && (
                     <TableCell>
-                      <FaGem style={{ marginRight: 8 , color : 'var(--primary-color)'}} />
+                      <FaGem
+                        style={{
+                          marginRight: 8,
+                          color: "var(--primary-color)",
+                        }}
+                      />
                       {company.subscription}
                     </TableCell>
                   )}
                   <TableCell>
-                    <FaPhone style={{ marginRight: 8 , color : 'var(--primary-color)'}} />
+                    <FaPhone
+                      style={{ marginRight: 8, color: "var(--primary-color)" }}
+                    />
                     {company.contactNumber}
                   </TableCell>
                   {!isMobile && (
                     <TableCell>
-                      <FaHome style={{ marginRight: 8, color : 'var(--primary-color)'}} />
+                      <FaHome
+                        style={{
+                          marginRight: 8,
+                          color: "var(--primary-color)",
+                        }}
+                      />
                       {company.address}
                     </TableCell>
                   )}
                   <TableCell>
                     <Tooltip title="Edit">
-                      <IconButton style={{color : 'var(--primary-color)'}}>
+                      <IconButton style={{ color: "var(--primary-color)" }}>
                         <FaEdit />
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Delete">
-                      <IconButton style={{color : 'var(--accent-color)'}}>
+                      <IconButton style={{ color: "var(--accent-color)" }}>
                         <FaTrashAlt />
                       </IconButton>
                     </Tooltip>
@@ -259,7 +288,7 @@ const AllCompanies = () => {
         </Table>
       </TableContainer>
 
-      <PaginationContainer>
+      {/* <PaginationContainer>
         <TablePagination
           rowsPerPageOptions={[5, 10, 15]}
           component="div"
@@ -269,7 +298,7 @@ const AllCompanies = () => {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
-      </PaginationContainer>
+      </PaginationContainer> */}
     </Box>
   );
 };

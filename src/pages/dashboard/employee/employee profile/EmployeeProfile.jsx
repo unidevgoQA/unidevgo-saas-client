@@ -1,3 +1,6 @@
+import AssessmentIcon from "@mui/icons-material/Assessment";
+import BadgeIcon from "@mui/icons-material/Badge";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import DetailsIcon from "@mui/icons-material/Details";
 import EditIcon from "@mui/icons-material/Edit";
 import EmailIcon from "@mui/icons-material/Email";
@@ -5,46 +8,46 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import LockIcon from "@mui/icons-material/Lock";
+import PersonIcon from "@mui/icons-material/Person";
 import PhoneIcon from "@mui/icons-material/Phone";
-import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
-import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+import WorkIcon from "@mui/icons-material/Work";
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Avatar,
-  Box,
-  Card,
-  Grid,
-  IconButton,
-  Tab,
-  Tabs,
-  Typography,
-  useMediaQuery,
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Avatar,
+    Box,
+    Card,
+    Grid,
+    IconButton,
+    Tab,
+    Tabs,
+    Typography,
+    useMediaQuery,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import React from "react";
 
-const CompanyProfile = () => {
-  const company = {
-    id: "56789",
-    name: "FutureWorks Inc.",
-    email: "hello@futureworks.com",
-    password: "future123",
-    needsPasswordChange: true,
-    subscription: "Gold",
-    profileImageUrl: "https://futureworks.com/images/avatar.png",
-    address: "789 Progress Lane, Tech City, NY",
-    contactNumber: "1122334455",
+const EmployeeProfile = () => {
+  const employee = {
+    id: "EMP00190",
+    name: "Mark",
+    email: "mark@johnsonera.com",
+    password: "passwordAlice123",
+    needsPasswordChange: false,
+    role: "employee",
+    designation: "HR Specialist",
+    companyId: "67890",
+    joiningDate: "2021-06-15T00:00:00.000Z",
+    gender: "female",
+    profileImageUrl: "https://example.com/profile-images/alicejohnson.jpg",
+    address: "789 Pine Street, Gotham City, USA",
+    contactNumber: "+11234567890",
     isDeleted: false,
-    established: "2010",
-    industry: "Technology",
-    website: "https://futureworks.com",
-    employees: 250,
-    description:
-      "FutureWorks Inc. is a leading technology solutions provider specializing in innovative digital transformation services for businesses of all sizes.",
-    mission:
-      "Empowering businesses through cutting-edge technology and innovation to achieve their full potential.",
+    performanceRating: "Exceeds Expectations",
+    department: "Human Resources",
+    supervisor: "John Doe",
+    skills: ["Conflict Resolution", "Employee Engagement", "HR Analytics"],
   };
 
   const [tabValue, setTabValue] = React.useState(0);
@@ -83,15 +86,15 @@ const CompanyProfile = () => {
             }}
           >
             <Avatar
-              src={company.profileImageUrl}
-              alt={company.name}
+              src={employee.profileImageUrl}
+              alt={employee.name}
               sx={{ width: 100, height: 100, border: "2px solid #fff" }}
             />
             <Typography variant="h5" fontWeight="bold" textAlign="center">
-              {company.name}
+              {employee.name}
             </Typography>
             <Typography variant="body2" textAlign="center">
-              {company.industry}
+              {employee.designation}
             </Typography>
             <IconButton sx={{ color: "#fff", border: "1px solid #fff" }}>
               <EditIcon />
@@ -120,7 +123,6 @@ const CompanyProfile = () => {
           >
             <Tab icon={<InfoIcon />} label="Overview" />
             <Tab icon={<DetailsIcon />} label="Details" />
-            {/* <Tab icon={<SettingsIcon />} label="Settings" /> */}
           </Tabs>
         </Box>
 
@@ -128,28 +130,9 @@ const CompanyProfile = () => {
         <Card sx={{ flexGrow: 1, boxShadow: 3, p: 3 }}>
           {tabValue === 0 && (
             <>
-              <Typography
-                variant="h6"
-                sx={{ color: "var(--primary-color)" }}
-                gutterBottom
-                fontWeight="bold"
-              >
-                Company Description
-              </Typography>
-              <Typography variant="body1" color="textSecondary" sx={{ mb: 4 }}>
-                {company.description}
-              </Typography>
-              <Typography
-                variant="h6"
-                sx={{ color: "var(--primary-color)" }}
-                gutterBottom
-                fontWeight="bold"
-              >
-                Mission Statement
-              </Typography>
-              <Typography variant="body1" color="textSecondary" sx={{ mb: 4 }}>
-                {company.mission}
-              </Typography>
+              {/* <Typography variant="h4" sx={{ color: 'var(--primary-color)' }} gutterBottom fontWeight="bold">
+                Personal Information
+              </Typography> */}
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <Typography
@@ -160,30 +143,7 @@ const CompanyProfile = () => {
                   >
                     <EmailIcon sx={{ color: "#371edc" }} /> Email
                   </Typography>
-                  <Typography sx={{ mt: 2 }}>{company.email}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography
-                    fontWeight="bold"
-                    variant="subtitle2"
-                    color="textSecondary"
-                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                  >
-                    <WorkspacePremiumIcon sx={{ color: "#371edc" }} />{" "}
-                    Subscription Plan
-                  </Typography>
-                  <Typography sx={{ mt: 2 }}>{company.subscription}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography
-                    fontWeight="bold"
-                    variant="subtitle2"
-                    color="textSecondary"
-                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                  >
-                    <HomeIcon sx={{ color: "#371edc" }} /> Address
-                  </Typography>
-                  <Typography sx={{ mt: 2 }}>{company.address}</Typography>
+                  <Typography sx={{ mt: 2 }}>{employee.email}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Typography
@@ -195,7 +155,7 @@ const CompanyProfile = () => {
                     <PhoneIcon sx={{ color: "#371edc" }} /> Contact Number
                   </Typography>
                   <Typography sx={{ mt: 2 }}>
-                    {company.contactNumber}
+                    {employee.contactNumber}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -205,9 +165,9 @@ const CompanyProfile = () => {
                     color="textSecondary"
                     sx={{ display: "flex", alignItems: "center", gap: 1 }}
                   >
-                    <InfoIcon sx={{ color: "#371edc" }} /> Established
+                    <HomeIcon sx={{ color: "#371edc" }} /> Address
                   </Typography>
-                  <Typography sx={{ mt: 2 }}>{company.established}</Typography>
+                  <Typography sx={{ mt: 2 }}>{employee.address}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Typography
@@ -216,9 +176,9 @@ const CompanyProfile = () => {
                     color="textSecondary"
                     sx={{ display: "flex", alignItems: "center", gap: 1 }}
                   >
-                    <DetailsIcon sx={{ color: "#371edc" }} /> Employees
+                    <WorkIcon sx={{ color: "#371edc" }} /> Designation
                   </Typography>
-                  <Typography sx={{ mt: 2 }}>{company.employees}</Typography>
+                  <Typography sx={{ mt: 2 }}>{employee.designation}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Typography
@@ -227,9 +187,71 @@ const CompanyProfile = () => {
                     color="textSecondary"
                     sx={{ display: "flex", alignItems: "center", gap: 1 }}
                   >
-                    <WorkspacePremiumIcon sx={{ color: "#371edc" }} /> Website
+                    <CalendarTodayIcon sx={{ color: "#371edc" }} /> Joining Date
                   </Typography>
-                  <Typography sx={{ mt: 2 }}>{company.website}</Typography>
+                  <Typography sx={{ mt: 2 }}>
+                    {new Date(employee.joiningDate).toLocaleDateString()}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography
+                    fontWeight="bold"
+                    variant="subtitle2"
+                    color="textSecondary"
+                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                  >
+                    <PersonIcon sx={{ color: "#371edc" }} /> Gender
+                  </Typography>
+                  <Typography sx={{ mt: 2 }}>{employee.gender}</Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography
+                    fontWeight="bold"
+                    variant="subtitle2"
+                    color="textSecondary"
+                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                  >
+                    <BadgeIcon sx={{ color: "#371edc" }} /> Department
+                  </Typography>
+                  <Typography sx={{ mt: 2 }}>{employee.department}</Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography
+                    fontWeight="bold"
+                    variant="subtitle2"
+                    color="textSecondary"
+                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                  >
+                    <BadgeIcon sx={{ color: "#371edc" }} /> Supervisor
+                  </Typography>
+                  <Typography sx={{ mt: 2 }}>{employee.supervisor}</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography
+                    fontWeight="bold"
+                    variant="subtitle2"
+                    color="textSecondary"
+                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                  >
+                    <AssessmentIcon sx={{ color: "#371edc" }} /> Performance
+                    Rating
+                  </Typography>
+                  <Typography sx={{ mt: 2 }}>
+                    {employee.performanceRating}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography
+                    fontWeight="bold"
+                    variant="subtitle2"
+                    color="textSecondary"
+                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                  >
+                    <DetailsIcon sx={{ color: "#371edc" }} /> Skills
+                  </Typography>
+                  <Typography sx={{ mt: 2 }}>
+                    {employee.skills.join(", ")}
+                  </Typography>
                 </Grid>
               </Grid>
             </>
@@ -249,7 +271,7 @@ const CompanyProfile = () => {
                 <AccordionDetails>
                   <Typography>
                     Needs Password Change:{" "}
-                    {company.needsPasswordChange ? "Yes" : "No"}
+                    {employee.needsPasswordChange ? "Yes" : "No"}
                   </Typography>
                 </AccordionDetails>
               </Accordion>
@@ -260,27 +282,21 @@ const CompanyProfile = () => {
                   <Typography
                     sx={{ display: "flex", alignItems: "center", gap: 1 }}
                   >
-                    <VerifiedUserIcon sx={{ color: "#371edc" }} /> Account
-                    Status
+                    <DetailsIcon sx={{ color: "#371edc" }} /> Account Status
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>
-                    Account Deleted: {company.isDeleted ? "Yes" : "No"}
+                    Account Deleted: {employee.isDeleted ? "Yes" : "No"}
                   </Typography>
                 </AccordionDetails>
               </Accordion>
             </Box>
           )}
-          {/* {tabValue === 2 && (
-            <Typography variant="body1" color="textSecondary">
-              Settings content goes here. Add form fields or additional details for customization.
-            </Typography>
-          )} */}
         </Card>
       </Box>
     </Box>
   );
 };
 
-export default CompanyProfile;
+export default EmployeeProfile;

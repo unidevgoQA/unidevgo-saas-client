@@ -30,7 +30,7 @@ const Topbar = ({ toggleDrawer }) => {
       position="fixed"
       sx={{
         zIndex: 1201,
-        background: "linear-gradient(#371edc, #170b68);",
+        background: "var(--primary-color)",
         color: "#fff", // Black text/icons
         boxShadow: "0 1px 4px rgba(0, 0, 0, 0)",
       }}
