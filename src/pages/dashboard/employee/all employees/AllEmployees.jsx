@@ -57,6 +57,32 @@ const employees = [
     contactNumber: "2345678901",
     status: "Active",
   },
+  {
+    id: "EMP00190",
+    name: "Jane Smith",
+    email: "jane.smith@example.com",
+    role: "Designer",
+    department: "UI/UX",
+    joiningDate: "2019-05-20",
+    gender: "female",
+    profileImageUrl: "https://via.placeholder.com/150",
+    address: "456 Oak Avenue",
+    contactNumber: "2345678901",
+    status: "Active",
+  },
+  {
+    id: "EMP00190",
+    name: "Jane Smith",
+    email: "jane.smith@example.com",
+    role: "Designer",
+    department: "UI/UX",
+    joiningDate: "2019-05-20",
+    gender: "female",
+    profileImageUrl: "https://via.placeholder.com/150",
+    address: "456 Oak Avenue",
+    contactNumber: "2345678901",
+    status: "Active",
+  },
   // Add more employees as needed
 ];
 

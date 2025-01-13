@@ -8,14 +8,18 @@ import {
   Toolbar,
   Tooltip,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FiBell, FiMenu } from "react-icons/fi";
 import { MdOutlineLanguage } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo/logo.png";
 import profieImg from "../../assets/profile/admin.jpg";
+import { AuthContext } from "../../providers/AuthProviders";
 
 const Topbar = ({ toggleDrawer }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const { logoutUser } = useContext(AuthContext); // Use AuthContext
+  const navigate = useNavigate();
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -25,13 +29,19 @@ const Topbar = ({ toggleDrawer }) => {
     setAnchorEl(null);
   };
 
+  const handleLogout = () => {
+    handleMenuClose(); // Close the menu
+    logoutUser(); // Call the logout function
+    navigate("/"); // Redirect to the login page
+  };
+
   return (
     <AppBar
       position="fixed"
       sx={{
         zIndex: 1201,
-        background: "var(--primary-color)",
-        color: "#fff", // Black text/icons
+        background: "linear-gradient( #170b68 , #371edc);",
+        color: "#fff",
         boxShadow: "0 1px 4px rgba(0, 0, 0, 0)",
       }}
     >
@@ -48,13 +58,10 @@ const Topbar = ({ toggleDrawer }) => {
             <FiMenu />
           </IconButton>
           <img
-            src={logo} // Replace with your logo URL
+            src={logo}
             alt="Logo"
             style={{ height: "32px", marginRight: "8px" }}
           />
-          {/* <Typography variant="h6" noWrap>
-            Dashboard
-          </Typography> */}
         </Box>
 
         {/* Right Section */}
@@ -92,7 +99,7 @@ const Topbar = ({ toggleDrawer }) => {
             }}
           >
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
         </Box>
       </Toolbar>

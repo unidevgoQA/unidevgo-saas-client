@@ -1,25 +1,25 @@
-import DetailsIcon from '@mui/icons-material/Details';
-import EditIcon from '@mui/icons-material/Edit';
-import EmailIcon from '@mui/icons-material/Email';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import InfoIcon from '@mui/icons-material/Info';
-import LockIcon from '@mui/icons-material/Lock';
+import DetailsIcon from "@mui/icons-material/Details";
+import EditIcon from "@mui/icons-material/Edit";
+import EmailIcon from "@mui/icons-material/Email";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import InfoIcon from "@mui/icons-material/Info";
+import LockIcon from "@mui/icons-material/Lock";
 import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Avatar,
-    Box,
-    Card,
-    Grid,
-    IconButton,
-    Tab,
-    Tabs,
-    Typography,
-    useMediaQuery
-} from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import React from 'react';
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Avatar,
+  Box,
+  Card,
+  Grid,
+  IconButton,
+  Tab,
+  Tabs,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import React from "react";
 
 const AdminProfile = () => {
   const admin = {
@@ -28,70 +28,148 @@ const AdminProfile = () => {
     email: "chirs.brown@gmail.com",
     password: "ewqe34534",
     role: "admin",
-    isDeleted: false
+    isDeleted: false,
   };
 
   const [tabValue, setTabValue] = React.useState(0);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
 
   return (
-    <Box sx={{ p: 3, backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
-      <Box sx={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: 2 }}>
+    <Box sx={{ p: 3, backgroundColor: "#f9f9f9" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          gap: 2,
+        }}
+      >
         {/* Sidebar */}
         <Box
           sx={{
-            minWidth: isMobile ? '100%' : '300px',
-            backgroundColor: '#371edc',
-            color: '#fff',
+            minWidth: isMobile ? "100%" : "300px",
+            background: "linear-gradient(135deg, #170b68, #371edc)",
+            color: "#fff",
             p: 3,
             borderRadius: 2,
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)", // Elegant shadow
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between", // Profile info at top, Tabs at bottom
+            height: "100%", // Stretch sidebar for full height
           }}
         >
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-            <Avatar
-              alt={admin.name}
-              sx={{ width: 100, height: 100, border: '2px solid #fff' }}
-            >
-              {admin.name.charAt(0)}
-            </Avatar>
+          {/* Profile Section */}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 3,
+              position: "relative", // Allows relative positioning for child elements
+            }}
+          >
+            {/* Avatar with Edit Icon */}
+            <Box sx={{ position: "relative", width: 120, height: 120 }}>
+              <Avatar
+                alt={admin.name}
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  border: "2px solid #fff",
+                  boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)", // Add subtle shadow to avatar
+                }}
+              >
+                {admin.name.charAt(0)}
+              </Avatar>
+              <IconButton
+                sx={{
+                  position: "absolute",
+                  bottom: 0,
+                  right: 0,
+                  backgroundColor: "#fff",
+                  color: "#371edc",
+                  boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)",
+                  p: 1,
+                  "&:hover": {
+                    backgroundColor: "#371edc",
+                    color: "#fff",
+                  },
+                }}
+              >
+                <EditIcon />
+              </IconButton>
+            </Box>
+            {/* Admin Info */}
             <Typography variant="h5" fontWeight="bold" textAlign="center">
               {admin.name}
             </Typography>
-            <Typography variant="body2" textAlign="center">
+            <Typography
+              variant="body2"
+              textAlign="center"
+              sx={{
+                backgroundColor: "#fff",
+                color: "#371edc",
+                px: 2,
+                py: 0.5,
+                borderRadius: 1,
+                fontWeight: "bold",
+                marginBottom: 4, // Add gap between role and tabs
+              }}
+            >
               {admin.role.charAt(0).toUpperCase() + admin.role.slice(1)}
             </Typography>
-            <IconButton sx={{ color: '#fff', border: '1px solid #fff' }}>
-              <EditIcon />
-            </IconButton>
           </Box>
+
+          {/* Tabs Section */}
           <Tabs
             value={tabValue}
             onChange={handleTabChange}
-            orientation={isMobile ? 'horizontal' : 'vertical'}
+            orientation={isMobile ? "horizontal" : "vertical"}
             sx={{
-              mt: 3,
-              '& .MuiTab-root': {
-                display: 'flex',
-                justifyContent: 'center',
-                flexDirection: 'row',
-                alignItems: 'center',
-                gap: 1,
-                color: '#fff',
+              "& .MuiTab-root": {
+                display: "flex", // Flexbox for icon and text alignment
+                flexDirection: "row", // Icon and text side-by-side
+                alignItems: "center", // Center items vertically
+                gap: 1, // Space between icon and text
+                color: "#fff",
+                minHeight: "40px",
+                padding: "8px 16px", // Increase padding for touch-friendly design
+                borderRadius: 2, // Rounded corners for tabs
+                "&:hover": {
+                  backgroundColor: "rgba(255, 255, 255, 0.2)", // Subtle hover effect
+                },
               },
-              '& .Mui-selected': {
-                color: '#fff !important',
-                fontWeight: 'bold',
+              "& .Mui-selected": {
+                color: "#fff !important",
+                fontWeight: "bold",
+                backgroundColor: "rgba(255, 255, 255, 0.3)", // Highlight active tab
               },
             }}
-            TabIndicatorProps={{ style: { backgroundColor: '#fff' } }}
+            TabIndicatorProps={{
+              style: { backgroundColor: "transparent" }, // Remove indicator line
+            }}
           >
-            <Tab icon={<InfoIcon />} label="Overview" />
-            <Tab icon={<DetailsIcon />} label="Details" />
+            <Tab
+              sx={{
+                display: "flex", // Flex for icon and text alignment
+                gap: 1, // Space between icon and text
+              }}
+              icon={<InfoIcon />}
+              label="Overview"
+            />
+            <Tab
+              sx={{
+                display: "flex", // Flex for icon and text alignment
+                gap: 1, // Space between icon and text
+              }}
+              icon={<DetailsIcon />}
+              label="Details"
+            />
           </Tabs>
         </Box>
 
@@ -107,9 +185,9 @@ const AdminProfile = () => {
                   <Typography
                     variant="subtitle2"
                     color="textSecondary"
-                    sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
+                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
                   >
-                    <EmailIcon sx={{ color: '#371edc' }} /> Email
+                    <EmailIcon sx={{ color: "#371edc" }} /> Email
                   </Typography>
                   <Typography sx={{ mt: 2 }}>{admin.email}</Typography>
                 </Grid>
@@ -117,9 +195,9 @@ const AdminProfile = () => {
                   <Typography
                     variant="subtitle2"
                     color="textSecondary"
-                    sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
+                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
                   >
-                    <DetailsIcon sx={{ color: '#371edc' }} /> Role
+                    <DetailsIcon sx={{ color: "#371edc" }} /> Role
                   </Typography>
                   <Typography sx={{ mt: 2 }}>{admin.role}</Typography>
                 </Grid>
@@ -129,14 +207,18 @@ const AdminProfile = () => {
           {tabValue === 1 && (
             <Box>
               <Accordion>
-                <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: '#371edc' }} />}>
-                  <Typography sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <LockIcon sx={{ color: '#371edc' }} /> Account Settings
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon sx={{ color: "#371edc" }} />}
+                >
+                  <Typography
+                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                  >
+                    <LockIcon sx={{ color: "#371edc" }} /> Account Settings
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>
-                    Account Deleted: {admin.isDeleted ? 'Yes' : 'No'}
+                    Account Deleted: {admin.isDeleted ? "Yes" : "No"}
                   </Typography>
                 </AccordionDetails>
               </Accordion>

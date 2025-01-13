@@ -1,6 +1,4 @@
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import {
-  Collapse,
   Drawer,
   List,
   ListItem,
@@ -9,58 +7,56 @@ import {
   ListItemText,
   Toolbar,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import {
   FiCalendar,
   FiClipboard,
-  FiClock,
+  FiDatabase,
   FiEdit,
   FiFileText,
-  FiFolder,
   FiHome,
-  FiSettings,
+  FiPieChart,
   FiUser,
+  FiUserCheck,
   FiUserPlus,
   FiUsers
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProviders";
 
 const drawerWidth = 250;
 const collapsedDrawerWidth = 60;
 
 const Sidebar = ({ isDrawerOpen }) => {
-  const [openSections, setOpenSections] = useState({ employees: false });
-
-  const handleToggle = (section) => {
-    setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
-  };
+  const { userRole } = useContext(AuthContext); // Use AuthContext
 
   const menuItems = [
     { text: "Home", icon: <FiHome />, path: "/" },
-    { text: "Projects", icon: <FiFolder />, path: "/projects" },
-    {
-      text: "Employees",
-      icon: <FiUsers />,
-      children: [
-        { text: "All Employees", icon: <FiUser />, path: "employees/all" },
-        { text: "Add Employee", icon: <FiUserPlus />, path: "employees/add" },
-        { text: "Edit Employee", icon: <FiEdit />, path: "/employees/edit" },
-        { text: "Employee Shift", icon: <FiClock />, path: "/employees/shift" },
-        { text: "Employee Profile", icon: <FiFileText />, path: "employees/profile" },
-      ],
-    },
-    { text: "Leave Management", icon: <FiClipboard />, path: "/leave-management" },
-    { text: "Attendance", icon: <FiCalendar />, path: "/attendance" },
-    { text: "Holidays", icon: <FiCalendar />, path: "/holidays" },
-    { text: "Clients", icon: <FiUser />, path: "/clients" },
-    { text: "Payroll", icon: <FiSettings />, path: "/payroll" },
-    { text: "Leaders", icon: <FiUsers />, path: "/leaders" },
-    { text: "All Companies", icon: <FiUser />, path: "companies/all" },
-    { text: "Company Profile", icon: <FiUser />, path: "company/profile" },
-    { text: "Edit Company", icon: <FiEdit />, path: "company/edit" },
-    { text: "Admin Profile", icon: <FiUser />, path: "admin/profile" },
-    { text: "Jobs", icon: <FiFolder />, path: "/jobs" },
+    // Company Menu Items
+    { text: "Company Profile", icon: <FiUser />, path: "companies/profile", role: "company" },
+    { text: "All Employees", icon: <FiUsers />, path: "employees/all", role: "company" },
+    { text: "Add Employee", icon: <FiUserPlus />, path: "employees/add", role: "company" },
+    { text: "Edit Employee", icon: <FiEdit />, path: "employees/edit", role: "company" },
+    { text: "Leave Management", icon: <FiClipboard />, path: "/leave-management", role: "company" },
+    // Admin Menu Items
+    { text: "Admin Profile", icon: <FiUser />, path: "admin/profile", role: "admin" },
+    { text: "All Companies", icon: <FiDatabase />, path: "companies/all", role: "admin" },
+    { text: "Add Company", icon: <FiUserPlus />, path: "companies/add", role: "admin" },
+    { text: "Edit Company", icon: <FiEdit />, path: "companies/edit", role: "admin" },
+    { text: "Company Details", icon: <FiFileText />, path: "companies/profile", role: "admin" },
+    
+    // Employee Menu Items
+    { text: "Employee Profile", icon: <FiUser />, path: "employees/profile", role: "employee" },
+    { text: "Leave Status", icon: <FiUserCheck />, path: "/leave-management", role: "employee" },
+    { text: "Work Progress", icon: <FiPieChart />, path: "/work-progress-management", role: "employee" },
+    { text: "Attendance", icon: <FiCalendar />, path: "/attendance-management", role: "employee" },
+    { text: "Calendar", icon: <FiCalendar />, path: "/calender", role: "employee" },
   ];
+
+  // Filter menu items based on userRole
+  const filteredMenuItems = menuItems.filter(
+    (item) => !item.role || item.role === userRole
+  );
 
   return (
     <Drawer
@@ -71,7 +67,7 @@ const Sidebar = ({ isDrawerOpen }) => {
         "& .MuiDrawer-paper": {
           width: isDrawerOpen ? drawerWidth : collapsedDrawerWidth,
           boxSizing: "border-box",
-          background: "var(--primary-color)",
+          background: "linear-gradient(#371edc, #170b68);",
           color: "#FFF",
           overflowX: "hidden",
           transition: "width 0.3s ease",
@@ -80,129 +76,43 @@ const Sidebar = ({ isDrawerOpen }) => {
     >
       <Toolbar />
       <List>
-        {menuItems.map((item, index) => (
-          <React.Fragment key={index}>
-            {item.children ? (
-              <>
-                <ListItemButton
-                  onClick={() => handleToggle(item.text.toLowerCase())}
+        {filteredMenuItems.map((item, index) => (
+          <ListItem key={index} disablePadding>
+            <ListItemButton
+              component={Link}
+              to={item.path}
+              sx={{
+                justifyContent: isDrawerOpen ? "initial" : "center",
+                px: 2.5,
+                "&:hover": {
+                  backgroundColor: "#fff",
+                  "& .MuiListItemIcon-root, & .MuiListItemText-root": {
+                    color: "var(--primary-color)",
+                  },
+                },
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: isDrawerOpen ? 3 : "auto",
+                  justifyContent: "center",
+                  color: "#FFF",
+                }}
+              >
+                {item.icon}
+              </ListItemIcon>
+              {isDrawerOpen && (
+                <ListItemText
+                  primary={item.text}
                   sx={{
-                    justifyContent: isDrawerOpen ? "initial" : "center",
-                    px: 2.5,
+                    fontSize: "0.875rem",
+                    color: "#FFF",
                   }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: isDrawerOpen ? 3 : "auto",
-                      justifyContent: "center",
-                      color: "#FFF",
-                    }}
-                  >
-                    {item.icon}
-                  </ListItemIcon>
-                  {isDrawerOpen && (
-                    <ListItemText
-                      primary={item.text}
-                      sx={{
-                        fontSize: "0.875rem", // Decrease font size for parent items
-                        color: "#FFF",
-                      }}
-                    />
-                  )}
-                  {isDrawerOpen &&
-                    (openSections[item.text.toLowerCase()] ? (
-                      <ExpandLess sx={{ color: "#FFF" }} />
-                    ) : (
-                      <ExpandMore sx={{ color: "#FFF" }} />
-                    ))}
-                </ListItemButton>
-                <Collapse
-                  in={openSections[item.text.toLowerCase()]}
-                  timeout="auto"
-                  unmountOnExit
-                >
-                  <List component="div" disablePadding>
-                    {item.children.map((child, childIndex) => (
-                      <ListItemButton
-                        key={childIndex}
-                        component={Link}
-                        to={child.path}
-                        sx={{
-                          pl: isDrawerOpen ? 4 : 0,
-                          justifyContent: isDrawerOpen ? "initial" : "center",
-                          px: 2.5,
-                          "&:hover": {
-                            backgroundColor: "#fff", // Hover background
-                            "& .MuiListItemIcon-root, & .MuiListItemText-root": {
-                              color: "var(--primary-color)", // Change icon and text color on hover
-                            },
-                          },
-                        }}
-                      >
-                        <ListItemIcon
-                          sx={{
-                            minWidth: 0,
-                            mr: isDrawerOpen ? 3 : "auto",
-                            justifyContent: "center",
-                            color: "#FFF",
-                          }}
-                        >
-                          {child.icon}
-                        </ListItemIcon>
-                        {isDrawerOpen && (
-                          <ListItemText
-                            primary={child.text}
-                            sx={{
-                              fontSize: "0.75rem", // Decrease font size for submenu items
-                              color: "#FFF",
-                            }}
-                          />
-                        )}
-                      </ListItemButton>
-                    ))}
-                  </List>
-                </Collapse>
-              </>
-            ) : (
-              <ListItem disablePadding>
-                <ListItemButton
-                  component={Link}
-                  to={item.path}
-                  sx={{
-                    justifyContent: isDrawerOpen ? "initial" : "center",
-                    px: 2.5,
-                    "&:hover": {
-                      backgroundColor: "#fff", // Hover background
-                      "& .MuiListItemIcon-root, & .MuiListItemText-root": {
-                        color: "var(--primary-color)", // Change icon and text color on hover
-                      },
-                    },
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: isDrawerOpen ? 3 : "auto",
-                      justifyContent: "center",
-                      color: "#FFF",
-                    }}
-                  >
-                    {item.icon}
-                  </ListItemIcon>
-                  {isDrawerOpen && (
-                    <ListItemText
-                      primary={item.text}
-                      sx={{
-                        fontSize: "0.875rem", // Decrease font size for parent items
-                        color: "#FFF",
-                      }}
-                    />
-                  )}
-                </ListItemButton>
-              </ListItem>
-            )}
-          </React.Fragment>
+                />
+              )}
+            </ListItemButton>
+          </ListItem>
         ))}
       </List>
     </Drawer>

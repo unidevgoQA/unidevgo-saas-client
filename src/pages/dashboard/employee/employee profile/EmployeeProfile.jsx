@@ -1,4 +1,3 @@
-import AssessmentIcon from "@mui/icons-material/Assessment";
 import BadgeIcon from "@mui/icons-material/Badge";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import DetailsIcon from "@mui/icons-material/Details";
@@ -12,18 +11,18 @@ import PersonIcon from "@mui/icons-material/Person";
 import PhoneIcon from "@mui/icons-material/Phone";
 import WorkIcon from "@mui/icons-material/Work";
 import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Avatar,
-    Box,
-    Card,
-    Grid,
-    IconButton,
-    Tab,
-    Tabs,
-    Typography,
-    useMediaQuery,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Avatar,
+  Box,
+  Card,
+  Grid,
+  IconButton,
+  Tab,
+  Tabs,
+  Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import React from "react";
@@ -59,7 +58,7 @@ const EmployeeProfile = () => {
   };
 
   return (
-    <Box sx={{ p: 3, backgroundColor: "#f9f9f9", minHeight: "100vh" }}>
+    <Box sx={{ p: 3, backgroundColor: "#f9f9f9" }}>
       <Box
         sx={{
           display: "flex",
@@ -71,10 +70,15 @@ const EmployeeProfile = () => {
         <Box
           sx={{
             minWidth: isMobile ? "100%" : "300px",
-            backgroundColor: "#371edc",
+            background: "linear-gradient(135deg, #170b68, #371edc)",
             color: "#fff",
             p: 3,
             borderRadius: 2,
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)", // Add shadow for depth
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between", // Push content to top and bottom
+            height: "100%", // Full height for proper positioning
           }}
         >
           <Box
@@ -82,24 +86,60 @@ const EmployeeProfile = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: 2,
+              gap: 3,
             }}
           >
-            <Avatar
-              src={employee.profileImageUrl}
-              alt={employee.name}
-              sx={{ width: 100, height: 100, border: "2px solid #fff" }}
-            />
+            {/* Avatar with Edit Icon */}
+            <Box sx={{ position: "relative", width: 120, height: 120 }}>
+              <Avatar
+                src={employee.profileImageUrl}
+                alt={employee.name}
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  border: "2px solid #fff",
+                  boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)",
+                }}
+              />
+              <IconButton
+                sx={{
+                  position: "absolute",
+                  bottom: 0,
+                  right: 0,
+                  backgroundColor: "#fff",
+                  color: "#371edc",
+                  boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)",
+                  p: 1,
+                  "&:hover": {
+                    backgroundColor: "#371edc",
+                    color: "#fff",
+                  },
+                }}
+              >
+                <EditIcon />
+              </IconButton>
+            </Box>
+            {/* Employee Info */}
             <Typography variant="h5" fontWeight="bold" textAlign="center">
               {employee.name}
             </Typography>
-            <Typography variant="body2" textAlign="center">
+            <Typography
+              variant="body2"
+              textAlign="center"
+              sx={{
+                backgroundColor: "#fff",
+                color: "#371edc",
+                px: 2,
+                py: 0.5,
+                borderRadius: 1,
+                fontWeight: "bold",
+              }}
+            >
               {employee.designation}
             </Typography>
-            <IconButton sx={{ color: "#fff", border: "1px solid #fff" }}>
-              <EditIcon />
-            </IconButton>
           </Box>
+
+          {/* Tabs at the Bottom */}
           <Tabs
             value={tabValue}
             onChange={handleTabChange}
@@ -107,19 +147,27 @@ const EmployeeProfile = () => {
             sx={{
               mt: 3,
               "& .MuiTab-root": {
-                display: "flex",
-                justifyContent: "center",
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 1,
+                display: "flex", // Flex container for icon and label
+                flexDirection: "row", // Icon and label side by side
+                alignItems: "center", // Center items vertically
+                gap: 1, // Space between icon and label
                 color: "#fff",
+                minHeight: "40px",
+                padding: "8px 16px", // Add padding for more space
+                borderRadius: 2, // Rounded corners for tabs
+                "&:hover": {
+                  backgroundColor: "rgba(255, 255, 255, 0.2)", // Add hover effect
+                },
               },
               "& .Mui-selected": {
-                color: '#fff !important',
+                color: "#fff !important",
                 fontWeight: "bold",
+                backgroundColor: "rgba(255, 255, 255, 0.3)", // Highlight for selected tab
               },
             }}
-            TabIndicatorProps={{ style: { backgroundColor: "#fff" } }}
+            TabIndicatorProps={{
+              style: { backgroundColor: "transparent" }, // Remove the indicator line
+            }}
           >
             <Tab icon={<InfoIcon />} label="Overview" />
             <Tab icon={<DetailsIcon />} label="Details" />
@@ -225,33 +273,6 @@ const EmployeeProfile = () => {
                     <BadgeIcon sx={{ color: "#371edc" }} /> Supervisor
                   </Typography>
                   <Typography sx={{ mt: 2 }}>{employee.supervisor}</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography
-                    fontWeight="bold"
-                    variant="subtitle2"
-                    color="textSecondary"
-                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                  >
-                    <AssessmentIcon sx={{ color: "#371edc" }} /> Performance
-                    Rating
-                  </Typography>
-                  <Typography sx={{ mt: 2 }}>
-                    {employee.performanceRating}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography
-                    fontWeight="bold"
-                    variant="subtitle2"
-                    color="textSecondary"
-                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                  >
-                    <DetailsIcon sx={{ color: "#371edc" }} /> Skills
-                  </Typography>
-                  <Typography sx={{ mt: 2 }}>
-                    {employee.skills.join(", ")}
-                  </Typography>
                 </Grid>
               </Grid>
             </>
