@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import React, { StrictMode, useContext } from "react";
 import { createRoot } from "react-dom/client";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
@@ -18,7 +18,24 @@ import EmployeeProfile from "./pages/dashboard/employee/employee profile/Employe
 import EmployeeRegister from "./pages/dashboard/employee/employee register/EmployeeRegister.jsx";
 import Home from "./pages/home/Home.jsx";
 import Login from "./pages/login/Login.jsx";
-import AuthProviders from "./providers/AuthProviders.jsx";
+import AuthProviders, { AuthContext } from "./providers/AuthProviders.jsx";
+
+// Component to dynamically render the default dashboard route
+const DynamicDashboardRoute = () => {
+  const { userRole } = useContext(AuthContext);
+
+  // Render appropriate profile page based on the userRole
+  switch (userRole) {
+    case "company":
+      return <CompanyProfile />;
+    case "admin":
+      return <AdminProfile />;
+    case "employee":
+      return <EmployeeProfile />;
+    default:
+      return <Home />; // Fallback for undefined roles
+  }
+};
 
 const router = createBrowserRouter([
   {
@@ -37,19 +54,17 @@ const router = createBrowserRouter([
     path: "/employee-register",
     element: <EmployeeRegister />,
   },
-
   {
     path: "/admin-register",
     element: <AdminRegister />,
   },
-
   {
     path: "/dashboard",
     element: <Dashboard />,
     children: [
       {
-        path: "/dashboard",
-        element: <CompanyProfile />,
+        path: "/dashboard", // Use DynamicDashboardRoute for default dashboard route
+        element: <DynamicDashboardRoute />,
       },
       {
         path: "employees/add",
@@ -64,15 +79,13 @@ const router = createBrowserRouter([
         element: <EmployeeProfile />,
       },
       {
-        path: "employees/edit",
+        path: "employees/edit/:id",
         element: <EditEmployee />,
       },
-
       {
         path: "companies/all",
         element: <AllCompanies />,
       },
-
       {
         path: "companies/profile",
         element: <CompanyProfile />,
@@ -93,7 +106,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
       <AuthProviders>
-      <Toaster position="top-center" reverseOrder={false} /> 
+        <Toaster position="top-center" reverseOrder={false} />
         <RouterProvider router={router} />
       </AuthProviders>
     </Provider>

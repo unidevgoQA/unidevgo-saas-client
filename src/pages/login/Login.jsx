@@ -24,7 +24,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { loginUser, loading, message } = useContext(AuthContext);
 
-  const [role, setRole] = useState("company");
+  const [role, setRole] = useState(null);
 
   const handleRoleChange = (event) => {
     setRole(event.target.value);
@@ -101,6 +101,7 @@ const Login = () => {
           </Typography>
           <RadioGroup
             value={role}
+            required={true}
             onChange={handleRoleChange}
             sx={{
               display: "flex",

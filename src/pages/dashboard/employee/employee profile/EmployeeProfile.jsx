@@ -25,9 +25,13 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../../providers/AuthProviders";
 
 const EmployeeProfile = () => {
+    const { user } = useContext(AuthContext); // Use AuthContext
+
+    console.log(user)
   const employee = {
     id: "EMP00190",
     name: "Mark",
@@ -92,8 +96,8 @@ const EmployeeProfile = () => {
             {/* Avatar with Edit Icon */}
             <Box sx={{ position: "relative", width: 120, height: 120 }}>
               <Avatar
-                src={employee.profileImageUrl}
-                alt={employee.name}
+                src={user?.profileImageUrl}
+                alt={user?.name}
                 sx={{
                   width: "100%",
                   height: "100%",
@@ -121,7 +125,7 @@ const EmployeeProfile = () => {
             </Box>
             {/* Employee Info */}
             <Typography variant="h5" fontWeight="bold" textAlign="center">
-              {employee.name}
+              {user?.name}
             </Typography>
             <Typography
               variant="body2"
@@ -135,7 +139,7 @@ const EmployeeProfile = () => {
                 fontWeight: "bold",
               }}
             >
-              {employee.designation}
+              {user?.designation}
             </Typography>
           </Box>
 
@@ -191,7 +195,7 @@ const EmployeeProfile = () => {
                   >
                     <EmailIcon sx={{ color: "#371edc" }} /> Email
                   </Typography>
-                  <Typography sx={{ mt: 2 }}>{employee.email}</Typography>
+                  <Typography sx={{ mt: 2 }}>{user?.email}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Typography
@@ -203,7 +207,7 @@ const EmployeeProfile = () => {
                     <PhoneIcon sx={{ color: "#371edc" }} /> Contact Number
                   </Typography>
                   <Typography sx={{ mt: 2 }}>
-                    {employee.contactNumber}
+                    {user?.contactNumber}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -215,7 +219,7 @@ const EmployeeProfile = () => {
                   >
                     <HomeIcon sx={{ color: "#371edc" }} /> Address
                   </Typography>
-                  <Typography sx={{ mt: 2 }}>{employee.address}</Typography>
+                  <Typography sx={{ mt: 2 }}>{user?.address}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Typography
@@ -226,7 +230,7 @@ const EmployeeProfile = () => {
                   >
                     <WorkIcon sx={{ color: "#371edc" }} /> Designation
                   </Typography>
-                  <Typography sx={{ mt: 2 }}>{employee.designation}</Typography>
+                  <Typography sx={{ mt: 2 }}>{user?.designation}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Typography
@@ -238,7 +242,7 @@ const EmployeeProfile = () => {
                     <CalendarTodayIcon sx={{ color: "#371edc" }} /> Joining Date
                   </Typography>
                   <Typography sx={{ mt: 2 }}>
-                    {new Date(employee.joiningDate).toLocaleDateString()}
+                    {new Date(user?.joiningDate).toLocaleDateString()}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -250,7 +254,7 @@ const EmployeeProfile = () => {
                   >
                     <PersonIcon sx={{ color: "#371edc" }} /> Gender
                   </Typography>
-                  <Typography sx={{ mt: 2 }}>{employee.gender}</Typography>
+                  <Typography sx={{ mt: 2 }}>{user?.gender}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Typography
@@ -292,7 +296,7 @@ const EmployeeProfile = () => {
                 <AccordionDetails>
                   <Typography>
                     Needs Password Change:{" "}
-                    {employee.needsPasswordChange ? "Yes" : "No"}
+                    {user?.needsPasswordChange ? "Yes" : "No"}
                   </Typography>
                 </AccordionDetails>
               </Accordion>
@@ -308,7 +312,7 @@ const EmployeeProfile = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>
-                    Account Deleted: {employee.isDeleted ? "Yes" : "No"}
+                    Account Deleted: {user?.isDeleted ? "Yes" : "No"}
                   </Typography>
                 </AccordionDetails>
               </Accordion>

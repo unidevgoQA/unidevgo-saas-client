@@ -33,20 +33,19 @@ const Sidebar = ({ isDrawerOpen }) => {
   const menuItems = [
     { text: "Home", icon: <FiHome />, path: "/" },
     // Company Menu Items
-    { text: "Company Profile", icon: <FiUser />, path: "companies/profile", role: "company" },
+    { text: "Profile", icon: <FiUser />, path: "companies/profile", role: "company" },
     { text: "All Employees", icon: <FiUsers />, path: "employees/all", role: "company" },
     { text: "Add Employee", icon: <FiUserPlus />, path: "employees/add", role: "company" },
-    { text: "Edit Employee", icon: <FiEdit />, path: "employees/edit", role: "company" },
     { text: "Leave Management", icon: <FiClipboard />, path: "/leave-management", role: "company" },
     // Admin Menu Items
-    { text: "Admin Profile", icon: <FiUser />, path: "admin/profile", role: "admin" },
+    { text: "Profile", icon: <FiUser />, path: "admin/profile", role: "admin" },
     { text: "All Companies", icon: <FiDatabase />, path: "companies/all", role: "admin" },
     { text: "Add Company", icon: <FiUserPlus />, path: "companies/add", role: "admin" },
     { text: "Edit Company", icon: <FiEdit />, path: "companies/edit", role: "admin" },
     { text: "Company Details", icon: <FiFileText />, path: "companies/profile", role: "admin" },
-    
+
     // Employee Menu Items
-    { text: "Employee Profile", icon: <FiUser />, path: "employees/profile", role: "employee" },
+    { text: "Profile", icon: <FiUser />, path: "employees/profile", role: "employee" },
     { text: "Leave Status", icon: <FiUserCheck />, path: "/leave-management", role: "employee" },
     { text: "Work Progress", icon: <FiPieChart />, path: "/work-progress-management", role: "employee" },
     { text: "Attendance", icon: <FiCalendar />, path: "/attendance-management", role: "employee" },

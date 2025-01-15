@@ -23,9 +23,13 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../../providers/AuthProviders";
 
 const CompanyProfile = () => {
+  
+  const { user } = useContext(AuthContext); // Use AuthContext
+
   const company = {
     id: "56789",
     name: "FutureWorks Inc.",
@@ -64,134 +68,133 @@ const CompanyProfile = () => {
           gap: 2,
         }}
       >
-       {/* Sidebar */}
-<Box
-  sx={{
-    minWidth: isMobile ? "100%" : "300px",
-    background: "linear-gradient(#170b68, #371edc)",
-    color: "#fff",
-    p: 3,
-    borderRadius: 2,
-    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)", // Add shadow for elegance
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between", // Profile info at the top, Tabs at the bottom
-    height: "100%", // Stretch sidebar to full height
-  }}
->
-  {/* Profile Info */}
-  <Box
-    sx={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      gap: 3,
-      position: "relative", // Positioning for the edit icon
-    }}
-  >
-    {/* Avatar */}
-    <Box sx={{ position: "relative", width: 120, height: 120 }}>
-      <Avatar
-        src={company.profileImageUrl}
-        alt={company.name}
-        sx={{
-          width: "100%",
-          height: "100%",
-          border: "2px solid #fff",
-          boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)", // Subtle shadow for the avatar
-        }}
-      />
-      {/* Edit Icon */}
-      <IconButton
-        sx={{
-          position: "absolute",
-          bottom: 0,
-          right: 0,
-          backgroundColor: "#fff",
-          color: "#371edc",
-          boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)",
-          p: 1,
-          "&:hover": {
-            backgroundColor: "#371edc",
+        {/* Sidebar */}
+        <Box
+          sx={{
+            minWidth: isMobile ? "100%" : "300px",
+            background: "linear-gradient(#170b68, #371edc)",
             color: "#fff",
-          },
-        }}
-      >
-        <EditIcon />
-      </IconButton>
-    </Box>
-    {/* Company Name */}
-    <Typography variant="h5" fontWeight="bold" textAlign="center">
-      {company.name}
-    </Typography>
-    {/* Company Industry */}
-    <Typography
-      variant="body2"
-      textAlign="center"
-      sx={{
-        backgroundColor: "#fff",
-        color: "#371edc",
-        px: 2,
-        py: 0.5,
-        borderRadius: 1,
-        fontWeight: "bold",
-        marginBottom: 4, // Add space between role and tabs
-      }}
-    >
-      {company.industry}
-    </Typography>
-  </Box>
+            p: 3,
+            borderRadius: 2,
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)", // Add shadow for elegance
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between", // Profile info at the top, Tabs at the bottom
+            height: "100%", // Stretch sidebar to full height
+          }}
+        >
+          {/* Profile Info */}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 3,
+              position: "relative", // Positioning for the edit icon
+            }}
+          >
+            {/* Avatar */}
+            <Box sx={{ position: "relative", width: 120, height: 120 }}>
+              <Avatar
+                src={user.profileImageUrl}
+                alt={user.name}
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  border: "2px solid #fff",
+                  boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)", // Subtle shadow for the avatar
+                }}
+              />
+              {/* Edit Icon */}
+              <IconButton
+                sx={{
+                  position: "absolute",
+                  bottom: 0,
+                  right: 0,
+                  backgroundColor: "#fff",
+                  color: "#371edc",
+                  boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)",
+                  p: 1,
+                  "&:hover": {
+                    backgroundColor: "#371edc",
+                    color: "#fff",
+                  },
+                }}
+              >
+                <EditIcon />
+              </IconButton>
+            </Box>
+            {/* Company Name */}
+            <Typography variant="h5" fontWeight="bold" textAlign="center">
+              {user.name}
+            </Typography>
+            {/* Company Industry */}
+            <Typography
+              variant="body2"
+              textAlign="center"
+              sx={{
+                backgroundColor: "#fff",
+                color: "#371edc",
+                px: 2,
+                py: 0.5,
+                borderRadius: 1,
+                fontWeight: "bold",
+                marginBottom: 4, // Add space between role and tabs
+              }}
+            >
+              {company.industry}
+            </Typography>
+          </Box>
 
-  {/* Tabs Section */}
-  <Tabs
-    value={tabValue}
-    onChange={handleTabChange}
-    orientation={isMobile ? "horizontal" : "vertical"}
-    sx={{
-      "& .MuiTab-root": {
-        display: "flex", // Flex container for the tab
-        flexDirection: "row", // Title and icon side-by-side
-        alignItems: "center", // Center-align items vertically
-        gap: 1, // Gap between icon and title
-        color: "#fff",
-        minHeight: "40px", // Consistent tab height
-        padding: "8px 16px", // Add padding for spacing
-        borderRadius: 2, // Add rounded corners
-        "&:hover": {
-          backgroundColor: "rgba(255, 255, 255, 0.2)", // Subtle hover effect
-        },
-      },
-      "& .Mui-selected": {
-        color: "#fff !important",
-        fontWeight: "bold",
-        backgroundColor: "rgba(255, 255, 255, 0.3)", // Highlight active tab
-      },
-    }}
-    TabIndicatorProps={{
-      style: { backgroundColor: "transparent" }, // Remove the indicator line
-    }}
-  >
-    <Tab
-      sx={{
-        display: "flex", // Flex for icon and text alignment
-        gap: 1, // Space between icon and text
-      }}
-      icon={<InfoIcon />}
-      label="Overview"
-    />
-    <Tab
-      sx={{
-        display: "flex", // Flex for icon and text alignment
-        gap: 1, // Space between icon and text
-      }}
-      icon={<DetailsIcon />}
-      label="Details"
-    />
-    {/* Uncomment if additional tabs are needed */}
-    {/* <Tab icon={<SettingsIcon />} label="Settings" /> */}
-  </Tabs>
-</Box>
-
+          {/* Tabs Section */}
+          <Tabs
+            value={tabValue}
+            onChange={handleTabChange}
+            orientation={isMobile ? "horizontal" : "vertical"}
+            sx={{
+              "& .MuiTab-root": {
+                display: "flex", // Flex container for the tab
+                flexDirection: "row", // Title and icon side-by-side
+                alignItems: "center", // Center-align items vertically
+                gap: 1, // Gap between icon and title
+                color: "#fff",
+                minHeight: "40px", // Consistent tab height
+                padding: "8px 16px", // Add padding for spacing
+                borderRadius: 2, // Add rounded corners
+                "&:hover": {
+                  backgroundColor: "rgba(255, 255, 255, 0.2)", // Subtle hover effect
+                },
+              },
+              "& .Mui-selected": {
+                color: "#fff !important",
+                fontWeight: "bold",
+                backgroundColor: "rgba(255, 255, 255, 0.3)", // Highlight active tab
+              },
+            }}
+            TabIndicatorProps={{
+              style: { backgroundColor: "transparent" }, // Remove the indicator line
+            }}
+          >
+            <Tab
+              sx={{
+                display: "flex", // Flex for icon and text alignment
+                gap: 1, // Space between icon and text
+              }}
+              icon={<InfoIcon />}
+              label="Overview"
+            />
+            <Tab
+              sx={{
+                display: "flex", // Flex for icon and text alignment
+                gap: 1, // Space between icon and text
+              }}
+              icon={<DetailsIcon />}
+              label="Details"
+            />
+            {/* Uncomment if additional tabs are needed */}
+            {/* <Tab icon={<SettingsIcon />} label="Settings" /> */}
+          </Tabs>
+        </Box>
 
         {/* Content Area */}
         <Card sx={{ flexGrow: 1, boxShadow: 3, p: 3 }}>
@@ -229,7 +232,7 @@ const CompanyProfile = () => {
                   >
                     <EmailIcon sx={{ color: "#371edc" }} /> Email
                   </Typography>
-                  <Typography sx={{ mt: 2 }}>{company.email}</Typography>
+                  <Typography sx={{ mt: 2 }}>{user.email}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <Typography
@@ -241,7 +244,7 @@ const CompanyProfile = () => {
                     <WorkspacePremiumIcon sx={{ color: "#371edc" }} />{" "}
                     Subscription Plan
                   </Typography>
-                  <Typography sx={{ mt: 2 }}>{company.subscription}</Typography>
+                  <Typography sx={{ mt: 2 }}>{user.subscription}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <Typography
@@ -252,7 +255,7 @@ const CompanyProfile = () => {
                   >
                     <HomeIcon sx={{ color: "#371edc" }} /> Address
                   </Typography>
-                  <Typography sx={{ mt: 2 }}>{company.address}</Typography>
+                  <Typography sx={{ mt: 2 }}>{user.address}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <Typography
@@ -263,9 +266,7 @@ const CompanyProfile = () => {
                   >
                     <PhoneIcon sx={{ color: "#371edc" }} /> Contact Number
                   </Typography>
-                  <Typography sx={{ mt: 2 }}>
-                    {company.contactNumber}
-                  </Typography>
+                  <Typography sx={{ mt: 2 }}>{user.contactNumber}</Typography>
                 </Grid>
                 {/* <Grid item xs={12} sm={4}>
                   <Typography

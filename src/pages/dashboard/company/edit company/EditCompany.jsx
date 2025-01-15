@@ -1,23 +1,26 @@
 import {
-    Box,
-    Button,
-    Container,
-    Grid,
-    IconButton,
-    InputAdornment,
-    TextField,
-    Typography,
+  Box,
+  Button,
+  Container,
+  Grid,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
-    AiOutlineCamera,
-    AiOutlineGlobal,
-    AiOutlineHome,
-    AiOutlineInfoCircle,
-    AiOutlineMail,
-    AiOutlinePhone,
-    AiOutlineShop,
+  AiOutlineCalendar,
+  AiOutlineCamera,
+  AiOutlineFieldTime,
+  AiOutlineGlobal,
+  AiOutlineHome,
+  AiOutlineInfoCircle,
+  AiOutlineMail,
+  AiOutlinePhone,
+  AiOutlineShop,
+  AiOutlineTeam,
 } from "react-icons/ai";
 
 const companyData = {
@@ -41,6 +44,20 @@ const companyData = {
     "Empowering businesses through cutting-edge technology and innovation to achieve their full potential.",
 };
 
+const iconMapping = {
+  name: <AiOutlineShop size={20} color="var(--primary-color)" />, // Name
+  email: <AiOutlineMail size={20} color="var(--primary-color)" />, // Email
+  address: <AiOutlineHome size={20} color="var(--primary-color)" />, // Address
+  contactNumber: <AiOutlinePhone size={20} color="var(--primary-color)" />, // Contact Number
+  subscription: <AiOutlineInfoCircle size={20} color="var(--primary-color)" />, // Subscription
+  established: <AiOutlineCalendar size={20} color="var(--primary-color)" />, // Established Year
+  industry: <AiOutlineInfoCircle size={20} color="var(--primary-color)" />, // Industry
+  employees: <AiOutlineTeam size={20} color="var(--primary-color)" />, // Employees
+  website: <AiOutlineGlobal size={20} color="var(--primary-color)" />, // Website
+  description: <AiOutlineFieldTime size={20} color="var(--primary-color)" />, // Description
+  mission: <AiOutlineFieldTime size={20} color="var(--primary-color)" />, // Mission
+};
+
 const EditCompany = () => {
   const {
     register,
@@ -55,19 +72,10 @@ const EditCompany = () => {
 
   useEffect(() => {
     // Pre-fill form fields with existing company data
-    setValue("name", companyData.name);
-    setValue("email", companyData.email);
-    setValue("address", companyData.address);
-    setValue("contactNumber", companyData.contactNumber);
-    setValue("profileImage", companyData.profileImageUrl);
-    setValue("subscription", companyData.subscription);
-    setValue("established", companyData.established);
-    setValue("industry", companyData.industry);
-    setValue("website", companyData.website);
-    setValue("employees", companyData.employees);
-    setValue("description", companyData.description);
-    setValue("mission", companyData.mission);
-  }, [companyData, setValue]);
+    Object.keys(companyData).forEach((key) => {
+      setValue(key, companyData[key]);
+    });
+  }, [setValue]);
 
   const onFileChange = (event) => {
     const file = event.target.files[0];
@@ -80,17 +88,56 @@ const EditCompany = () => {
     console.log("Company Updated:", data);
   };
 
+  const renderTextField = (name, label, type = "text", multiline = false) => (
+    <TextField
+      label={label}
+      type={type}
+      variant="outlined"
+      fullWidth
+      multiline={multiline}
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">{iconMapping[name]}</InputAdornment>
+        ),
+      }}
+      {...register(name, {
+        required: `${label} is required`,
+        ...(name === "email" && {
+          pattern: {
+            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            message: "Invalid email address",
+          },
+        }),
+        ...(name === "website" && {
+          pattern: {
+            value:
+              /^https?:\/\/[a-zA-Z0-9._\-]+(\.[a-zA-Z]{2,3})(\/[^\s]*)?$/i,
+            message: "Invalid website URL",
+          },
+        }),
+        ...(name === "contactNumber" && {
+          pattern: {
+            value: /^[0-9]+$/,
+            message: "Invalid contact number",
+          },
+        }),
+      })}
+      error={!!errors[name]}
+      helperText={errors[name]?.message}
+      defaultValue={companyData[name]}
+    />
+  );
+
   return (
     <Grid
       container
       justifyContent="center"
       alignItems="center"
       sx={{
-        minHeight: "100vh",
         padding: "20px",
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Box
           sx={{
             backgroundColor: "#ffffff",
@@ -107,7 +154,7 @@ const EditCompany = () => {
               fontFamily: "Poppins, serif",
               fontWeight: 700,
               color: "var(--primary-color)",
-              marginBottom: "10px",
+              marginBottom: "50px",
               fontSize: "1.5rem",
               "@media (max-width: 600px)": {
                 fontSize: "1.25rem",
@@ -118,233 +165,41 @@ const EditCompany = () => {
           >
             Edit Company Details
           </Typography>
-          <Typography
-            sx={{
-              fontFamily: "Poppins, serif",
-              fontWeight: 500,
-              color: "#666666",
-              marginBottom: "30px",
-              textAlign: "center",
-              fontSize: "1rem",
-              "@media (max-width: 600px)": {
-                fontSize: "0.875rem",
-              },
-            }}
-          >
-            Update your company information below.
-          </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Company Name"
-                  variant="outlined"
-                  fullWidth
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <AiOutlineShop size={20} color="var(--primary-color)" />
-                      </InputAdornment>
-                    ),
-                  }}
-                  {...register("name", {
-                    required: "Company Name is required",
-                  })}
-                  error={!!errors.name}
-                  helperText={errors.name?.message}
-                />
+                {renderTextField("name", "Company Name")}
               </Grid>
-
               <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Email Address"
-                  variant="outlined"
-                  fullWidth
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <AiOutlineMail size={20} color="var(--primary-color)" />
-                      </InputAdornment>
-                    ),
-                  }}
-                  {...register("email", {
-                    required: "Email is required",
-                    pattern: {
-                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                      message: "Invalid email address",
-                    },
-                  })}
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                />
+                {renderTextField("email", "Email Address")}
               </Grid>
-
               <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Address"
-                  variant="outlined"
-                  fullWidth
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <AiOutlineHome size={20} color="var(--primary-color)" />
-                      </InputAdornment>
-                    ),
-                  }}
-                  {...register("address", { required: "Address is required" })}
-                  error={!!errors.address}
-                  helperText={errors.address?.message}
-                />
+                {renderTextField("address", "Address")}
               </Grid>
-
               <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Contact Number"
-                  variant="outlined"
-                  fullWidth
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <AiOutlinePhone
-                          size={20}
-                          color="var(--primary-color)"
-                        />
-                      </InputAdornment>
-                    ),
-                  }}
-                  {...register("contactNumber", {
-                    required: "Contact Number is required",
-                    pattern: {
-                      value: /^[0-9]+$/, // Regex validation
-                      message: "Invalid contact number",
-                    },
-                  })}
-                  error={!!errors.contactNumber}
-                  helperText={errors.contactNumber?.message}
-                />
+                {renderTextField("contactNumber", "Contact Number")}
               </Grid>
-
               <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Subscription"
-                  variant="outlined"
-                  fullWidth
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <AiOutlineInfoCircle
-                          size={20}
-                          color="var(--primary-color)"
-                        />
-                      </InputAdornment>
-                    ),
-                  }}
-                  {...register("subscription", {
-                    required: "Subscription is required",
-                  })}
-                  error={!!errors.subscription}
-                  helperText={errors.subscription?.message}
-                />
+                {renderTextField("subscription", "Subscription Plan")}
               </Grid>
-
               <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Established Year"
-                  variant="outlined"
-                  fullWidth
-                  {...register("established", {
-                    required: "Established Year is required",
-                  })}
-                  error={!!errors.established}
-                  helperText={errors.established?.message}
-                />
+                {renderTextField("established", "Established Year")}
               </Grid>
-
               <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Industry"
-                  variant="outlined"
-                  fullWidth
-                  {...register("industry", {
-                    required: "Industry is required",
-                  })}
-                  error={!!errors.industry}
-                  helperText={errors.industry?.message}
-                />
+                {renderTextField("industry", "Industry")}
               </Grid>
-
               <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Number of Employees"
-                  variant="outlined"
-                  fullWidth
-                  type="number"
-                  {...register("employees", {
-                    required: "Number of Employees is required",
-                  })}
-                  error={!!errors.employees}
-                  helperText={errors.employees?.message}
-                />
+                {renderTextField("employees", "Number of Employees", "number")}
               </Grid>
-
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  label="Website"
-                  variant="outlined"
-                  fullWidth
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <AiOutlineGlobal
-                          size={20}
-                          color="var(--primary-color)"
-                        />
-                      </InputAdornment>
-                    ),
-                  }}
-                  {...register("website", {
-                    required: "Website is required",
-                    pattern: {
-                      value:
-                        /^https?:\/\/[a-zA-Z0-9._\-]+(\.[a-zA-Z]{2,3})(\/[^\s]*)?$/i,
-                      message: "Invalid website URL",
-                    },
-                  })}
-                  error={!!errors.website}
-                  helperText={errors.website?.message}
-                />
-              </Grid>
-
               <Grid item xs={12}>
-                <TextField
-                  label="Description"
-                  variant="outlined"
-                  fullWidth
-                  multiline
-                  rows={4}
-                  {...register("description", {
-                    required: "Description is required",
-                  })}
-                  error={!!errors.description}
-                  helperText={errors.description?.message}
-                />
+                {renderTextField("website", "Website URL")}
               </Grid>
-
               <Grid item xs={12}>
-                <TextField
-                  label="Mission Statement"
-                  variant="outlined"
-                  fullWidth
-                  multiline
-                  rows={3}
-                  {...register("mission", {
-                    required: "Mission statement is required",
-                  })}
-                  error={!!errors.mission}
-                  helperText={errors.mission?.message}
-                />
+                {renderTextField("description", "Company Description", "text", true)}
               </Grid>
-
+              <Grid item xs={12}>
+                {renderTextField("mission", "Mission Statement", "text", true)}
+              </Grid>
               <Grid item xs={12}>
                 <Box
                   sx={{
@@ -397,7 +252,6 @@ const EditCompany = () => {
                   </Typography>
                 </Box>
               </Grid>
-
               <Grid item xs={12}>
                 <Button
                   type="submit"

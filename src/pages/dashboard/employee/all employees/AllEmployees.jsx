@@ -12,13 +12,13 @@ import {
   TextField,
   Tooltip,
   Typography,
-  useMediaQuery
+  useMediaQuery,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { BsPersonLinesFill } from "react-icons/bs";
 import {
-  FaDailymotion,
   FaDownload,
   FaEdit,
   FaEnvelope,
@@ -27,64 +27,13 @@ import {
   FaPhone,
   FaPlus,
   FaTrashAlt,
-  FaUserAlt
+  FaUserAlt,
 } from "react-icons/fa";
-
-const employees = [
-  {
-    id: "EMP0012357",
-    name: "John Doe",
-    email: "john.doe@example.com",
-    role: "Developer",
-    department: "Java",
-    joiningDate: "2018-03-01",
-    gender: "male",
-    profileImageUrl: "https://via.placeholder.com/150",
-    address: "123 Elm Street",
-    contactNumber: "1234567890",
-    status: "On Leave",
-  },
-  {
-    id: "EMP00190",
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    role: "Designer",
-    department: "UI/UX",
-    joiningDate: "2019-05-20",
-    gender: "female",
-    profileImageUrl: "https://via.placeholder.com/150",
-    address: "456 Oak Avenue",
-    contactNumber: "2345678901",
-    status: "Active",
-  },
-  {
-    id: "EMP00190",
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    role: "Designer",
-    department: "UI/UX",
-    joiningDate: "2019-05-20",
-    gender: "female",
-    profileImageUrl: "https://via.placeholder.com/150",
-    address: "456 Oak Avenue",
-    contactNumber: "2345678901",
-    status: "Active",
-  },
-  {
-    id: "EMP00190",
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    role: "Designer",
-    department: "UI/UX",
-    joiningDate: "2019-05-20",
-    gender: "female",
-    profileImageUrl: "https://via.placeholder.com/150",
-    address: "456 Oak Avenue",
-    contactNumber: "2345678901",
-    status: "Active",
-  },
-  // Add more employees as needed
-];
+import { Link } from "react-router-dom";
+import {
+  useDeleteEmployeeMutation,
+  useGetAllEmployeesQuery,
+} from "../../../../features/employee/employeeApi";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   fontWeight: "bold",
@@ -97,15 +46,13 @@ const StyledSearchBox = styled(TextField)({
   maxWidth: "300px",
   borderRadius: "5px",
   backgroundColor: "white",
-   border : '1px solid var(--primary-color)'
-  
+  border: "1px solid var(--primary-color)",
 });
 
 const ActionBar = styled(Box)({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  // backgroundColor: "var(--bg-grey-color)",
   padding: "1rem 0rem",
   borderRadius: "8px",
   margin: "1rem 0rem",
@@ -113,22 +60,18 @@ const ActionBar = styled(Box)({
   gap: "10px",
 });
 
-const PaginationContainer = styled(Box)({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  marginTop: "1rem",
-  padding: "1rem 0",
-  borderTop: "1px solid #f0f0f0",
-});
-
 const AllEmployees = () => {
+  const { data, isLoading } = useGetAllEmployeesQuery();
+  const [deleteEmployee, { isSuccess, isLoading: deleteEmployeeLoading }] =
+    useDeleteEmployeeMutation();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedAll, setSelectedAll] = useState(false);
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const isMobile = useMediaQuery("(max-width:768px)");
+
+  const employees = data?.data || []; // Fallback to an empty array if data is undefined
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value.toLowerCase());
@@ -155,23 +98,34 @@ const AllEmployees = () => {
     }
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+  //handle Delete
+  const handleDelete = (id) => {
+    const deleteConfirm = window.confirm("Want to delete?");
+    if (deleteConfirm) {
+      deleteEmployee(id);
+    }
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+  //Delete Effects
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Deleted Successfully", { id: "employee" });
+    }
+    if (deleteEmployeeLoading) {
+      toast.loading("Loading", { id: "employee" });
+    }
+  }, [isSuccess, deleteEmployeeLoading]);
+
+  if (isLoading) {
+    return <Typography>Loading employees...</Typography>;
+  }
+
+  if (employees.length === 0) {
+    return <Typography>No employees found.</Typography>;
+  }
 
   return (
-    <Box
-      sx={{
-        // backgroundColor: "var(--bg-grey-color)",
-        padding: "1rem",
-        borderRadius: "10px",
-      }}
-    >
+    <Box sx={{ padding: "1rem", borderRadius: "10px" }}>
       <Typography
         sx={{
           fontWeight: 700,
@@ -191,9 +145,9 @@ const AllEmployees = () => {
           size="small"
           onChange={handleSearch}
         />
-        <Box sx={{ display: "flex", alignItems:'center' ,gap: "10px" }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <Tooltip title="Add New Employee">
-            <IconButton style={{color :'var(--primary-color)'}}>
+            <IconButton style={{ color: "var(--primary-color)" }}>
               <FaPlus />
             </IconButton>
           </Tooltip>
@@ -205,9 +159,12 @@ const AllEmployees = () => {
         </Box>
       </ActionBar>
 
-      <TableContainer sx={{
-        border : '1px solid var(--primary-color)'
-      }} component={Paper}>
+      <TableContainer
+        sx={{
+          border: "1px solid var(--primary-color)",
+        }}
+        component={Paper}
+      >
         <Table>
           <TableHead>
             <TableRow>
@@ -216,13 +173,11 @@ const AllEmployees = () => {
               </StyledTableCell>
               {!isMobile && <StyledTableCell>Name</StyledTableCell>}
               {!isMobile && <StyledTableCell>Role</StyledTableCell>}
-              {/* {!isMobile && <StyledTableCell>Department</StyledTableCell>} */}
               <StyledTableCell>Mobile</StyledTableCell>
               {!isMobile && <StyledTableCell>Joining Date</StyledTableCell>}
               <StyledTableCell>Email</StyledTableCell>
               {!isMobile && <StyledTableCell>Gender</StyledTableCell>}
               {!isMobile && <StyledTableCell>Address</StyledTableCell>}
-              <StyledTableCell>Employee Status</StyledTableCell>
               <StyledTableCell>Actions</StyledTableCell>
             </TableRow>
           </TableHead>
@@ -251,24 +206,16 @@ const AllEmployees = () => {
                     </TableCell>
                   )}
                   {!isMobile && (
-               <TableCell>
-               <div style={{ display: "flex", alignItems: "center" }}>
-                 <BsPersonLinesFill
-                   style={{
-                     marginRight: 8,
-                     color: "var(--primary-color)",
-                   }}
-                 />
-                 <Typography>{employee.role}</Typography>
-               </div>
-             </TableCell>
-                    
-                  )}
-                  {/* {!isMobile && (
                     <TableCell>
-                      <Typography>{employee.department}</Typography>
+                      <BsPersonLinesFill
+                        style={{
+                          marginRight: 8,
+                          color: "var(--primary-color)",
+                        }}
+                      />
+                      {employee.role}
                     </TableCell>
-                  )} */}
+                  )}
                   <TableCell>
                     <FaPhone
                       style={{ marginRight: 8, color: "var(--primary-color)" }}
@@ -277,7 +224,6 @@ const AllEmployees = () => {
                   </TableCell>
                   {!isMobile && (
                     <TableCell>
-                      <FaDailymotion  style={{ marginRight: 8, color: "var(--primary-color)" }}/>
                       {new Date(employee.joiningDate).toLocaleDateString()}
                     </TableCell>
                   )}
@@ -289,7 +235,12 @@ const AllEmployees = () => {
                   </TableCell>
                   {!isMobile && (
                     <TableCell>
-                      <FaGenderless  style={{ marginRight: 8, color: "var(--primary-color)" }}/>
+                      <FaGenderless
+                        style={{
+                          marginRight: 8,
+                          color: "var(--primary-color)",
+                        }}
+                      />
                       {employee.gender.charAt(0).toUpperCase() +
                         employee.gender.slice(1)}
                     </TableCell>
@@ -305,31 +256,21 @@ const AllEmployees = () => {
                       {employee.address}
                     </TableCell>
                   )}
-                  <TableCell>
-                    <Typography
-                      sx={{
-                        backgroundColor:
-                          employee.status === "Active"
-                            ? "var(--bg-light-green-color)"
-                            : "var(--accent-color)",
-                        color: "var(--white-color)",
-                        padding: "0.25rem 0.5rem",
-                        borderRadius: "4px",
-                        display: "inline-block",
-                        fontSize: "12px",
-                      }}
-                    >
-                      {employee.status}
-                    </Typography>
-                  </TableCell>
+
                   <TableCell>
                     <Tooltip title="Edit">
-                      <IconButton style={{ color: "var(--primary-color)" }}>
-                        <FaEdit />
-                      </IconButton>
+                      <Link to={`/dashboard/employees/edit/${employee?.id}`}>
+                        {" "}
+                        <IconButton style={{ color: "var(--primary-color)" }}>
+                          <FaEdit />
+                        </IconButton>
+                      </Link>
                     </Tooltip>
                     <Tooltip title="Delete">
-                      <IconButton style={{ color: "var(--accent-color)" }}>
+                      <IconButton
+                        onClick={() => handleDelete(employee?.id)}
+                        style={{ color: "var(--accent-color)" }}
+                      >
                         <FaTrashAlt />
                       </IconButton>
                     </Tooltip>
@@ -339,18 +280,6 @@ const AllEmployees = () => {
           </TableBody>
         </Table>
       </TableContainer>
-
-      {/* <PaginationContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 15]}
-          component="div"
-          count={filteredEmployees.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </PaginationContainer> */}
     </Box>
   );
 };
