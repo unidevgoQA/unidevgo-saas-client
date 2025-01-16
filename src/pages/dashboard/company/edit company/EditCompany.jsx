@@ -45,17 +45,17 @@ const companyData = {
 };
 
 const iconMapping = {
-  name: <AiOutlineShop size={20} color="var(--primary-color)" />, // Name
-  email: <AiOutlineMail size={20} color="var(--primary-color)" />, // Email
-  address: <AiOutlineHome size={20} color="var(--primary-color)" />, // Address
-  contactNumber: <AiOutlinePhone size={20} color="var(--primary-color)" />, // Contact Number
-  subscription: <AiOutlineInfoCircle size={20} color="var(--primary-color)" />, // Subscription
-  established: <AiOutlineCalendar size={20} color="var(--primary-color)" />, // Established Year
-  industry: <AiOutlineInfoCircle size={20} color="var(--primary-color)" />, // Industry
-  employees: <AiOutlineTeam size={20} color="var(--primary-color)" />, // Employees
-  website: <AiOutlineGlobal size={20} color="var(--primary-color)" />, // Website
-  description: <AiOutlineFieldTime size={20} color="var(--primary-color)" />, // Description
-  mission: <AiOutlineFieldTime size={20} color="var(--primary-color)" />, // Mission
+  name: <AiOutlineShop size={20} color="var(--primary-color)" />,
+  email: <AiOutlineMail size={20} color="var(--primary-color)" />,
+  address: <AiOutlineHome size={20} color="var(--primary-color)" />,
+  contactNumber: <AiOutlinePhone size={20} color="var(--primary-color)" />,
+  subscription: <AiOutlineInfoCircle size={20} color="var(--primary-color)" />,
+  established: <AiOutlineCalendar size={20} color="var(--primary-color)" />,
+  industry: <AiOutlineInfoCircle size={20} color="var(--primary-color)" />,
+  employees: <AiOutlineTeam size={20} color="var(--primary-color)" />,
+  website: <AiOutlineGlobal size={20} color="var(--primary-color)" />,
+  description: <AiOutlineFieldTime size={20} color="var(--primary-color)" />,
+  mission: <AiOutlineFieldTime size={20} color="var(--primary-color)" />,
 };
 
 const EditCompany = () => {
@@ -71,7 +71,6 @@ const EditCompany = () => {
   );
 
   useEffect(() => {
-    // Pre-fill form fields with existing company data
     Object.keys(companyData).forEach((key) => {
       setValue(key, companyData[key]);
     });
@@ -129,19 +128,21 @@ const EditCompany = () => {
   );
 
   return (
-    <Grid
-      container
-      justifyContent="center"
-      alignItems="center"
+    <Box
       sx={{
-        padding: "20px",
+        width: "100%",
+        minHeight: "100vh",
+        borderRadius: "10px",
+        backgroundColor: "#f5f7fb",
+        padding: "30px 20px",
+        boxSizing: "border-box",
       }}
     >
       <Container maxWidth="xl">
         <Box
           sx={{
             backgroundColor: "#ffffff",
-            borderRadius: "15px",
+            borderRadius: "10px",
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
             padding: "30px",
             "@media (max-width: 600px)": {
@@ -154,19 +155,18 @@ const EditCompany = () => {
               fontFamily: "Poppins, serif",
               fontWeight: 700,
               color: "var(--primary-color)",
-              marginBottom: "50px",
-              fontSize: "1.5rem",
+              textAlign: "left",
+              marginBottom: "30px",
+              fontSize: "1.75rem",
               "@media (max-width: 600px)": {
                 fontSize: "1.25rem",
               },
             }}
-            variant="h4"
-            align="center"
           >
             Edit Company Details
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid container spacing={2}>
+            <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
                 {renderTextField("name", "Company Name")}
               </Grid>
@@ -256,14 +256,14 @@ const EditCompany = () => {
                 <Button
                   type="submit"
                   variant="contained"
-                  fullWidth
+                
                   sx={{
                     backgroundColor: "var(--primary-color)",
                     color: "#ffffff",
                     fontFamily: "Poppins, serif",
                     fontWeight: "600",
                     textTransform: "none",
-                    padding: "10px",
+                    padding: "15px",
                     borderRadius: "5px",
                     "&:hover": {
                       backgroundColor: "#2c1bb6",
@@ -277,7 +277,7 @@ const EditCompany = () => {
           </form>
         </Box>
       </Container>
-    </Grid>
+    </Box>
   );
 };
 

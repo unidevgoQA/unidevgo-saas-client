@@ -133,7 +133,7 @@ const EditEmployee = () => {
         width: "100%",
         minHeight: "100vh",
         backgroundColor: "#f5f7fb",
-        padding: "20px",
+        padding: "30px 20px",
         borderRadius: "10px",
         boxSizing: "border-box",
       }}

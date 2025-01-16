@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import axios from "axios"; // Import axios
+import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -20,7 +20,6 @@ import {
   AiOutlinePhone,
   AiOutlineShop,
 } from "react-icons/ai";
-import "./company-register.css";
 
 const CompanyRegister = () => {
   const {
@@ -28,6 +27,7 @@ const CompanyRegister = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const [fileName, setFileName] = useState("Upload Profile Image");
   const [profileImageUrl, setProfileImageUrl] = useState("");
 
@@ -67,14 +67,9 @@ const CompanyRegister = () => {
         }
       );
 
-      console.log("Company Registered Successfully:", response.data);
-      toast(response.data.message);
+      toast.success("Company Registered Successfully!");
     } catch (error) {
-      console.error(
-        "Error registering company:",
-        error.response?.data || error
-      );
-      alert("Failed to register company. Please try again.");
+      toast.error("Failed to register company. Please try again.");
     }
   };
 
@@ -85,34 +80,34 @@ const CompanyRegister = () => {
       alignItems="center"
       sx={{
         minHeight: "100vh",
-        background: "linear-gradient(#371edc, #170b68);",
+        background: "linear-gradient(135deg, #371edc, #170b68)",
         padding: "20px",
       }}
     >
-      <Container maxWidth="sm">
+      <Container maxWidth="md">
         <Box
           sx={{
             backgroundColor: "#ffffff",
-            borderRadius: "15px",
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-            padding: "30px",
+            borderRadius: "10px",
+            boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.2)",
+            padding: "40px",
           }}
         >
           <Typography
             sx={{
-              fontFamily: "Poppins, serif",
+              fontFamily: "Poppins, sans-serif",
               fontWeight: 700,
               color: "#371edc",
-              marginBottom: "10px",
+              marginBottom: "20px",
+              textAlign: "center",
             }}
             variant="h4"
-            align="center"
           >
             Register Your Company
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Poppins, serif",
+              fontFamily: "Poppins, sans-serif",
               fontWeight: 500,
               color: "#666666",
               marginBottom: "30px",
@@ -252,7 +247,7 @@ const CompanyRegister = () => {
               <Typography
                 sx={{
                   marginLeft: "8px",
-                  fontFamily: "Poppins, serif",
+                  fontFamily: "Poppins, sans-serif",
                   color: "#666666",
                   fontSize: "12px",
                   border: "1px solid rgba(149, 149, 149, 0.67)",
@@ -272,11 +267,11 @@ const CompanyRegister = () => {
               sx={{
                 backgroundColor: "#371edc",
                 color: "#ffffff",
-                fontFamily: "Poppins, serif",
+                fontFamily: "Poppins, sans-serif",
                 fontWeight: "600",
                 textTransform: "none",
-                padding: "10px",
-                borderRadius: "5px",
+                padding: "12px",
+                borderRadius: "8px",
                 "&:hover": {
                   backgroundColor: "#2c1bb6",
                 },

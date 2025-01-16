@@ -56,7 +56,7 @@ const Login = () => {
       <Box
         sx={{
           backgroundColor: "#ffffff",
-          borderRadius: "15px",
+          borderRadius: "10px",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
           padding: "30px",
           width: "100%",

@@ -1,236 +1,290 @@
 import {
+    Avatar,
     Box,
     Button,
+    Card,
+    CardActions,
+    CardContent,
     Checkbox,
+    Grid,
     IconButton,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
     Tooltip,
     Typography,
     useMediaQuery,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaCheck, FaHospital, FaPlane, FaTimes, FaTrashAlt, FaUserAlt } from "react-icons/fa";
 import {
     useDeleteLeaveMutation,
-    useGetAllLeavesByCompanyQuery,
-    useUpdateLeaveStatusMutation
+    useGetAllLeavesQuery,
+    useUpdateLeaveStatusMutation,
 } from "../../../../../features/leave/leaveApi";
-import { AuthContext } from "../../../../../providers/AuthProviders";
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  fontWeight: "bold",
-  backgroundColor: "var(--bg-grey-color)",
-}));
-
-const ActionBar = styled(Box)({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: "1rem 0rem",
-  borderRadius: "8px",
-  margin: "1rem 0rem",
-  flexWrap: "wrap",
-  gap: "10px",
-});
-
-const FilterButton = styled(Button)(({ theme }) => ({
-  textTransform: "none",
-  backgroundColor: "var(--primary-color)",
-  color: "white",
-  fontWeight: "600",
-  padding: "5px 15px",
-  borderRadius: "5px",
-  "&:hover": {
-    backgroundColor: "var(--primary-color)",
-  },
-  "&.active": {
-    backgroundColor: "#5948CE",
-  },
-}));
-
-const ManageLeave = () => {
-  const isMobile = useMediaQuery("(max-width:768px)");
-  const [selectedAll, setSelectedAll] = useState(false);
-  const [selected, setSelected] = useState([]);
-  const [filterStatus, setFilterStatus] = useState("all");
-  const { user } = useContext(AuthContext);
-  const { data } = useGetAllLeavesByCompanyQuery(user?.id);
-
-  const [deleteLeave, { isSuccess, isLoading }] = useDeleteLeaveMutation();
-  const [updateLeaveStatus] = useUpdateLeaveStatusMutation();
   
-
-  const leaves = data?.data || [];
-
-  const handleStatusFilter = (status) => {
-    setFilterStatus(status);
+  const StyledCard = styled(Card)({
+    background: "linear-gradient(#371edc, #170b68)",
+    color: "white",
+    padding: "10px",
+    borderRadius: "10px",
+    boxShadow: "0 6px 20px rgba(0, 0, 0, 0.2)",
+    overflow: "hidden",
+  });
+  
+  const IconText = styled(Box)({
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    marginBottom: "8px",
+    "& svg": {
+      color: "white",
+    },
+  });
+  
+  const leaveTypeIcons = {
+    vacation: <FaPlane />,
+    sick: <FaHospital />,
+    personal: <FaUserAlt />,
   };
-
-  const filteredLeaves = leaves.filter((leave) =>
-    filterStatus === "all" ? true : leave.status.toLowerCase() === filterStatus
-  );
-
-  const handleSelectAll = () => {
-    if (selectedAll) {
-      setSelected([]);
-    } else {
-      setSelected(filteredLeaves.map((leave) => leave._id));
-    }
-    setSelectedAll(!selectedAll);
-  };
-
-  const handleSelect = (id) => {
-    if (selected.includes(id)) {
-      setSelected(selected.filter((item) => item !== id));
-    } else {
-      setSelected([...selected, id]);
-    }
-  };
-
-  const handleDelete = (id) => {
-    const deleteConfirm = window.confirm("Do you want to delete this leave?");
-    if (deleteConfirm) {
-      deleteLeave(id);
-    }
-  };
-
-  const handleAccept = (leaveId) => {
-    updateLeaveStatus({ id: leaveId, data: { status: "Accepted" } });
-  };
-
-  const handleReject = (leaveId) => {
-    updateLeaveStatus({ id: leaveId, data: { status: "Rejected" } });
-  };
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success("Deleted Successfully", { id: "delete-leave" });
-    }
-    if (isLoading) {
-      toast.loading("Loading", { id: "delete-leave" });
-    }
-  }, [isSuccess, isLoading]);
-
-  return (
-    <Box sx={{ padding: "1rem", borderRadius: "10px" }}>
-      <Typography
-        sx={{ fontWeight: 700, color: "#371edc", marginBottom: "10px" }}
-        variant="h4"
-      >
-        Manage Leaves
-      </Typography>
-
-      <ActionBar>
-        <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <FilterButton
-            onClick={() => handleStatusFilter("all")}
-            className={filterStatus === "all" ? "active" : ""}
-          >
-            All
-          </FilterButton>
-          <FilterButton
-            onClick={() => handleStatusFilter("pending")}
-            className={filterStatus === "pending" ? "active" : ""}
-          >
-            Pending
-          </FilterButton>
-          <FilterButton
-            onClick={() => handleStatusFilter("accepted")}
-            className={filterStatus === "accepted" ? "active" : ""}
-          >
-            Accepted
-          </FilterButton>
-          <FilterButton
-            onClick={() => handleStatusFilter("rejected")}
-            className={filterStatus === "rejected" ? "active" : ""}
-          >
-            Rejected
-          </FilterButton>
-        </Box>
-      </ActionBar>
-
-      {filteredLeaves.length > 0 ? (
-        <TableContainer
-          sx={{ border: "1px solid var(--primary-color)" }}
-          component={Paper}
+  
+  const ManageLeave = () => {
+    const [filterStatus, setFilterStatus] = useState("all");
+    const [selected, setSelected] = useState([]);
+    const isMobile = useMediaQuery("(max-width:768px)");
+  
+    const { data } = useGetAllLeavesQuery();
+    const leaves = data?.data || [];
+  
+    const [deleteLeave, { isSuccess, isLoading }] = useDeleteLeaveMutation();
+    const [updateLeaveStatus] = useUpdateLeaveStatusMutation();
+  
+    const handleStatusFilter = (status) => {
+      setFilterStatus(status);
+    };
+  
+    const filteredLeaves = leaves.filter((leave) =>
+      filterStatus === "all" ? true : leave.status.toLowerCase() === filterStatus
+    );
+  
+    const handleDelete = (id) => {
+      if (window.confirm("Do you want to delete this leave?")) {
+        deleteLeave(id);
+      }
+    };
+  
+    const handleAccept = (leaveId) => {
+      updateLeaveStatus({ id: leaveId, data: { status: "Accepted" } });
+    };
+  
+    const handleReject = (leaveId) => {
+      updateLeaveStatus({ id: leaveId, data: { status: "Rejected" } });
+    };
+  
+    const handleSelect = (id) => {
+      if (selected.includes(id)) {
+        setSelected(selected.filter((item) => item !== id));
+      } else {
+        setSelected([...selected, id]);
+      }
+    };
+  
+    useEffect(() => {
+      if (isSuccess) {
+        toast.success("Deleted Successfully");
+      }
+      if (isLoading) {
+        toast.loading("Loading...");
+      }
+    }, [isSuccess, isLoading]);
+  
+    return (
+      <Box sx={{ padding: "1rem" }}>
+        <Typography
+          sx={{
+            fontWeight: 700,
+            background: "linear-gradient(#371edc, #170b68)",
+            color: "#fff",
+            padding: "10px 20px",
+            marginBottom: "20px",
+            borderRadius: "10px",
+          }}
+          variant="h5"
         >
-          <Table>
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>
-                  <Checkbox checked={selectedAll} onChange={handleSelectAll} />
-                </StyledTableCell>
-                <StyledTableCell>Employee ID</StyledTableCell>
-                {!isMobile && <StyledTableCell>Leave Type</StyledTableCell>}
-                <StyledTableCell>Total Days</StyledTableCell>
-                {!isMobile && <StyledTableCell>Status</StyledTableCell>}
-                <StyledTableCell>Actions</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {filteredLeaves.map((leave) => (
-                <TableRow key={leave._id}>
-                  <TableCell>
-                    <Checkbox
-                      checked={selected.includes(leave._id)}
-                      onChange={() => handleSelect(leave._id)}
-                    />
-                  </TableCell>
-                  <TableCell>{leave.employeeId}</TableCell>
-                  {!isMobile && <TableCell>{leave.leaveType}</TableCell>}
-                  <TableCell>{leave.totalDays}</TableCell>
-                  {!isMobile && <TableCell>{leave.status}</TableCell>}
-                  <TableCell>
-                    <Button
-                      onClick={() => handleAccept(leave._id)}
-                      size="small"
-                      style={{
-                        backgroundColor: "green",
-                        color: "white",
-                        marginRight: "5px",
+          Manage Leaves
+        </Typography>
+  
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: "10px",
+          }}
+        >
+          <Box sx={{ display: "flex", gap: "10px" }}>
+            <Button
+              onClick={() => handleStatusFilter("all")}
+              sx={{
+                textTransform: "none",
+                backgroundColor: filterStatus === "all" ? "#5948CE" : "var(--primary-color)",
+                color: "white",
+                fontWeight: "600",
+                padding: "5px 15px",
+                borderRadius: "5px",
+                "&:hover": {
+                  backgroundColor: "#5948CE",
+                },
+              }}
+            >
+              All
+            </Button>
+            <Button
+              onClick={() => handleStatusFilter("pending")}
+              sx={{
+                textTransform: "none",
+                backgroundColor: filterStatus === "pending" ? "#5948CE" : "var(--primary-color)",
+                color: "white",
+                fontWeight: "600",
+                padding: "5px 15px",
+                borderRadius: "5px",
+                "&:hover": {
+                  backgroundColor: "#5948CE",
+                },
+              }}
+            >
+              Pending
+            </Button>
+            <Button
+              onClick={() => handleStatusFilter("accepted")}
+              sx={{
+                textTransform: "none",
+                backgroundColor: filterStatus === "accepted" ? "#5948CE" : "var(--primary-color)",
+                color: "white",
+                fontWeight: "600",
+                padding: "5px 15px",
+                borderRadius: "5px",
+                "&:hover": {
+                  backgroundColor: "#5948CE",
+                },
+              }}
+            >
+              Accepted
+            </Button>
+            <Button
+              onClick={() => handleStatusFilter("rejected")}
+              sx={{
+                textTransform: "none",
+                backgroundColor: filterStatus === "rejected" ? "#5948CE" : "var(--primary-color)",
+                color: "white",
+                fontWeight: "600",
+                padding: "5px 15px",
+                borderRadius: "5px",
+                "&:hover": {
+                  backgroundColor: "#5948CE",
+                },
+              }}
+            >
+              Rejected
+            </Button>
+          </Box>
+        </Box>
+  
+        <Grid container spacing={3} sx={{ marginTop: "20px" }}>
+          {filteredLeaves.map((leave) => (
+            <Grid item xs={12} sm={6} md={4} key={leave._id}>
+              <StyledCard>
+                <CardContent>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      marginBottom: "15px",
+                    }}
+                  >
+                    <Avatar
+                      sx={{
+                        bgcolor: "white",
+                        color: "var(--primary-color)",
+                        width: "50px",
+                        height: "50px",
+                        fontWeight: "bold",
                       }}
                     >
-                      Accept
-                    </Button>
-                    <Button
-                      onClick={() => handleReject(leave._id)}
-                      size="small"
-                      style={{
-                        backgroundColor: "red",
-                        color: "white",
-                      }}
-                    >
-                      Reject
-                    </Button>
+                      {leave.employeeId.charAt(0)}
+                    </Avatar>
+                    <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                      {leave.employeeId}
+                    </Typography>
+                  </Box>
+                  <IconText>
+                    {leaveTypeIcons[leave.leaveType.toLowerCase()] || <FaUserAlt />}
+                    <Typography variant="body2">{leave.leaveType}</Typography>
+                  </IconText>
+                  <IconText>
+                    <Typography variant="body2">
+                      Total Days: {leave.totalDays}
+                    </Typography>
+                  </IconText>
+                  <IconText>
+                    <Typography variant="body2">Status: {leave.status}</Typography>
+                  </IconText>
+                </CardContent>
+                <CardActions sx={{ justifyContent: "space-between" }}>
+                  <Checkbox
+                    checked={selected.includes(leave._id)}
+                    onChange={() => handleSelect(leave._id)}
+                    sx={{ color: "white" }}
+                  />
+                  <Box>
+                    <Tooltip title="Accept">
+                      <IconButton
+                        onClick={() => handleAccept(leave._id)}
+                        style={{
+                          color: "white",
+                          backgroundColor: "green",
+                          borderRadius: "10px",
+                          marginRight: "10px",
+                        }}
+                      >
+                        <FaCheck />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Reject">
+                      <IconButton
+                        onClick={() => handleReject(leave._id)}
+                        style={{
+                          color: "white",
+                          backgroundColor: "red",
+                          borderRadius: "10px",
+                          marginRight: "10px",
+                        }}
+                      >
+                        <FaTimes />
+                      </IconButton>
+                    </Tooltip>
                     <Tooltip title="Delete">
                       <IconButton
                         onClick={() => handleDelete(leave._id)}
-                        style={{ color: "var(--accent-color)" }}
+                        style={{
+                          color: "white",
+                          backgroundColor: "rgba(255, 255, 255, 0.2)",
+                          borderRadius: "10px",
+                        }}
                       >
                         <FaTrashAlt />
                       </IconButton>
                     </Tooltip>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      ) : (
-        <Typography sx={{ marginTop: "20px", color: "#666666" }}>
-          No leaves found for the selected filter.
-        </Typography>
-      )}
-    </Box>
-  );
-};
-
-export default ManageLeave;
+                  </Box>
+                </CardActions>
+              </StyledCard>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+    );
+  };
+  
+  export default ManageLeave;
+  
