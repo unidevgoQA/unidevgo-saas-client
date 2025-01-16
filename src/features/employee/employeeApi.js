@@ -16,6 +16,12 @@ const employeeApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["employee"],
     }),
+    getAllEmployeesByCompany: builder.query({
+      query: (id) => ({
+        url: `api/v1/employees/company/${id}`,
+      }),
+      providesTags: ["employee"],
+    }),
     getSingleEmployee: builder.query({
       query: (id) => ({
         url: `api/v1/employees/${id}`,
@@ -45,5 +51,6 @@ export const {
   useGetAllEmployeesQuery,
   useGetSingleEmployeeQuery,
   useDeleteEmployeeMutation,
+  getAllEmployeesByCompany,
   useUpdateEmployeeMutation,
 } = employeeApi;

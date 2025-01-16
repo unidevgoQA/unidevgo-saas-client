@@ -36,7 +36,7 @@ const Sidebar = ({ isDrawerOpen }) => {
     { text: "Profile", icon: <FiUser />, path: "companies/profile", role: "company" },
     { text: "All Employees", icon: <FiUsers />, path: "employees/all", role: "company" },
     { text: "Add Employee", icon: <FiUserPlus />, path: "employees/add", role: "company" },
-    { text: "Leave Management", icon: <FiClipboard />, path: "/leave-management", role: "company" },
+    { text: "Leave Management", icon: <FiClipboard />, path: "leave/manage", role: "company" },
     // Admin Menu Items
     { text: "Profile", icon: <FiUser />, path: "admin/profile", role: "admin" },
     { text: "All Companies", icon: <FiDatabase />, path: "companies/all", role: "admin" },
@@ -46,8 +46,8 @@ const Sidebar = ({ isDrawerOpen }) => {
 
     // Employee Menu Items
     { text: "Profile", icon: <FiUser />, path: "employees/profile", role: "employee" },
-    { text: "Leave Status", icon: <FiUserCheck />, path: "/leave-management", role: "employee" },
-    { text: "Work Progress", icon: <FiPieChart />, path: "/work-progress-management", role: "employee" },
+    { text: "Leave Status", icon: <FiUserCheck />, path: "leave", role: "employee" },
+    { text: "Work Progress", icon: <FiPieChart />, path: "work-progress", role: "employee" },
     { text: "Attendance", icon: <FiCalendar />, path: "/attendance-management", role: "employee" },
     { text: "Calendar", icon: <FiCalendar />, path: "/calender", role: "employee" },
   ];

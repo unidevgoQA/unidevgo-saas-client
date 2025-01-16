@@ -326,7 +326,6 @@ const EmployeeRegister = () => {
             <Button
               type="submit"
               variant="contained"
-              fullWidth
               sx={{
                 backgroundColor: "#371edc",
                 color: "#ffffff",

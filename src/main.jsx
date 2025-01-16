@@ -16,6 +16,10 @@ import AllEmployees from "./pages/dashboard/employee/all employees/AllEmployees.
 import EditEmployee from "./pages/dashboard/employee/edit employee/EditEmployee.jsx";
 import EmployeeProfile from "./pages/dashboard/employee/employee profile/EmployeeProfile.jsx";
 import EmployeeRegister from "./pages/dashboard/employee/employee register/EmployeeRegister.jsx";
+import AllLeaves from "./pages/dashboard/services/leave management/All leaves/AllLeaves.jsx";
+import ApplyLeave from "./pages/dashboard/services/leave management/apply leave/ApplyLeave.jsx";
+import ManageLeave from "./pages/dashboard/services/leave management/manage leave/ManageLeave.jsx";
+import WorkProgress from "./pages/dashboard/services/work progress/WorkProgress.jsx";
 import Home from "./pages/home/Home.jsx";
 import Login from "./pages/login/Login.jsx";
 import AuthProviders, { AuthContext } from "./providers/AuthProviders.jsx";
@@ -97,6 +101,23 @@ const router = createBrowserRouter([
       {
         path: "admin/profile",
         element: <AdminProfile />,
+      },
+      {
+        path: "work-progress",
+        element: <WorkProgress />,
+      },
+      {
+        path: "leave",
+        element: <AllLeaves />,
+      },
+
+      {
+        path: "leave/apply",
+        element: <ApplyLeave />,
+      },
+      {
+        path: "leave/manage",
+        element: <ManageLeave />,
       },
     ],
   },

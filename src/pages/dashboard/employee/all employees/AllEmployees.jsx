@@ -15,11 +15,10 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { BsPersonLinesFill } from "react-icons/bs";
 import {
-  FaDownload,
   FaEdit,
   FaEnvelope,
   FaGenderless,
@@ -34,6 +33,7 @@ import {
   useDeleteEmployeeMutation,
   useGetAllEmployeesQuery,
 } from "../../../../features/employee/employeeApi";
+import { AuthContext } from "../../../../providers/AuthProviders";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   fontWeight: "bold",
@@ -61,7 +61,11 @@ const ActionBar = styled(Box)({
 });
 
 const AllEmployees = () => {
+
+  const {user } = useContext(AuthContext);
   const { data, isLoading } = useGetAllEmployeesQuery();
+  const { data : employeesDataById } = useGetAllEmployeesQuery(user?.id);
+  
   const [deleteEmployee, { isSuccess, isLoading: deleteEmployeeLoading }] =
     useDeleteEmployeeMutation();
   const [searchQuery, setSearchQuery] = useState("");
@@ -147,14 +151,12 @@ const AllEmployees = () => {
         />
         <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <Tooltip title="Add New Employee">
-            <IconButton style={{ color: "var(--primary-color)" }}>
-              <FaPlus />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Download Data">
-            <IconButton color="secondary">
-              <FaDownload />
-            </IconButton>
+            <Link to={`/dashboard/employees/add`}>
+              {" "}
+              <IconButton style={{ color: "var(--primary-color)" }}>
+                <FaPlus />
+              </IconButton>
+            </Link>
           </Tooltip>
         </Box>
       </ActionBar>
