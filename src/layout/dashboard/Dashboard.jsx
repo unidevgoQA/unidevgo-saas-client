@@ -7,8 +7,10 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "../Sidebar/Sidebar";
 import Topbar from "../Topbar/Topbar";
 
-const drawerWidth = 240;
-const collapsedDrawerWidth = 60;
+
+const drawerWidth = 300; // Width when the sidebar is expanded
+const collapsedDrawerWidth = 100; // Adjust the collapsed width here
+
 
 const Dashboard = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
@@ -28,7 +30,7 @@ const Dashboard = () => {
       {/* Topbar */}
       <Topbar toggleDrawer={toggleDrawer} />
       {/* Sidebar */}
-      <Sidebar isDrawerOpen={isDrawerOpen} />
+      <Sidebar isDrawerOpen={isDrawerOpen} drawerWidth={drawerWidth} collapsedDrawerWidth={collapsedDrawerWidth}/>
       {/* Main Content */}
       <Box
         component="main"

@@ -48,7 +48,8 @@ const EditEmployee = () => {
 
   const { id } = useParams();
   const { data } = useGetSingleEmployeeQuery(id);
-  //Update API
+
+  // Update API
   const [
     updateEmployee,
     { isLoading: employeeUpdateLoading, isSuccess: employeeUpdateSuccess },
@@ -76,7 +77,6 @@ const EditEmployee = () => {
     updateEmployee({ id, data });
   };
 
-  //Update Effects
   useEffect(() => {
     if (employeeUpdateSuccess) {
       toast.success("Update Successfully", { id: "employee-update" });
@@ -128,19 +128,21 @@ const EditEmployee = () => {
   );
 
   return (
-    <Grid
-      container
-      justifyContent="center"
-      alignItems="center"
+    <Box
       sx={{
+        width: "100%",
+        minHeight: "100vh",
+        backgroundColor: "#f5f7fb",
         padding: "20px",
+        borderRadius: "10px",
+        boxSizing: "border-box",
       }}
     >
       <Container maxWidth="xl">
         <Box
           sx={{
             backgroundColor: "#ffffff",
-            borderRadius: "15px",
+            borderRadius: "10px",
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
             padding: "30px",
             "@media (max-width: 600px)": {
@@ -150,22 +152,20 @@ const EditEmployee = () => {
         >
           <Typography
             sx={{
-              fontFamily: "Poppins, serif",
               fontWeight: 700,
               color: "var(--primary-color)",
-              marginBottom: "50px",
-              fontSize: "1.5rem",
+              textAlign: "left",
+              marginBottom: "30px",
+              fontSize: "1.75rem",
               "@media (max-width: 600px)": {
                 fontSize: "1.25rem",
               },
             }}
-            variant="h4"
-            align="center"
           >
             Edit Employee Details
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid container spacing={2}>
+            <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
                 {renderTextField("name", "Name")}
               </Grid>
@@ -194,14 +194,13 @@ const EditEmployee = () => {
                 <Button
                   type="submit"
                   variant="contained"
-                  fullWidth
                   sx={{
                     backgroundColor: "var(--primary-color)",
                     color: "#ffffff",
                     fontFamily: "Poppins, serif",
                     fontWeight: "600",
                     textTransform: "none",
-                    padding: "10px",
+                    padding: "15px",
                     borderRadius: "5px",
                     "&:hover": {
                       backgroundColor: "#2c1bb6",
@@ -215,7 +214,7 @@ const EditEmployee = () => {
           </form>
         </Box>
       </Container>
-    </Grid>
+    </Box>
   );
 };
 

@@ -14,6 +14,7 @@ import CompanyProfile from "./pages/dashboard/company/company profile/CompanyPro
 import EditCompany from "./pages/dashboard/company/edit company/EditCompany.jsx";
 import AllEmployees from "./pages/dashboard/employee/all employees/AllEmployees.jsx";
 import EditEmployee from "./pages/dashboard/employee/edit employee/EditEmployee.jsx";
+import EmployeeDetails from "./pages/dashboard/employee/employee details/EmployeeDetails.jsx";
 import EmployeeProfile from "./pages/dashboard/employee/employee profile/EmployeeProfile.jsx";
 import EmployeeRegister from "./pages/dashboard/employee/employee register/EmployeeRegister.jsx";
 import AllLeaves from "./pages/dashboard/services/leave management/All leaves/AllLeaves.jsx";
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
       {
         path: "employees/edit/:id",
         element: <EditEmployee />,
+      },
+      {
+        path: "employees/details/:id",
+        element: <EmployeeDetails />,
       },
       {
         path: "companies/all",

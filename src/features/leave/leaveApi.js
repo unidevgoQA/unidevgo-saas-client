@@ -1,4 +1,3 @@
-
 import apiSlice from "../api/apiSlice";
 
 const leaveApi = apiSlice.injectEndpoints({

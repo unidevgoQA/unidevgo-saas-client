@@ -1,32 +1,29 @@
 import {
-    Avatar,
-    Box,
-    Checkbox,
-    IconButton,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    TextField,
-    Tooltip,
-    Typography,
-    useMediaQuery,
+  Avatar,
+  Box,
+  Card,
+  CardActions,
+  CardContent,
+  Checkbox,
+  Grid,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Tooltip,
+  Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import React, { useState } from "react";
 import {
-    FaDownload,
-    FaEdit,
-    FaEnvelope,
-    FaGem,
-    FaHome,
-    FaPhone,
-    FaPlus,
-    FaTrashAlt,
-    FaUserAlt,
+  FaEdit,
+  FaEnvelope,
+  FaGem,
+  FaHome,
+  FaPhone,
+  FaPlus,
+  FaSearch,
+  FaTrashAlt
 } from "react-icons/fa";
 
 const companies = [
@@ -82,47 +79,44 @@ const companies = [
   },
 ];
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  fontWeight: "bold",
-  backgroundColor: "var(--bg-grey-color)",
-}));
-
 const StyledSearchBox = styled(TextField)({
-  marginBottom: "1rem",
+  marginBottom: "1.5rem",
   width: "100%",
-  maxWidth: "300px",
-  borderRadius: "5px",
-  backgroundColor: "white",
-  border: "1px solid var(--primary-color)",
+  maxWidth: "510px",
+  background: "white",
+  borderRadius: "10px",
+  padding: "10px 15px",
+  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.27)",
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "30px",
+    "& fieldset": {
+      border: "none",
+    },
+  },
 });
 
-const ActionBar = styled(Box)({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  // backgroundColor: "var(--bg-grey-color)",
-  padding: "1rem 0rem",
-  borderRadius: "8px",
-  margin: "1rem 0rem",
-  flexWrap: "wrap",
-  gap: "10px",
+const StyledCard = styled(Card)({
+  background: "linear-gradient(#371edc, #170b68)",
+  color: "white",
+  padding : "10px",
+  borderRadius: "10px",
+  boxShadow: "0 6px 20px rgba(0, 0, 0, 0.2)",
+  overflow: "hidden",
 });
 
-const PaginationContainer = styled(Box)({
+const IconText = styled(Box)({
   display: "flex",
-  justifyContent: "center",
   alignItems: "center",
-  marginTop: "1rem",
-  padding: "1rem 0",
-  borderTop: "1px solid #f0f0f0",
+  gap: "8px",
+  marginBottom: "8px",
+  "& svg": {
+    color: "white",
+  },
 });
 
 const AllCompanies = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedAll, setSelectedAll] = useState(false);
   const [selected, setSelected] = useState([]);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
   const isMobile = useMediaQuery("(max-width:768px)");
 
   const handleSearch = (e) => {
@@ -133,15 +127,6 @@ const AllCompanies = () => {
     company.name.toLowerCase().includes(searchQuery)
   );
 
-  const handleSelectAll = () => {
-    if (selectedAll) {
-      setSelected([]);
-    } else {
-      setSelected(filteredCompanies.map((company) => company.id));
-    }
-    setSelectedAll(!selectedAll);
-  };
-
   const handleSelect = (id) => {
     if (selected.includes(id)) {
       setSelected(selected.filter((item) => item !== id));
@@ -150,155 +135,144 @@ const AllCompanies = () => {
     }
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
   return (
-    <Box sx={{ padding: "1rem",
-        borderRadius: "10px",}}>
+    <Box sx={{ padding: "1rem" }}>
       <Typography
         sx={{
           fontWeight: 700,
-          color: "#371edc",
-          marginBottom: "10px",
+          background: "linear-gradient(#371edc, #170b68)",
+          color: "#fff",
+          padding: "10px 20px",
+          marginBottom: "20px",
+          borderRadius: "10px",
         }}
-        variant="h4"
-        align="center"
+        variant="h5"
+        align="left"
       >
         All Companies
       </Typography>
 
-      <ActionBar>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: "10px",
+        }}
+      >
         <StyledSearchBox
-          placeholder="Search Companies"
+          placeholder="Search Companies..."
           variant="outlined"
           size="small"
           onChange={handleSearch}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <FaSearch style={{ color: "#371edc" }} />
+              </InputAdornment>
+            ),
+          }}
         />
         <Box sx={{ display: "flex", gap: "10px" }}>
           <Tooltip title="Add New Company">
-            <IconButton color="primary">
+            <IconButton
+              style={{
+                backgroundColor: "#371edc",
+                color: "white",
+                borderRadius: "50%",
+              }}
+            >
               <FaPlus />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Download Data">
-            <IconButton color="secondary">
-              <FaDownload />
-            </IconButton>
-          </Tooltip>
         </Box>
-      </ActionBar>
+      </Box>
 
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>
-                <Checkbox checked={selectedAll} onChange={handleSelectAll} />
-              </StyledTableCell>
-              {!isMobile && <StyledTableCell>Image</StyledTableCell>}
-              <StyledTableCell>Name</StyledTableCell>
-              <StyledTableCell>Email</StyledTableCell>
-              {!isMobile && <StyledTableCell>Subscription</StyledTableCell>}
-              <StyledTableCell>Contact</StyledTableCell>
-              {!isMobile && <StyledTableCell>Address</StyledTableCell>}
-              <StyledTableCell>Actions</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredCompanies
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((company) => (
-                <TableRow key={company.id}>
-                  <TableCell>
-                    <Checkbox
-                      checked={selected.includes(company.id)}
-                      onChange={() => handleSelect(company.id)}
-                    />
-                  </TableCell>
-                  {!isMobile && (
-                    <TableCell>
-                      <Avatar
-                        src={company.profileImageUrl}
-                        alt={company.name}
-                      />
-                    </TableCell>
-                  )}
-                  <TableCell>
-                    <FaUserAlt
-                      style={{ marginRight: 8, color: "var(--primary-color)" }}
-                    />
+      <Grid container spacing={3}>
+        {filteredCompanies.map((company) => (
+          <Grid item xs={12} sm={6} md={4} key={company.id}>
+            <StyledCard>
+              <CardContent>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "15px",
+                    marginBottom: "15px",
+                  }}
+                >
+                  <Avatar
+                    src={company.profileImageUrl}
+                    alt={company.name}
+                    sx={{
+                      width: "60px",
+                      height: "60px",
+                      borderRadius: "10px",
+                      border: "2px solid white",
+                    }}
+                  />
+                  <Typography variant="h6" sx={{ fontWeight: "bold" }}>
                     {company.name}
-                  </TableCell>
-                  <TableCell>
-                    <FaEnvelope
-                      style={{ marginRight: 8, color: "var(--primary-color)" }}
-                    />
-                    {company.email}
-                  </TableCell>
-                  {!isMobile && (
-                    <TableCell>
-                      <FaGem
-                        style={{
-                          marginRight: 8,
-                          color: "var(--primary-color)",
-                        }}
-                      />
-                      {company.subscription}
-                    </TableCell>
-                  )}
-                  <TableCell>
-                    <FaPhone
-                      style={{ marginRight: 8, color: "var(--primary-color)" }}
-                    />
-                    {company.contactNumber}
-                  </TableCell>
-                  {!isMobile && (
-                    <TableCell>
-                      <FaHome
-                        style={{
-                          marginRight: 8,
-                          color: "var(--primary-color)",
-                        }}
-                      />
-                      {company.address}
-                    </TableCell>
-                  )}
-                  <TableCell>
-                    <Tooltip title="Edit">
-                      <IconButton style={{ color: "var(--primary-color)" }}>
-                        <FaEdit />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Delete">
-                      <IconButton style={{ color: "var(--accent-color)" }}>
-                        <FaTrashAlt />
-                      </IconButton>
-                    </Tooltip>
-                  </TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-
-      {/* <PaginationContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 15]}
-          component="div"
-          count={filteredCompanies.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </PaginationContainer> */}
+                  </Typography>
+                </Box>
+                <IconText>
+                  <FaEnvelope />
+                  <Typography>{company.email}</Typography>
+                </IconText>
+                {!isMobile && (
+                  <>
+                    <IconText>
+                      <FaGem />
+                      <Typography>{company.subscription}</Typography>
+                    </IconText>
+                    <IconText>
+                      <FaPhone />
+                      <Typography>{company.contactNumber}</Typography>
+                    </IconText>
+                    <IconText>
+                      <FaHome />
+                      <Typography>{company.address}</Typography>
+                    </IconText>
+                  </>
+                )}
+              </CardContent>
+              <CardActions sx={{ justifyContent: "space-between" }}>
+                <Checkbox
+                  checked={selected.includes(company.id)}
+                  onChange={() => handleSelect(company.id)}
+                  sx={{ color: "white" }}
+                />
+                <Box>
+                  <Tooltip title="Edit">
+                    <IconButton
+                      style={{
+                        color: "white",
+                        backgroundColor: "rgba(255, 255, 255, 0.2)",
+                        borderRadius: "10px",
+                        marginRight :"10px"
+                      }}
+                    >
+                      <FaEdit />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Delete">
+                    <IconButton
+                      style={{
+                        color: "white",
+                        backgroundColor: "rgba(255, 255, 255, 0.2)",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      <FaTrashAlt />
+                    </IconButton>
+                  </Tooltip>
+                </Box>
+              </CardActions>
+            </StyledCard>
+          </Grid>
+        ))}
+      </Grid>
     </Box>
   );
 };
