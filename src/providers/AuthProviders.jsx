@@ -54,7 +54,6 @@ const AuthProviders = ({ children }) => {
       // Make API call
       const response = await axios.post(apiUrl, { email, password });
 
-      console.log("res", response);
 
       if (response.data.success) {
         const { token, profile, role, message } = response.data;

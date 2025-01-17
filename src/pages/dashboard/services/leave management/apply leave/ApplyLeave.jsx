@@ -1,20 +1,21 @@
 import {
-    Box,
-    Button,
-    Container,
-    Grid,
-    InputAdornment,
-    TextField,
-    Typography,
+  Box,
+  Button,
+  Container,
+  Grid,
+  InputAdornment,
+  TextField,
+  Typography,
 } from "@mui/material";
 import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import {
-    AiOutlineClockCircle,
-    AiOutlineFieldTime,
-    AiOutlineNumber,
+  AiOutlineClockCircle,
+  AiOutlineFieldTime,
+  AiOutlineNumber,
 } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import { useApplyLeaveMutation } from "../../../../../features/leave/leaveApi";
 import { AuthContext } from "../../../../../providers/AuthProviders";
 
@@ -26,6 +27,7 @@ const ApplyLeave = () => {
   } = useForm();
 
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   //Add work task API
   const [applyLeave, { isLoading, isSuccess }] = useApplyLeaveMutation();
@@ -46,6 +48,7 @@ const ApplyLeave = () => {
     };
 
     applyLeave(formattedData);
+    navigate('/dashboard/leave')
   };
 
   useEffect(() => {

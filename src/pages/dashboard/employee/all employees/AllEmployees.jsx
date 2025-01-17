@@ -26,6 +26,7 @@ import {
   FaSearch,
   FaTrashAlt,
 } from "react-icons/fa";
+import { TbListDetails } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import {
   useDeleteEmployeeMutation,
@@ -78,88 +79,88 @@ const IconText = styled(Box)({
 });
 
 
-const employees = [
-  {
-    id: "EMP00193",
-    name: "John Doe",
-    email: "john.doe@company.com",
-    password: "passwordJohn123",
-    needsPasswordChange: false,
-    role: "employee",
-    designation: "Data Analyst",
-    companyId: "56789",
-    joiningDate: "2020-02-15T00:00:00.000Z",
-    gender: "male",
-    profileImageUrl: "https://example.com/profile-images/johndoe.jpg",
-    address: "456 Oak Street, Metropolis, USA",
-    contactNumber: "+11234567893",
-    isDeleted: false,
-  },
-  {
-    id: "EMP00194",
-    name: "Emily Davis",
-    email: "emily.davis@company.com",
-    password: "passwordEmily123",
-    needsPasswordChange: false,
-    role: "employee",
-    designation: "HR Manager",
-    companyId: "56789",
-    joiningDate: "2018-07-22T00:00:00.000Z",
-    gender: "female",
-    profileImageUrl: "https://example.com/profile-images/emilydavis.jpg",
-    address: "789 Pine Road, Gotham, USA",
-    contactNumber: "+11234567894",
-    isDeleted: false,
-  },
-  {
-    id: "EMP00195",
-    name: "Michael Brown",
-    email: "michael.brown@company.com",
-    password: "passwordMichael123",
-    needsPasswordChange: false,
-    role: "employee",
-    designation: "Project Manager",
-    companyId: "56789",
-    joiningDate: "2016-05-18T00:00:00.000Z",
-    gender: "male",
-    profileImageUrl: "https://example.com/profile-images/michaelbrown.jpg",
-    address: "321 Maple Avenue, Star City, USA",
-    contactNumber: "+11234567895",
-    isDeleted: false,
-  },
-  {
-    id: "EMP00196",
-    name: "Sophia Martinez",
-    email: "sophia.martinez@company.com",
-    password: "passwordSophia123",
-    needsPasswordChange: false,
-    role: "employee",
-    designation: "Marketing Specialist",
-    companyId: "56789",
-    joiningDate: "2021-03-12T00:00:00.000Z",
-    gender: "female",
-    profileImageUrl: "https://example.com/profile-images/sophiamartinez.jpg",
-    address: "654 Birch Street, Central City, USA",
-    contactNumber: "+11234567896",
-    isDeleted: false,
-  },
-  {
-    id: "EMP00197",
-    name: "David Wilson",
-    email: "david.wilson@company.com",
-    password: "passwordDavid123",
-    needsPasswordChange: false,
-    role: "employee",
-    designation: "UI/UX Designer",
-    companyId: "56789",
-    joiningDate: "2022-08-05T00:00:00.000Z",
-    gender: "male",
-    profileImageUrl: "https://example.com/profile-images/davidwilson.jpg",
-    address: "987 Cedar Drive, Smallville, USA",
-    contactNumber: "+11234567897",
-    isDeleted: false,
-  },
-];
+// const employees = [
+//   {
+//     id: "EMP00193",
+//     name: "John Doe",
+//     email: "john.doe@company.com",
+//     password: "passwordJohn123",
+//     needsPasswordChange: false,
+//     role: "employee",
+//     designation: "Data Analyst",
+//     companyId: "56789",
+//     joiningDate: "2020-02-15T00:00:00.000Z",
+//     gender: "male",
+//     profileImageUrl: "https://example.com/profile-images/johndoe.jpg",
+//     address: "456 Oak Street, Metropolis, USA",
+//     contactNumber: "+11234567893",
+//     isDeleted: false,
+//   },
+//   {
+//     id: "EMP00194",
+//     name: "Emily Davis",
+//     email: "emily.davis@company.com",
+//     password: "passwordEmily123",
+//     needsPasswordChange: false,
+//     role: "employee",
+//     designation: "HR Manager",
+//     companyId: "56789",
+//     joiningDate: "2018-07-22T00:00:00.000Z",
+//     gender: "female",
+//     profileImageUrl: "https://example.com/profile-images/emilydavis.jpg",
+//     address: "789 Pine Road, Gotham, USA",
+//     contactNumber: "+11234567894",
+//     isDeleted: false,
+//   },
+//   {
+//     id: "EMP00195",
+//     name: "Michael Brown",
+//     email: "michael.brown@company.com",
+//     password: "passwordMichael123",
+//     needsPasswordChange: false,
+//     role: "employee",
+//     designation: "Project Manager",
+//     companyId: "56789",
+//     joiningDate: "2016-05-18T00:00:00.000Z",
+//     gender: "male",
+//     profileImageUrl: "https://example.com/profile-images/michaelbrown.jpg",
+//     address: "321 Maple Avenue, Star City, USA",
+//     contactNumber: "+11234567895",
+//     isDeleted: false,
+//   },
+//   {
+//     id: "EMP00196",
+//     name: "Sophia Martinez",
+//     email: "sophia.martinez@company.com",
+//     password: "passwordSophia123",
+//     needsPasswordChange: false,
+//     role: "employee",
+//     designation: "Marketing Specialist",
+//     companyId: "56789",
+//     joiningDate: "2021-03-12T00:00:00.000Z",
+//     gender: "female",
+//     profileImageUrl: "https://example.com/profile-images/sophiamartinez.jpg",
+//     address: "654 Birch Street, Central City, USA",
+//     contactNumber: "+11234567896",
+//     isDeleted: false,
+//   },
+//   {
+//     id: "EMP00197",
+//     name: "David Wilson",
+//     email: "david.wilson@company.com",
+//     password: "passwordDavid123",
+//     needsPasswordChange: false,
+//     role: "employee",
+//     designation: "UI/UX Designer",
+//     companyId: "56789",
+//     joiningDate: "2022-08-05T00:00:00.000Z",
+//     gender: "male",
+//     profileImageUrl: "https://example.com/profile-images/davidwilson.jpg",
+//     address: "987 Cedar Drive, Smallville, USA",
+//     contactNumber: "+11234567897",
+//     isDeleted: false,
+//   },
+// ];
 
 
 
@@ -174,7 +175,7 @@ const AllEmployees = () => {
   const [selected, setSelected] = useState([]);
   const isMobile = useMediaQuery("(max-width:768px)");
 
-  // const employees = employeesDataById?.data || []; // Fallback to an empty array if data is undefined
+  const employees = employeesDataById?.data || []; // Fallback to an empty array if data is undefined
 
   
 
@@ -334,6 +335,20 @@ const AllEmployees = () => {
                         }}
                       >
                         <FaEdit />
+                      </IconButton>
+                    </Link>
+                  </Tooltip>
+                  <Tooltip title="Details">
+                    <Link to={`/dashboard/employees/details/${employee?.id}`}>
+                      <IconButton
+                        style={{
+                          color: "white",
+                          backgroundColor: "rgba(255, 255, 255, 0.2)",
+                          borderRadius: "10px",
+                          marginRight: "10px",
+                        }}
+                      >
+                        <TbListDetails />
                       </IconButton>
                     </Link>
                   </Tooltip>

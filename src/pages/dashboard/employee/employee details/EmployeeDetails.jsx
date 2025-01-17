@@ -11,18 +11,18 @@ import PersonIcon from "@mui/icons-material/Person";
 import PhoneIcon from "@mui/icons-material/Phone";
 import WorkIcon from "@mui/icons-material/Work";
 import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Avatar,
-    Box,
-    Card,
-    Grid,
-    IconButton,
-    Tab,
-    Tabs,
-    Typography,
-    useMediaQuery,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Avatar,
+  Box,
+  Card,
+  Grid,
+  IconButton,
+  Tab,
+  Tabs,
+  Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import React from "react";

@@ -185,6 +185,7 @@ const Sidebar = ({ isDrawerOpen }) => {
               sx={{
                 fontWeight: "bold",
                 fontSize: "16px",
+                textAlign : "center",
                 "@media (max-width: 600px)": {
                   fontSize: "14px",
                 },

@@ -2,22 +2,20 @@ import {
   Box,
   Button,
   Grid,
-  IconButton,
   InputAdornment,
   MenuItem,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import {
-  AiOutlineCamera,
   AiOutlineHome,
   AiOutlineLock,
   AiOutlineMail,
   AiOutlinePhone,
-  AiOutlineUser,
+  AiOutlineUser
 } from "react-icons/ai";
 import { FaGenderless } from "react-icons/fa"; // Gender icon
 import { useAddEmployeeMutation } from "../../../../features/employee/employeeApi";
@@ -66,7 +64,6 @@ const EmployeeRegister = () => {
       },
     };
     addEmployee(formattedData);
-    console.log("Formatted Employee Data:", formattedData);
   };
 
   useEffect(() => {
@@ -284,7 +281,7 @@ const EmployeeRegister = () => {
             </Grid>
           </Grid>
 
-          <Box
+          {/* <Box
             sx={{
               display: "flex",
               alignItems: "center",
@@ -323,7 +320,7 @@ const EmployeeRegister = () => {
             >
               {fileName}
             </Typography>
-          </Box>
+          </Box> */}
 
           <Button
             type="submit"

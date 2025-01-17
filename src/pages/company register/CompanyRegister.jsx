@@ -3,7 +3,6 @@ import {
   Button,
   Container,
   Grid,
-  IconButton,
   InputAdornment,
   TextField,
   Typography,
@@ -13,13 +12,13 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import {
-  AiOutlineCamera,
   AiOutlineHome,
   AiOutlineLock,
   AiOutlineMail,
   AiOutlinePhone,
   AiOutlineShop,
 } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const CompanyRegister = () => {
   const {
@@ -30,6 +29,8 @@ const CompanyRegister = () => {
 
   const [fileName, setFileName] = useState("Upload Profile Image");
   const [profileImageUrl, setProfileImageUrl] = useState("");
+
+  const navigate = useNavigate();
 
   const onFileChange = async (event) => {
     const file = event.target.files[0];
@@ -68,6 +69,8 @@ const CompanyRegister = () => {
       );
 
       toast.success("Company Registered Successfully!");
+
+      navigate("/login");
     } catch (error) {
       toast.error("Failed to register company. Please try again.");
     }
@@ -221,7 +224,7 @@ const CompanyRegister = () => {
               sx={{ marginBottom: "20px" }}
             />
 
-            <Box
+            {/* <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
@@ -258,7 +261,7 @@ const CompanyRegister = () => {
               >
                 {fileName}
               </Typography>
-            </Box>
+            </Box> */}
 
             <Button
               type="submit"
