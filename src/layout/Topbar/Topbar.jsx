@@ -13,12 +13,11 @@ import { FiBell, FiMenu } from "react-icons/fi";
 import { MdOutlineLanguage } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo/logo.png";
-import profieImg from "../../assets/profile/admin.jpg";
 import { AuthContext } from "../../providers/AuthProviders";
 
 const Topbar = ({ toggleDrawer }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const { logoutUser } = useContext(AuthContext); // Use AuthContext
+  const { logoutUser, user } = useContext(AuthContext); // Use AuthContext
   const navigate = useNavigate();
 
   const handleMenuOpen = (event) => {
@@ -77,9 +76,19 @@ const Topbar = ({ toggleDrawer }) => {
           </IconButton>
 
           {/* Profile Section */}
-          <Tooltip title="Profile">
+          <Tooltip title={user?.name}>
             <IconButton onClick={handleMenuOpen} sx={{ p: 0 }}>
-              <Avatar alt="Ella Jones" src={profieImg} />
+              <Avatar
+                src={user?.profileImageUrl}
+                alt={user?.name}
+                sx={{
+                  width: "40px",
+                  height: "40px",
+                  margin: "20px 0px",
+                  borderRadius: "10px",
+                  border: "2px solid white",
+                }}
+              />
             </IconButton>
           </Tooltip>
 
@@ -98,7 +107,7 @@ const Topbar = ({ toggleDrawer }) => {
               horizontal: "right",
             }}
           >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+            {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem> */}
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
         </Box>

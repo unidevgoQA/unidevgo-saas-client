@@ -22,25 +22,23 @@ import {
   FiUser,
   FiUserCheck,
   FiUserPlus,
-  FiUsers,
+  FiUsers
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProviders";
 
-
 const getFormattedDate = (date) => {
-  const options = { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' };
-  return date.toLocaleDateString('en-US', options);
+  const options = { weekday: "short", day: "2-digit", month: "short", year: "numeric" };
+  return date.toLocaleDateString("en-US", options);
 };
 
-const Sidebar = ({ isDrawerOpen, drawerWidth, collapsedDrawerWidth }) => {
-  const { userRole } = useContext(AuthContext);
-  const { user } = useContext(AuthContext);
+const drawerWidth = 300;
+const collapsedDrawerWidth = 150;
 
-  const date = new Date(); // Use any date object
+const Sidebar = ({ isDrawerOpen }) => {
+  const { userRole, user } = useContext(AuthContext);
+  const date = new Date();
   const formattedDate = getFormattedDate(date);
-
-
   const menuItems = [
     { text: "Home", icon: <FiHome />, path: "/" },
     // Company Menu Items
@@ -94,7 +92,6 @@ const Sidebar = ({ isDrawerOpen, drawerWidth, collapsedDrawerWidth }) => {
       path: "companies/profile",
       role: "admin",
     },
-
     // Employee Menu Items
     {
       text: "Profile",
@@ -122,13 +119,12 @@ const Sidebar = ({ isDrawerOpen, drawerWidth, collapsedDrawerWidth }) => {
     },
     {
       text: "Calendar",
-      icon: <FiCalendar />,
+      icon: <FiCalendar/>,
       path: "/calender",
       role: "employee",
     },
   ];
 
-  // Filter menu items based on userRole
   const filteredMenuItems = menuItems.filter(
     (item) => !item.role || item.role === userRole
   );
@@ -139,12 +135,18 @@ const Sidebar = ({ isDrawerOpen, drawerWidth, collapsedDrawerWidth }) => {
       sx={{
         width: isDrawerOpen ? drawerWidth : collapsedDrawerWidth,
         flexShrink: 0,
+        
         "& .MuiDrawer-paper": {
           width: isDrawerOpen ? drawerWidth : collapsedDrawerWidth,
           boxSizing: "border-box",
-          backgroundColor: "#fff", // Your sidebar background color
-          color: "var(--primary-color)", // Sidebar text color
-          transition: "width 0.3s ease", // Smooth transition when collapsing
+          boxShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;",
+          marginTop : '20px',
+          color: "var(--primary-color)",
+          borderRight: "1px solid var(--primary-color)",
+          transition: "width 0.3s ease",
+          "@media (max-width: 600px)": {
+            width: collapsedDrawerWidth,
+          },
         },
       }}
     >
@@ -158,6 +160,9 @@ const Sidebar = ({ isDrawerOpen, drawerWidth, collapsedDrawerWidth }) => {
               justifyContent: "center",
               marginTop: "80px",
               width: "100%",
+              "@media (max-width: 600px)": {
+                marginTop: "50px",
+              },
             }}
           >
             <Avatar
@@ -166,14 +171,24 @@ const Sidebar = ({ isDrawerOpen, drawerWidth, collapsedDrawerWidth }) => {
               sx={{
                 width: "80px",
                 height: "80px",
-                margin : '20px 0px',
+                margin: "20px 0px",
                 borderRadius: "10px",
                 border: "2px solid white",
+                "@media (max-width: 600px)": {
+                  width: "60px",
+                  height: "60px",
+                },
               }}
             />
             <Typography
               variant="h6"
-              sx={{ fontWeight: "bold", fontSize: "16px" }}
+              sx={{
+                fontWeight: "bold",
+                fontSize: "16px",
+                "@media (max-width: 600px)": {
+                  fontSize: "14px",
+                },
+              }}
             >
               Welcome {user?.name}
             </Typography>
@@ -189,6 +204,9 @@ const Sidebar = ({ isDrawerOpen, drawerWidth, collapsedDrawerWidth }) => {
           gridTemplateColumns: isDrawerOpen ? "1fr 1fr" : "1fr",
           gap: 2,
           padding: 2,
+          "@media (max-width: 600px)": {
+            gridTemplateColumns: "1fr",
+          },
         }}
       >
         {filteredMenuItems.map((item, index) => (
@@ -210,6 +228,9 @@ const Sidebar = ({ isDrawerOpen, drawerWidth, collapsedDrawerWidth }) => {
                   backgroundColor: "#f0f0f0",
                   color: "#000",
                 },
+                "@media (max-width: 600px)": {
+                  p: 1,
+                },
               }}
             >
               <ListItemIcon
@@ -217,8 +238,10 @@ const Sidebar = ({ isDrawerOpen, drawerWidth, collapsedDrawerWidth }) => {
                   minWidth: 0,
                   color: "#fff",
                   justifyContent: "center",
-
                   fontSize: "25px",
+                  "@media (max-width: 600px)": {
+                    fontSize: "20px",
+                  },
                 }}
               >
                 {item.icon}
@@ -226,8 +249,11 @@ const Sidebar = ({ isDrawerOpen, drawerWidth, collapsedDrawerWidth }) => {
               <ListItemText
                 primary={item.text}
                 primaryTypographyProps={{
-                  fontSize: "0.875rem",
+                  fontSize: "0.85rem",
                   fontWeight: "bold",
+                  "@media (max-width: 600px)": {
+                    fontSize: "0.65rem",
+                  },
                 }}
               />
             </ListItemButton>
