@@ -1,0 +1,39 @@
+/* Add this CSS to your global stylesheet or use a CSS-in-JS solution */
+
+/* FullCalendar header buttons */
+.fc-button {
+  background-color: #371edc !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 5px !important;
+  padding: 5px 10px !important;
+  text-transform: capitalize !important;
+  font-weight: bold !important;
+  box-shadow: 0px 2px 5px rgba(55, 30, 220, 0.3) !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+.fc-button:hover {
+  background-color: #2e15b8 !important;
+  box-shadow: 0px 4px 8px rgba(55, 30, 220, 0.4) !important;
+}
+
+.fc-button:disabled {
+  background-color: #d3d3d3 !important;
+  color: #ffffff !important;
+  cursor: not-allowed !important;
+}
+
+/* FullCalendar active button (like 'today') */
+.fc-button-active {
+  background-color: #2e15b8 !important;
+  color: white !important;
+  font-weight: bold !important;
+}
+
+/* Calendar title styling */
+.fc-toolbar-title {
+  color: #371edc !important;
+  font-weight: bold !important;
+  font-size: 1.5rem !important;
+}

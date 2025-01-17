@@ -9,6 +9,7 @@ import Dashboard from "./layout/dashboard/Dashboard.jsx";
 import AdminRegister from "./pages/admin register/AdminRegister.jsx";
 import CompanyRegister from "./pages/company register/CompanyRegister.jsx";
 import AdminProfile from "./pages/dashboard/admin/admin profile/AdminProfile.jsx";
+import Calender from "./pages/dashboard/calender/calender.jsx";
 import AllCompanies from "./pages/dashboard/company/all companies/AllCompanies.jsx";
 import CompanyProfile from "./pages/dashboard/company/company profile/CompanyProfile.jsx";
 import EditCompany from "./pages/dashboard/company/edit company/EditCompany.jsx";
@@ -123,6 +124,10 @@ const router = createBrowserRouter([
       {
         path: "leave/manage",
         element: <ManageLeave />,
+      },
+      {
+        path: "calender",
+        element: <Calender />,
       },
     ],
   },

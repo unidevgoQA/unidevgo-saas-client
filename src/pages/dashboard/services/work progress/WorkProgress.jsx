@@ -12,8 +12,15 @@ import {
     Typography,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaBuilding, FaClock, FaPlay, FaStop, FaUser } from "react-icons/fa";
+import { MdOutlineTimelapse } from "react-icons/md";
+import {
+    useGetProgressByEmployeeQuery,
+    useStartProgressMutation,
+    useStopProgressMutation,
+} from "../../../../features/work progress/workProgressApi";
+import { AuthContext } from "../../../../providers/AuthProviders";
 
 const StyledCard = styled(Card)(({ theme }) => ({
   background: "linear-gradient(135deg, #371edc, #170b68)",
@@ -49,35 +56,42 @@ const IconText = styled(Box)(({ theme }) => ({
 }));
 
 const WorkProgress = () => {
-  const [progressData, setProgressData] = useState([]);
+  const { user } = useContext(AuthContext);
   const [filterStatus, setFilterStatus] = useState("all");
   const [selected, setSelected] = useState([]);
 
+  const [
+    startProgress,
+    { isLoading: progressStartLoading, isSuccess: progressStartSuccess },
+  ] = useStartProgressMutation();
+  const [
+    stopProgress,
+    { isLoading: progressStopLoading, isSuccess: progressStopSuccess },
+  ] = useStopProgressMutation();
+
+  const { data } = useGetProgressByEmployeeQuery(user?.id);
+
+  const progressData = data?.data;
+
   const handleStart = () => {
     const newProgress = {
-      employeeId: "EMP00193",
-      companyId: "56789",
-      startTime: new Date().toISOString(),
-      trackerStatus: "Running",
-      _id: Math.random().toString(36).substr(2, 9),
+      employeeId: user?.id,
+      companyId: user?.companyId,
     };
 
-    setProgressData([...progressData, newProgress]);
+    startProgress(newProgress);
   };
 
-  const handleStop = (id) => {
-    setProgressData(
-      progressData.map((progress) =>
-        progress._id === id
-          ? { ...progress, trackerStatus: "Stopped" }
-          : progress
-      )
-    );
+  const handleStop = () => {
+    stopData = {
+      employeeId: user?.id,
+    };
+    stopProgress(stopData);
   };
 
   const handleSelect = (id) => {
     if (selected.includes(id)) {
-      setSelected(selected.filter((item) => item !== id));
+      setSelected(selected?.filter((item) => item !== id));
     } else {
       setSelected([...selected, id]);
     }
@@ -87,7 +101,7 @@ const WorkProgress = () => {
     setFilterStatus(status);
   };
 
-  const filteredProgress = progressData.filter((progress) =>
+  const filteredProgress = progressData?.filter((progress) =>
     filterStatus === "all"
       ? true
       : progress.trackerStatus.toLowerCase() === filterStatus
@@ -158,8 +172,8 @@ const WorkProgress = () => {
       </Box>
 
       <Grid container spacing={3}>
-        {filteredProgress.length > 0 ? (
-          filteredProgress.map((progress) => (
+        {filteredProgress?.length > 0 ? (
+          filteredProgress?.map((progress) => (
             <Grid item xs={12} sm={6} md={4} key={progress._id}>
               <StyledCard>
                 <CardContent>
@@ -189,12 +203,18 @@ const WorkProgress = () => {
                   </Box>
                   <IconText>
                     <FaUser />
-                    <Typography>Employee ID: {progress.employeeId}</Typography>
+                    <Typography>Employee ID: {progress?.employeeId}</Typography>
                   </IconText>
                   <IconText>
                     <FaBuilding />
-                    <Typography>Company ID: {progress.companyId}</Typography>
+                    <Typography>Company ID: {progress?.companyId}</Typography>
                   </IconText>
+                  {progress?.totalWorkHours && (
+                    <IconText>
+                      <MdOutlineTimelapse />
+                      <Typography>Hours: {progress?.totalWorkHours}</Typography>
+                    </IconText>
+                  )}
                   <IconText>
                     <FaClock />
                     <Typography>
@@ -205,7 +225,9 @@ const WorkProgress = () => {
                   <Typography
                     sx={{
                       color:
-                        progress.trackerStatus === "Running" ? "#4caf50" : "red",
+                        progress.trackerStatus === "Running"
+                          ? "#4caf50"
+                          : "red",
                       fontWeight: "bold",
                       marginTop: "10px",
                     }}
