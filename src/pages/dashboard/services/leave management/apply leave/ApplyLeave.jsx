@@ -53,7 +53,7 @@ const ApplyLeave = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success("Added Employee Successfully", { id: "leave-apply" });
+      toast.success("Leave Apply Successfully", { id: "leave-apply" });
     }
     if (isLoading) {
       toast.loading("Loading", { id: "leave-apply" });

@@ -1,18 +1,18 @@
 import {
   Box,
   Button,
+  CircularProgress,
   Container,
   Grid,
-  IconButton,
   InputAdornment,
   TextField,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import {
   AiOutlineCalendar,
-  AiOutlineCamera,
   AiOutlineFieldTime,
   AiOutlineGlobal,
   AiOutlineHome,
@@ -22,27 +22,11 @@ import {
   AiOutlineShop,
   AiOutlineTeam,
 } from "react-icons/ai";
-
-const companyData = {
-  id: "56789",
-  name: "FutureWorks Inc.",
-  email: "hello@futureworks.com",
-  password: "future123",
-  needsPasswordChange: true,
-  subscription: "Gold",
-  profileImageUrl: "https://futureworks.com/images/avatar.png",
-  address: "789 Progress Lane, Tech City, NY",
-  contactNumber: "1122334455",
-  isDeleted: false,
-  established: "2010",
-  industry: "Technology",
-  website: "https://futureworks.com",
-  employees: 250,
-  description:
-    "FutureWorks Inc. is a leading technology solutions provider specializing in innovative digital transformation services for businesses of all sizes.",
-  mission:
-    "Empowering businesses through cutting-edge technology and innovation to achieve their full potential.",
-};
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useGetSingleCompanyQuery,
+  useUpdateCompanyMutation,
+} from "../../../../features/company/companyApi";
 
 const iconMapping = {
   name: <AiOutlineShop size={20} color="var(--primary-color)" />,
@@ -65,16 +49,34 @@ const EditCompany = () => {
     formState: { errors },
     setValue,
   } = useForm();
+  const { id } = useParams();
+
+  const { data } = useGetSingleCompanyQuery(id);
+  const companyData = data?.data;
+
+  // Update API
+  const [
+    updateCompany,
+    { isLoading: companyUpdateLoading, isSuccess: companyUpdateSuccess },
+  ] = useUpdateCompanyMutation();
+
+  const navigate = useNavigate();
+
+  // Simulate loading and data fetch
+  const [loading, setLoading] = useState(true);
 
   const [fileName, setFileName] = useState(
-    companyData.profileImageUrl || "Upload Profile Image"
+    companyData?.profileImageUrl || "Upload Profile Image"
   );
 
   useEffect(() => {
-    Object.keys(companyData).forEach((key) => {
-      setValue(key, companyData[key]);
-    });
-  }, [setValue]);
+    if (companyData) {
+      Object.keys(companyData).forEach((key) => {
+        setValue(key, companyData[key]);
+      });
+      setLoading(false);
+    }
+  }, [companyData, setValue]);
 
   const onFileChange = (event) => {
     const file = event.target.files[0];
@@ -85,7 +87,18 @@ const EditCompany = () => {
 
   const onSubmit = (data) => {
     console.log("Company Updated:", data);
+    updateCompany({ id, data });
   };
+
+  useEffect(() => {
+    if (companyUpdateSuccess) {
+      toast.success("Update Successfully", { id: "company-update" });
+      navigate(-1);
+    }
+    if (companyUpdateLoading) {
+      toast.loading("Loading", { id: "company-update" });
+    }
+  }, [companyUpdateSuccess, companyUpdateLoading]);
 
   const renderTextField = (name, label, type = "text", multiline = false) => (
     <TextField
@@ -103,20 +116,19 @@ const EditCompany = () => {
         required: `${label} is required`,
         ...(name === "email" && {
           pattern: {
-            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
             message: "Invalid email address",
           },
         }),
         ...(name === "website" && {
           pattern: {
-            value:
-              /^https?:\/\/[a-zA-Z0-9._\-]+(\.[a-zA-Z]{2,3})(\/[^\s]*)?$/i,
+            value: /^https?:\/\/[a-zA-Z0-9._\-]+(\.[a-zA-Z]{2,3})(\/[^\s]*)?$/i,
             message: "Invalid website URL",
           },
         }),
         ...(name === "contactNumber" && {
           pattern: {
-            value: /^[0-9]+$/,
+            value: /^[0-9]+$/i,
             message: "Invalid contact number",
           },
         }),
@@ -126,6 +138,21 @@ const EditCompany = () => {
       defaultValue={companyData[name]}
     />
   );
+
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+        }}
+      >
+        <CircularProgress color="var(--primary-color)" size={50} />
+      </Box>
+    );
+  }
 
   return (
     <Box
@@ -167,7 +194,7 @@ const EditCompany = () => {
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={12}>
                 {renderTextField("name", "Company Name")}
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -182,7 +209,7 @@ const EditCompany = () => {
               <Grid item xs={12} sm={6}>
                 {renderTextField("subscription", "Subscription Plan")}
               </Grid>
-              <Grid item xs={12} sm={6}>
+              {/* <Grid item xs={12} sm={6}>
                 {renderTextField("established", "Established Year")}
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -251,22 +278,21 @@ const EditCompany = () => {
                     {fileName}
                   </Typography>
                 </Box>
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <Button
                   type="submit"
                   variant="contained"
-                
                   sx={{
                     backgroundColor: "var(--primary-color)",
                     color: "#ffffff",
                     fontFamily: "Poppins, serif",
-                    fontWeight: "600",
-                    textTransform: "none",
-                    padding: "15px",
-                    borderRadius: "5px",
-                    "&:hover": {
-                      backgroundColor: "#2c1bb6",
+                    fontWeight: 600,
+                    padding: "12px 40px",
+                    borderRadius: "8px",
+                    width: "100%",
+                    "@media (min-width: 600px)": {
+                      width: "auto",
                     },
                   }}
                 >

@@ -5,6 +5,7 @@ import {
   CardActions,
   CardContent,
   Checkbox,
+  CircularProgress,
   Grid,
   IconButton,
   InputAdornment,
@@ -62,7 +63,7 @@ const ActionBar = styled(Box)({
 const StyledCard = styled(Card)({
   background: "linear-gradient(#371edc, #170b68)",
   color: "white",
-  padding : "10px",
+  padding: "10px",
   borderRadius: "10px",
   boxShadow: "0 6px 20px rgba(0, 0, 0, 0.2)",
   overflow: "hidden",
@@ -77,7 +78,6 @@ const IconText = styled(Box)({
     color: "white",
   },
 });
-
 
 // const employees = [
 //   {
@@ -162,12 +162,9 @@ const IconText = styled(Box)({
 //   },
 // ];
 
-
-
 const AllEmployees = () => {
   const { user } = useContext(AuthContext);
-  const { data, isLoading } = useGetAllEmployeesQuery();
-  const { data: employeesDataById } = useGetAllEmployeesQuery(user?.id);
+  const { data: employeesDataById , isLoading} = useGetAllEmployeesQuery(user?.id);
 
   const [deleteEmployee, { isSuccess, isLoading: deleteEmployeeLoading }] =
     useDeleteEmployeeMutation();
@@ -176,8 +173,6 @@ const AllEmployees = () => {
   const isMobile = useMediaQuery("(max-width:768px)");
 
   const employees = employeesDataById?.data || []; // Fallback to an empty array if data is undefined
-
-  
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value.toLowerCase());
@@ -212,7 +207,18 @@ const AllEmployees = () => {
   }, [isSuccess, deleteEmployeeLoading]);
 
   if (isLoading) {
-    return <Typography>Loading employees...</Typography>;
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+        }}
+      >
+        <CircularProgress color="var(--primary-color)" size={50} />
+      </Box>
+    );
   }
 
   if (employees.length === 0) {

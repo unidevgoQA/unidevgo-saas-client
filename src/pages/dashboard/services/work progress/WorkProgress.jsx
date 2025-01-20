@@ -1,24 +1,24 @@
 import {
-    Avatar,
-    Box,
-    Button,
-    Card,
-    CardActions,
-    CardContent,
-    Checkbox,
-    Grid,
-    IconButton,
-    Tooltip,
-    Typography,
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Checkbox,
+  Grid,
+  IconButton,
+  Tooltip,
+  Typography,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import React, { useContext, useState } from "react";
 import { FaBuilding, FaClock, FaPlay, FaStop, FaUser } from "react-icons/fa";
 import { MdOutlineTimelapse } from "react-icons/md";
 import {
-    useGetProgressByEmployeeQuery,
-    useStartProgressMutation,
-    useStopProgressMutation,
+  useGetProgressByEmployeeQuery,
+  useStartProgressMutation,
+  useStopProgressMutation,
 } from "../../../../features/work progress/workProgressApi";
 import { AuthContext } from "../../../../providers/AuthProviders";
 
@@ -69,7 +69,7 @@ const WorkProgress = () => {
     { isLoading: progressStopLoading, isSuccess: progressStopSuccess },
   ] = useStopProgressMutation();
 
-  const { data } = useGetProgressByEmployeeQuery(user?.id);
+  const { data } = useGetProgressByEmployeeQuery(user?.id,{pollingInterval : 1000});
 
   const progressData = data?.data;
 

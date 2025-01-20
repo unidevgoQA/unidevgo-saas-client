@@ -1,6 +1,11 @@
 /* Add this CSS to your global stylesheet or use a CSS-in-JS solution */
 
 /* FullCalendar header buttons */
+
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: #371edc !important;
+  color: #fff !important;
+}
 .fc-button {
   background-color: #371edc !important;
   color: white !important;
@@ -11,6 +16,7 @@
   font-weight: bold !important;
   box-shadow: 0px 2px 5px rgba(55, 30, 220, 0.3) !important;
   transition: all 0.3s ease-in-out !important;
+  margin: 0px 2px !important;
 }
 
 .fc-button:hover {

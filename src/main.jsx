@@ -11,6 +11,7 @@ import CompanyRegister from "./pages/company register/CompanyRegister.jsx";
 import AdminProfile from "./pages/dashboard/admin/admin profile/AdminProfile.jsx";
 import Calender from "./pages/dashboard/calender/calender.jsx";
 import AllCompanies from "./pages/dashboard/company/all companies/AllCompanies.jsx";
+import CompanyDetails from "./pages/dashboard/company/company details/CompanyDetails.jsx";
 import CompanyProfile from "./pages/dashboard/company/company profile/CompanyProfile.jsx";
 import EditCompany from "./pages/dashboard/company/edit company/EditCompany.jsx";
 import AllEmployees from "./pages/dashboard/employee/all employees/AllEmployees.jsx";
@@ -93,6 +94,10 @@ const router = createBrowserRouter([
         element: <EmployeeDetails />,
       },
       {
+        path: "companies/details/:id",
+        element: <CompanyDetails />,
+      },
+      {
         path: "companies/all",
         element: <AllCompanies />,
       },
@@ -101,7 +106,7 @@ const router = createBrowserRouter([
         element: <CompanyProfile />,
       },
       {
-        path: "companies/edit",
+        path: "companies/edit/:id",
         element: <EditCompany />,
       },
       {

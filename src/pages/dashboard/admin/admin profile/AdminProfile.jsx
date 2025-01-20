@@ -19,9 +19,11 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../../providers/AuthProviders";
 
 const AdminProfile = () => {
+  const {user} = useContext(AuthContext)
   const admin = {
     id: "admin0323",
     name: "Chirs Brown",
@@ -76,7 +78,7 @@ const AdminProfile = () => {
             {/* Avatar with Edit Icon */}
             <Box sx={{ position: "relative", width: 120, height: 120 }}>
               <Avatar
-                alt={admin.name}
+                alt={user?.name}
                 sx={{
                   width: "100%",
                   height: "100%",
@@ -84,7 +86,7 @@ const AdminProfile = () => {
                   boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)", // Add subtle shadow to avatar
                 }}
               >
-                {admin.name.charAt(0)}
+                {user?.name.charAt(0)}
               </Avatar>
               <IconButton
                 sx={{
@@ -106,7 +108,7 @@ const AdminProfile = () => {
             </Box>
             {/* Admin Info */}
             <Typography variant="h5" fontWeight="bold" textAlign="center">
-              {admin.name}
+              {user?.name}
             </Typography>
             <Typography
               variant="body2"
@@ -189,7 +191,7 @@ const AdminProfile = () => {
                   >
                     <EmailIcon sx={{ color: "#371edc" }} /> Email
                   </Typography>
-                  <Typography sx={{ mt: 2 }}>{admin.email}</Typography>
+                  <Typography sx={{ mt: 2 }}>{user?.email}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Typography

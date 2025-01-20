@@ -3,19 +3,16 @@ import {
   Button,
   Container,
   Grid,
-  IconButton,
   InputAdornment,
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  AiOutlineCamera,
-  AiOutlineLock,
-  AiOutlineMail,
-  AiOutlineUser,
-} from "react-icons/ai";
+import toast from "react-hot-toast";
+import { AiOutlineLock, AiOutlineMail, AiOutlineUser } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import { useAddAdminMutation } from "../../features/admin/adminApi";
 
 const AdminRegister = () => {
   const {
@@ -25,17 +22,42 @@ const AdminRegister = () => {
   } = useForm();
 
   const [fileName, setFileName] = useState("Upload Profile Image");
+  const [profileImageUrl, setProfileImageUrl] = useState("");
+const navigate = useNavigate();
+  // Add work task API
+  const [addAdmin, { isLoading, isSuccess }] = useAddAdminMutation();
 
-  const onFileChange = (event) => {
+  const onFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
       setFileName(file.name);
+      const uploadedImageUrl = `https://example.com/uploads/${file.name}`;
+      setProfileImageUrl(uploadedImageUrl);
     }
   };
 
   const onSubmit = (data) => {
-    console.log("Admin Registered:", data);
+    const formattedData = {
+      id: "ADM" + Math.floor(10000 + Math.random() * 90000), // Generate a random ID
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      needsPasswordChange: false,
+      role: "admin",
+      isDeleted: false,
+    };
+    addAdmin(formattedData);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Added Admin Successfully", { id: "admin-register" });
+      navigate('/login')
+    }
+    if (isLoading) {
+      toast.loading("Loading", { id: "admin-register" });
+    }
+  }, [isSuccess, isLoading]);
 
   return (
     <Grid
@@ -145,7 +167,7 @@ const AdminRegister = () => {
               sx={{ marginBottom: "20px" }}
             />
 
-            <Box
+            {/* <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
@@ -184,7 +206,7 @@ const AdminRegister = () => {
               >
                 {fileName}
               </Typography>
-            </Box>
+            </Box> */}
 
             <Button
               type="submit"

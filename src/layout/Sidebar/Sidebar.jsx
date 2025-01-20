@@ -15,20 +15,23 @@ import {
   FiCalendar,
   FiClipboard,
   FiDatabase,
-  FiEdit,
-  FiFileText,
   FiHome,
   FiPieChart,
   FiUser,
   FiUserCheck,
   FiUserPlus,
-  FiUsers
+  FiUsers,
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProviders";
 
 const getFormattedDate = (date) => {
-  const options = { weekday: "short", day: "2-digit", month: "short", year: "numeric" };
+  const options = {
+    weekday: "short",
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  };
   return date.toLocaleDateString("en-US", options);
 };
 
@@ -66,6 +69,12 @@ const Sidebar = ({ isDrawerOpen }) => {
       path: "leave/manage",
       role: "company",
     },
+    {
+      text: "Calendar",
+      icon: <FiCalendar />,
+      path: "calender",
+      role: "company",
+    },
     // Admin Menu Items
     { text: "Profile", icon: <FiUser />, path: "admin/profile", role: "admin" },
     {
@@ -77,19 +86,13 @@ const Sidebar = ({ isDrawerOpen }) => {
     {
       text: "Add Company",
       icon: <FiUserPlus />,
-      path: "companies/add",
+      path: "/register",
       role: "admin",
     },
     {
-      text: "Edit Company",
-      icon: <FiEdit />,
-      path: "companies/edit",
-      role: "admin",
-    },
-    {
-      text: "Company Details",
-      icon: <FiFileText />,
-      path: "companies/profile",
+      text: "Calendar",
+      icon: <FiCalendar />,
+      path: "calender",
       role: "admin",
     },
     // Employee Menu Items
@@ -103,13 +106,13 @@ const Sidebar = ({ isDrawerOpen }) => {
       text: "Leave Status",
       icon: <FiUserCheck />,
       path: "leave",
-      role: "employee",
+      role: "admin",
     },
     {
       text: "Work Progress",
       icon: <FiPieChart />,
       path: "work-progress",
-      role: "employee",
+      role: "admin",
     },
     // {
     //   text: "Attendance",
@@ -119,7 +122,7 @@ const Sidebar = ({ isDrawerOpen }) => {
     // },
     {
       text: "Calendar",
-      icon: <FiCalendar/>,
+      icon: <FiCalendar />,
       path: "calender",
       role: "employee",
     },
@@ -135,12 +138,13 @@ const Sidebar = ({ isDrawerOpen }) => {
       sx={{
         width: isDrawerOpen ? drawerWidth : collapsedDrawerWidth,
         flexShrink: 0,
-        
+
         "& .MuiDrawer-paper": {
           width: isDrawerOpen ? drawerWidth : collapsedDrawerWidth,
           boxSizing: "border-box",
-          marginTop : '20px',
+          marginTop: "20px",
           color: "var(--primary-color)",
+          background: "linear-gradient(135deg, #170b68, #371edc)",
           borderRight: "2px solid var(--primary-color)",
           transition: "width 0.3s ease",
           "@media (max-width: 600px)": {
@@ -184,7 +188,8 @@ const Sidebar = ({ isDrawerOpen }) => {
               sx={{
                 fontWeight: "bold",
                 fontSize: "16px",
-                textAlign : "center",
+                color: "#fff",
+                textAlign: "center",
                 "@media (max-width: 600px)": {
                   fontSize: "14px",
                 },
@@ -220,9 +225,9 @@ const Sidebar = ({ isDrawerOpen }) => {
                 alignItems: "center",
                 textAlign: "center",
                 gap: 1,
-                background: "linear-gradient(#371edc, #170b68)",
+                background: "linear-gradient(#371edc,rgb(8, 8, 126))",
                 borderRadius: "8px",
-                p: 2,
+                p: 1,
                 boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
                 "&:hover": {
                   backgroundColor: "#f0f0f0",
