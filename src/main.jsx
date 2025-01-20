@@ -25,6 +25,7 @@ import ManageLeave from "./pages/dashboard/services/leave management/manage leav
 import WorkProgress from "./pages/dashboard/services/work progress/WorkProgress.jsx";
 import Home from "./pages/home/Home.jsx";
 import Login from "./pages/login/Login.jsx";
+import NotFound from "./pages/not found/NotFound.jsx";
 import AuthProviders, { AuthContext } from "./providers/AuthProviders.jsx";
 
 // Component to dynamically render the default dashboard route
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
   {
     path: "/admin-register",
     element: <AdminRegister />,
+  },
+  {
+    path: "*", // Catch all unmatched routes
+    element: <NotFound />, // Render the NotFoundPage component
   },
   {
     path: "/dashboard",

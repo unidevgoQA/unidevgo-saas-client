@@ -66,7 +66,14 @@ const AuthProviders = ({ children }) => {
         // Update user state
         setUser(profile);
         setUserRole(role);
-        toast(response.data.message);
+        toast.success(response.data.message, {
+          style: {
+            background: 'var(--primary-color)', // Set background color
+            color: '#ffffff', // Set text color
+            borderRadius: '8px', // Optional: add rounded corners
+            padding: '10px', // Optional: add padding
+          },
+        });
 
         return { success: true, message: "Login successful" };
       } else {

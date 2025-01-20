@@ -64,7 +64,7 @@ const Sidebar = ({ isDrawerOpen }) => {
       role: "company",
     },
     {
-      text: "Leave Management",
+      text: "Leave Manage",
       icon: <FiClipboard />,
       path: "leave/manage",
       role: "company",

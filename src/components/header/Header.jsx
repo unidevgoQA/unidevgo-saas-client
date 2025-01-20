@@ -36,26 +36,14 @@ const Header = () => {
   const menuItems = [
     {
       name: "Products",
-      submenu: [
-        { name: "Product 1", link: "/product1" },
-        { name: "Product 2", link: "/product2" },
-        { name: "Product 3", link: "/product3" },
-      ],
+      link: "/products",
     },
     {
       name: "Solutions",
       submenu: [
-        { name: "Solution 1", link: "/solution1" },
-        { name: "Solution 2", link: "/solution2" },
-        { name: "Solution 3", link: "/solution3" },
-      ],
-    },
-    {
-      name: "Resources",
-      submenu: [
-        { name: "Resource 1", link: "/resource1" },
-        { name: "Resource 2", link: "/resource2" },
-        { name: "Resource 3", link: "/resource3" },
+        { name: "Leave Manage", link: "/leave-manage" },
+        { name: "Work Progress", link: "/work-progress" },
+        { name: "Attendance", link: "/attendance" },
       ],
     },
     { name: "Enterprise", link: "/enterprise" },
@@ -69,18 +57,17 @@ const Header = () => {
         background: "linear-gradient(#371edc, #170b68);",
         boxShadow: "none",
         fontFamily: "Poppins, serif",
-        marginTop: "20px",
-        marginLeft: "20px",
-        marginRight: "20px",
-        borderRadius: "10px",
-        width: "calc(100% - 40px)", // Adjust width to respect the left and right margins
+        // marginTop: "20px",
+        // marginLeft: "20px",
+        // marginRight: "20px",
+        // borderRadius: "10px",
+        // width: "calc(100% - 40px)", // Adjust width to respect the left and right margins
       }}
- 
     >
       <Toolbar sx={{ justifyContent: "space-between", alignItems: "center" }}>
         {/* Logo Section */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          <img src={logo} alt="Logo" style={{ height:30 }} />
+          <img src={logo} alt="Logo" style={{ height: 30 }} />
           <Typography
             variant="h6"
             component={Link}
@@ -91,8 +78,7 @@ const Header = () => {
               fontWeight: "bold",
               fontFamily: "Poppins, serif",
             }}
-          >
-          </Typography>
+          ></Typography>
         </Box>
 
         {/* Desktop Menu Section */}
@@ -184,7 +170,7 @@ const Header = () => {
               component={Link}
               to="/contact-sales"
               sx={{
-                borderRadius : '30px',
+                borderRadius: "30px",
                 textTransform: "none",
                 borderColor: "white",
                 color: "white",
@@ -200,7 +186,7 @@ const Header = () => {
               to="/get-started"
               sx={{
                 textTransform: "none",
-                borderRadius : '30px',
+                borderRadius: "30px",
                 backgroundColor: "white",
                 color: "var(--primary-color)",
                 fontFamily: "Poppins, serif",
@@ -225,9 +211,14 @@ const Header = () => {
         anchor="right"
         open={mobileMenuOpen}
         onClose={toggleMobileMenu}
-        sx={{ "& .MuiDrawer-paper": { backgroundColor: "var(--primary-color)" } }}
+        sx={{
+          "& .MuiDrawer-paper": { backgroundColor: "var(--primary-color)" },
+        }}
       >
-        <Box sx={{ width: 250, padding: 2, color: "white" }} role="presentation">
+        <Box
+          sx={{ width: 250, padding: 2, color: "white" }}
+          role="presentation"
+        >
           <List>
             {menuItems.map((item, index) => (
               <Box key={index}>
@@ -245,12 +236,20 @@ const Header = () => {
                   <ListItemText primary={item.name} />
                   {item.submenu && (
                     <Box component="span">
-                      {openSubmenu === index ? <FaChevronDown /> : <FaChevronRight />}
+                      {openSubmenu === index ? (
+                        <FaChevronDown />
+                      ) : (
+                        <FaChevronRight />
+                      )}
                     </Box>
                   )}
                 </ListItem>
                 {item.submenu && (
-                  <Collapse in={openSubmenu === index} timeout="auto" unmountOnExit>
+                  <Collapse
+                    in={openSubmenu === index}
+                    timeout="auto"
+                    unmountOnExit
+                  >
                     <List component="div" disablePadding>
                       {item.submenu.map((subItem, subIndex) => (
                         <ListItem
@@ -263,7 +262,9 @@ const Header = () => {
                             color: "white",
                             fontSize: "14px",
                             fontFamily: "Poppins, serif",
-                            "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)" },
+                            "&:hover": {
+                              backgroundColor: "rgba(255, 255, 255, 0.2)",
+                            },
                           }}
                         >
                           <ListItemText primary={subItem.name} />

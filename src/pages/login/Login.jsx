@@ -185,7 +185,7 @@ const Login = () => {
                 backgroundColor: "#2c1bb6",
               },
             }}
-            disabled={loading}
+            disabled={loading || !role || !!errors.email || !!errors.password} // Disable if no role, email, or password is invalid
           >
             {loading ? "Logging in..." : "Log In"}
           </Button>
