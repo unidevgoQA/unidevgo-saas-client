@@ -5,17 +5,17 @@ import {
   Card,
   CardActions,
   CardContent,
-  Checkbox,
   Grid,
   IconButton,
   Tooltip,
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import React, { useContext, useState } from "react";
-import { FaBuilding, FaClock, FaPlay, FaStop, FaUser } from "react-icons/fa";
-import { MdOutlineTimelapse } from "react-icons/md";
+import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { FaPlay, FaStop, FaTrash, FaUser } from "react-icons/fa";
 import {
+  useDeleteProgressMutation,
   useGetProgressByEmployeeQuery,
   useStartProgressMutation,
   useStopProgressMutation,
@@ -48,52 +48,58 @@ const FilterButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const IconText = styled(Box)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  gap: "10px",
-  marginBottom: "10px",
-}));
-
 const WorkProgress = () => {
   const { user } = useContext(AuthContext);
   const [filterStatus, setFilterStatus] = useState("all");
-  const [selected, setSelected] = useState([]);
 
   const [
     startProgress,
-    { isLoading: progressStartLoading, isSuccess: progressStartSuccess },
+    { isLoading: progressStartLoading },
   ] = useStartProgressMutation();
   const [
     stopProgress,
-    { isLoading: progressStopLoading, isSuccess: progressStopSuccess },
+    { isLoading: progressStopLoading },
   ] = useStopProgressMutation();
+  const [
+    deleteProgress,
+    { isSuccess: progressDeleteSuccess },
+  ] = useDeleteProgressMutation();
 
-  const { data } = useGetProgressByEmployeeQuery(user?.id,{pollingInterval : 1000});
-
+  const { data } = useGetProgressByEmployeeQuery(user?.id);
   const progressData = data?.data;
 
-  const handleStart = () => {
+  const handleStart = async () => {
     const newProgress = {
       employeeId: user?.id,
       companyId: user?.companyId,
     };
 
-    startProgress(newProgress);
+    try {
+      const response = await startProgress(newProgress).unwrap();
+      console.log(response)
+      toast(response?.message, { id: "start-progress" });
+    } catch (error) {
+      console.error("Error starting progress:", error);
+    }
   };
 
-  const handleStop = () => {
-    stopData = {
+  const handleStop = async () => {
+    const stopData = {
       employeeId: user?.id,
     };
-    stopProgress(stopData);
+    console.log(stopData);
+  
+    try {
+      const response = await stopProgress(stopData).unwrap();
+      toast(response?.message, { id: "stop-progress" });
+    } catch (error) {
+      console.error("Error stopping progress:", error);
+    }
   };
-
-  const handleSelect = (id) => {
-    if (selected.includes(id)) {
-      setSelected(selected?.filter((item) => item !== id));
-    } else {
-      setSelected([...selected, id]);
+  
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this progress?")) {
+      deleteProgress(id);
     }
   };
 
@@ -106,6 +112,12 @@ const WorkProgress = () => {
       ? true
       : progress.trackerStatus.toLowerCase() === filterStatus
   );
+
+  useEffect(() => {
+    if (progressDeleteSuccess) {
+      toast.success("Deleted Successfully", { id: "delete-progress" });
+    }
+  }, [progressDeleteSuccess]);
 
   return (
     <Box sx={{ padding: "1rem", borderRadius: "10px" }}>
@@ -128,31 +140,22 @@ const WorkProgress = () => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "1rem 0rem",
+          padding: "1rem 0",
           marginBottom: "20px",
           gap: "10px",
           flexWrap: "wrap",
         }}
       >
         <Box sx={{ display: "flex", gap: "10px" }}>
-          <FilterButton
-            onClick={() => handleStatusFilter("all")}
-            className={filterStatus === "all" ? "active" : ""}
-          >
-            All
-          </FilterButton>
-          <FilterButton
-            onClick={() => handleStatusFilter("running")}
-            className={filterStatus === "running" ? "active" : ""}
-          >
-            Running
-          </FilterButton>
-          <FilterButton
-            onClick={() => handleStatusFilter("stopped")}
-            className={filterStatus === "stopped" ? "active" : ""}
-          >
-            Stopped
-          </FilterButton>
+          {["all", "running", "stopped"].map((status) => (
+            <FilterButton
+              key={status}
+              onClick={() => handleStatusFilter(status)}
+              className={filterStatus === status ? "active" : ""}
+            >
+              {status.charAt(0).toUpperCase() + status.slice(1)}
+            </FilterButton>
+          ))}
         </Box>
         <Tooltip title="Start Work Progress">
           <IconButton
@@ -161,9 +164,7 @@ const WorkProgress = () => {
               backgroundColor: "var(--primary-color)",
               color: "white",
               borderRadius: "10px",
-              "&:hover": {
-                backgroundColor: "#5948CE",
-              },
+              "&:hover": { backgroundColor: "#5948CE" },
             }}
           >
             <FaPlay />
@@ -173,7 +174,7 @@ const WorkProgress = () => {
 
       <Grid container spacing={3}>
         {filteredProgress?.length > 0 ? (
-          filteredProgress?.map((progress) => (
+          filteredProgress.map((progress) => (
             <Grid item xs={12} sm={6} md={4} key={progress._id}>
               <StyledCard>
                 <CardContent>
@@ -192,7 +193,6 @@ const WorkProgress = () => {
                         width: "60px",
                         height: "60px",
                         fontSize: "1.5rem",
-                        borderRadius: "10px",
                       }}
                     >
                       <FaUser />
@@ -201,27 +201,15 @@ const WorkProgress = () => {
                       Employee Progress
                     </Typography>
                   </Box>
-                  <IconText>
-                    <FaUser />
-                    <Typography>Employee ID: {progress?.employeeId}</Typography>
-                  </IconText>
-                  <IconText>
-                    <FaBuilding />
-                    <Typography>Company ID: {progress?.companyId}</Typography>
-                  </IconText>
+                  <Typography>Employee ID: {progress.employeeId}</Typography>
+                  <Typography>Company ID: {progress.companyId}</Typography>
                   {progress?.totalWorkHours && (
-                    <IconText>
-                      <MdOutlineTimelapse />
-                      <Typography>Hours: {progress?.totalWorkHours}</Typography>
-                    </IconText>
+                    <Typography>Hours: {progress.totalWorkHours}</Typography>
                   )}
-                  <IconText>
-                    <FaClock />
-                    <Typography>
-                      Start Time:{" "}
-                      {new Date(progress.startTime).toLocaleTimeString()}
-                    </Typography>
-                  </IconText>
+                  <Typography>
+                    Start Time:{" "}
+                    {new Date(progress.startTime).toLocaleTimeString()}
+                  </Typography>
                   <Typography
                     sx={{
                       color:
@@ -236,15 +224,10 @@ const WorkProgress = () => {
                   </Typography>
                 </CardContent>
                 <CardActions sx={{ justifyContent: "space-between" }}>
-                  <Checkbox
-                    checked={selected.includes(progress._id)}
-                    onChange={() => handleSelect(progress._id)}
-                    sx={{ color: "white" }}
-                  />
                   {progress.trackerStatus === "Running" && (
                     <Tooltip title="Stop Work Progress">
                       <IconButton
-                        onClick={() => handleStop(progress._id)}
+                        onClick={handleStop}
                         sx={{
                           color: "white",
                           backgroundColor: "rgba(255, 255, 255, 0.2)",
@@ -258,6 +241,21 @@ const WorkProgress = () => {
                       </IconButton>
                     </Tooltip>
                   )}
+                  <Tooltip title="Delete Work Progress">
+                    <IconButton
+                      onClick={() => handleDelete(progress._id)}
+                      sx={{
+                        color: "white",
+                        backgroundColor: "rgba(255, 255, 255, 0.2)",
+                        borderRadius: "10px",
+                        "&:hover": {
+                          backgroundColor: "rgba(255, 0, 0, 0.8)",
+                        },
+                      }}
+                    >
+                      <FaTrash />
+                    </IconButton>
+                  </Tooltip>
                 </CardActions>
               </StyledCard>
             </Grid>

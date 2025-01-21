@@ -30,7 +30,7 @@ const ApplyLeave = () => {
   const navigate = useNavigate();
 
   //Add work task API
-  const [applyLeave, { isLoading, isSuccess }] = useApplyLeaveMutation();
+  const [applyLeave, { isSuccess }] = useApplyLeaveMutation();
 
   const onSubmit = (data) => {
     const formattedData = {
@@ -53,12 +53,9 @@ const ApplyLeave = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success("Leave Apply Successfully", { id: "leave-apply" });
+      toast.success("Leave Apply Successfully", { id: "apply-leave" });
     }
-    if (isLoading) {
-      toast.loading("Loading", { id: "leave-apply" });
-    }
-  }, [isSuccess, isLoading]);
+  }, [isSuccess]);
 
   return (
     <>

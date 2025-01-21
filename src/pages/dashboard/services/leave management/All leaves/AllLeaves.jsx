@@ -1,18 +1,18 @@
 import {
-    Box,
-    Button,
-    Checkbox,
-    IconButton,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Tooltip,
-    Typography,
-    useMediaQuery,
+  Box,
+  Button,
+  Checkbox,
+  IconButton,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Tooltip,
+  Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import React, { useContext, useEffect, useState } from "react";
@@ -20,8 +20,8 @@ import toast from "react-hot-toast";
 import { FaPlus, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {
-    useDeleteLeaveMutation,
-    useGetAllLeavesByEmployeeQuery,
+  useDeleteLeaveMutation,
+  useGetAllLeavesByEmployeeQuery,
 } from "../../../../../features/leave/leaveApi";
 import { AuthContext } from "../../../../../providers/AuthProviders";
   
@@ -122,7 +122,7 @@ import { AuthContext } from "../../../../../providers/AuthProviders";
           }}
           variant="h4"
         >
-          All Leaves
+         Leaves
         </Typography>
   
         <ActionBar>

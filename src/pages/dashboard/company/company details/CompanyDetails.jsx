@@ -26,10 +26,16 @@ import { useTheme } from "@mui/material/styles";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useGetSingleCompanyQuery } from "../../../../features/company/companyApi";
+import { useGetAllEmployeesByCompanyQuery } from "../../../../features/employee/employeeApi";
+import AllEmployeesByCompany from "../../employee/all employees by company/AllEmployeesByCompany";
 
 const CompanyDetails = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetSingleCompanyQuery(id); // Destructure isLoading
+  const { data: employeesDataByCompany , isLoading : employeeRetriveByComapnyLoading } = useGetAllEmployeesByCompanyQuery(id);
+
+  const employees = employeesDataByCompany?.data;
+  
   const company = data?.data;
 
   const [tabValue, setTabValue] = React.useState(0);
@@ -40,7 +46,7 @@ const CompanyDetails = () => {
     setTabValue(newValue);
   };
 
-  if (isLoading) {
+  if (isLoading && employeeRetriveByComapnyLoading) {
     // Show a loading indicator if data is still loading
     return (
       <Box
@@ -56,9 +62,14 @@ const CompanyDetails = () => {
       </Box>
     );
   }
+  
+    if (employees.length === 0) {
+      return <Typography>No employees found.</Typography>;
+    }
 
   return (
-    <Box sx={{ p: 3, backgroundColor: "#f9f9f9" }}>
+  <>
+    <Box sx={{ padding : '2rem 1rem', backgroundColor: "#f9f9f9" }}>
       <Box
         sx={{
           display: "flex",
@@ -262,6 +273,8 @@ const CompanyDetails = () => {
         </Card>
       </Box>
     </Box>
+    <AllEmployeesByCompany employees={employees} employeeRetriveByComapnyLoading={employeeRetriveByComapnyLoading} />
+  </>
   );
 };
 

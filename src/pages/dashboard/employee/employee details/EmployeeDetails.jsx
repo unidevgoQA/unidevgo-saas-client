@@ -1,4 +1,3 @@
-import BadgeIcon from "@mui/icons-material/Badge";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import DetailsIcon from "@mui/icons-material/Details";
 import EditIcon from "@mui/icons-material/Edit";
@@ -258,7 +257,7 @@ const EmployeeDetails = () => {
                   </Typography>
                   <Typography sx={{ mt: 2 }}>{user?.gender}</Typography>
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                {/* <Grid item xs={12} sm={6}>
                   <Typography
                     fontWeight="bold"
                     variant="subtitle2"
@@ -268,8 +267,8 @@ const EmployeeDetails = () => {
                     <BadgeIcon sx={{ color: "#371edc" }} /> Department
                   </Typography>
                   <Typography sx={{ mt: 2 }}>{employee.department}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
+                </Grid> */}
+                {/* <Grid item xs={12} sm={6}>
                   <Typography
                     fontWeight="bold"
                     variant="subtitle2"
@@ -279,7 +278,7 @@ const EmployeeDetails = () => {
                     <BadgeIcon sx={{ color: "#371edc" }} /> Supervisor
                   </Typography>
                   <Typography sx={{ mt: 2 }}>{employee.supervisor}</Typography>
-                </Grid>
+                </Grid> */}
               </Grid>
             </>
           )}

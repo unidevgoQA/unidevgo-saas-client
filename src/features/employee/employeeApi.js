@@ -51,6 +51,6 @@ export const {
   useGetAllEmployeesQuery,
   useGetSingleEmployeeQuery,
   useDeleteEmployeeMutation,
-  getAllEmployeesByCompany,
+  useGetAllEmployeesByCompanyQuery,
   useUpdateEmployeeMutation,
 } = employeeApi;

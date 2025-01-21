@@ -121,7 +121,8 @@ const Header = () => {
                       zIndex: 10,
                       display: "none",
                       flexDirection: "column",
-                      minWidth: "150px",
+                      textAlign :'left',
+                      minWidth: "250px",
                     }}
                   >
                     {item.submenu.map((subItem, subIndex) => (
@@ -130,7 +131,7 @@ const Header = () => {
                         component={Link}
                         to={subItem.link}
                         sx={{
-                          textAlign: "left",
+                          textAlign: "left !important",
                           color: "var(--primary-color)",
                           padding: "10px 20px",
                           fontSize: "14px",

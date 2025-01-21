@@ -106,13 +106,13 @@ const Sidebar = ({ isDrawerOpen }) => {
       text: "Leave Status",
       icon: <FiUserCheck />,
       path: "leave",
-      role: "admin",
+      role: "employee",
     },
     {
       text: "Work Progress",
       icon: <FiPieChart />,
       path: "work-progress",
-      role: "admin",
+      role: "employee",
     },
     // {
     //   text: "Attendance",
