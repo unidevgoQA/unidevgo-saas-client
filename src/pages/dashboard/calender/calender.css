@@ -2,12 +2,21 @@
 
 /* FullCalendar header buttons */
 
+.css-1vba8ai {
+  margin: 20px;
+  padding: 30px;
+  background-color: var(--bg-color) !important;
+  border-radius: 5px !important;
+  box-shadow: 0px 1px 8px rgb(0 0 0) !important;
+  border: 1px solid var(--bg-color) !important ;
+}
+
 .fc .fc-daygrid-day.fc-day-today {
-  background-color: #371edc !important;
+  background-color: var(--primary-color) !important;
   color: #fff !important;
 }
 .fc-button {
-  background-color: #371edc !important;
+  background-color: var(--primary-color) !important;
   color: white !important;
   border: none !important;
   border-radius: 5px !important;
@@ -20,26 +29,26 @@
 }
 
 .fc-button:hover {
-  background-color: #2e15b8 !important;
+  background-color: var(--primary-color) !important;
   box-shadow: 0px 4px 8px rgba(55, 30, 220, 0.4) !important;
 }
 
 .fc-button:disabled {
-  background-color: #d3d3d3 !important;
+  background-color: var(--primary-color) !important;
   color: #ffffff !important;
   cursor: not-allowed !important;
 }
 
 /* FullCalendar active button (like 'today') */
 .fc-button-active {
-  background-color: #2e15b8 !important;
+  background-color: var(--primary-color) !important;
   color: white !important;
   font-weight: bold !important;
 }
 
 /* Calendar title styling */
 .fc-toolbar-title {
-  color: #371edc !important;
+  color: var(--primary-text-color) !important;
   font-weight: bold !important;
   font-size: 1.5rem !important;
 }

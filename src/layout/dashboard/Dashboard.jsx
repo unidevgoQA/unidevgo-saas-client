@@ -40,7 +40,7 @@ const Dashboard = () => {
             isDrawerOpen ? drawerWidth : collapsedDrawerWidth
           }px)`,
           transition: "width 0.3s ease",
-          backgroundColor: "#fff",
+          backgroundColor: "var(--bg-color)",
           padding: "20px",
           marginTop: "64px", // Adjusts for AppBar height
           overflow: "auto"

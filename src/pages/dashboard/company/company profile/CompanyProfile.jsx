@@ -40,7 +40,8 @@ const CompanyProfile = () => {
   };
 
   return (
-    <Box sx={{ p: 3, backgroundColor: "#f9f9f9" }}>
+    <Box sx={{ p: 3,   backgroundColor: "var(--bg-color)",
+     }}>
     <Box
       sx={{
         display: "flex",
@@ -52,7 +53,8 @@ const CompanyProfile = () => {
       <Box
         sx={{
           minWidth: isMobile ? "100%" : "300px",
-          background: "linear-gradient(#170b68, #371edc)",
+          backgroundColor: "var(--bg-color)",
+          border: "1px solid var(--primary-color)",
           color: "#fff",
           p: 3,
           borderRadius: 2,
@@ -95,7 +97,7 @@ const CompanyProfile = () => {
                   bottom: 0,
                   right: 0,
                   backgroundColor: "#fff",
-                  color: "#371edc",
+                  color: "var(--primary-color)",
                   boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)",
                   p: 1,
                   "&:hover": {
@@ -163,42 +165,43 @@ const CompanyProfile = () => {
       </Box>
 
       {/* Content Area */}
-      <Card sx={{ flexGrow: 1, boxShadow: 3, p: 3 }}>
+      <Card sx={{ flexGrow: 1, boxShadow: 3, p: 3 ,  backgroundColor: "var(--bg-color)",
+                border: "1px solid var(--primary-color)", }}>
         {tabValue === 0 && (
-          <Grid container spacing={2}>
+          <Grid container spacing={6}>
             <Grid item xs={12} sm={4}>
               <Typography
                 fontWeight="bold"
                 variant="subtitle2"
-                color="textSecondary"
+                color="var(--primary-text-color)"
                 sx={{ display: "flex", alignItems: "center", gap: 1 }}
               >
-                <EmailIcon sx={{ color: "#371edc" }} /> Email
+                <EmailIcon sx={{ color: "var(--primary-color)", }} /> Email
               </Typography>
-              <Typography sx={{ mt: 2 }}>{user?.email}</Typography>
+              <Typography sx={{ mt: 2,color : "var(--primary-text-color)" }}>{user?.email}</Typography>
             </Grid>
             <Grid item xs={12} sm={4}>
               <Typography
                 fontWeight="bold"
                 variant="subtitle2"
-                color="textSecondary"
+                color="var(--primary-text-color)"
                 sx={{ display: "flex", alignItems: "center", gap: 1 }}
               >
-                <WorkspacePremiumIcon sx={{ color: "#371edc" }} />{" "}
+                <WorkspacePremiumIcon sx={{ color: "var(--primary-color)", }} />{" "}
                 Subscription Plan
               </Typography>
-              <Typography sx={{ mt: 2 }}>{user?.subscription}</Typography>
+              <Typography sx={{ mt: 2 ,color : "var(--primary-text-color)"}}>{user?.subscription}</Typography>
             </Grid>
             <Grid item xs={12} sm={4}>
               <Typography
                 fontWeight="bold"
                 variant="subtitle2"
-                color="textSecondary"
+                color="var(--primary-text-color)"
                 sx={{ display: "flex", alignItems: "center", gap: 1 }}
               >
-                <HomeIcon sx={{ color: "#371edc" }} /> Address
+                <HomeIcon sx={{ color: "var(--primary-color)", }} /> Address
               </Typography>
-              <Typography sx={{ mt: 2 }}>{user?.address}</Typography>
+              <Typography sx={{ mt: 2 ,color : "var(--primary-text-color)"}}>{user?.address}</Typography>
             </Grid>
           </Grid>
         )}
@@ -211,7 +214,7 @@ const CompanyProfile = () => {
                 <Typography
                   sx={{ display: "flex", alignItems: "center", gap: 1 }}
                 >
-                  <LockIcon sx={{ color: "#371edc" }} /> Password Settings
+                  <LockIcon sx={{ color: "var(--primary-color)", }} /> Password Settings
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -223,12 +226,12 @@ const CompanyProfile = () => {
             </Accordion>
             <Accordion>
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon sx={{ color: "#371edc" }} />}
+                expandIcon={<ExpandMoreIcon sx={{ color: "var(--primary-color)", }}  />}
               >
                 <Typography
                   sx={{ display: "flex", alignItems: "center", gap: 1 }}
                 >
-                  <VerifiedUserIcon sx={{ color: "#371edc" }} /> Account
+                  <VerifiedUserIcon sx={{ color: "var(--primary-color)", }}  /> Account
                   Status
                 </Typography>
               </AccordionSummary>

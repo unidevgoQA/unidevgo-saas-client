@@ -4,6 +4,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InfoIcon from "@mui/icons-material/Info";
 import LockIcon from "@mui/icons-material/Lock";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import {
   Accordion,
   AccordionDetails,
@@ -20,18 +21,13 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../../../providers/AuthProviders";
 
 const AdminProfile = () => {
-  const {user} = useContext(AuthContext)
-  const admin = {
-    id: "admin0323",
-    name: "Chirs Brown",
-    email: "chirs.brown@gmail.com",
-    password: "ewqe34534",
-    role: "admin",
-    isDeleted: false,
-  };
+  const { user } = useContext(AuthContext);
+
+
 
   const [tabValue, setTabValue] = React.useState(0);
   const theme = useTheme();
@@ -42,7 +38,7 @@ const AdminProfile = () => {
   };
 
   return (
-    <Box sx={{ p: 3, backgroundColor: "#f9f9f9" }}>
+    <Box sx={{ p: 3, backgroundColor: "var(--bg-color)" }}>
       <Box
         sx={{
           display: "flex",
@@ -51,62 +47,68 @@ const AdminProfile = () => {
         }}
       >
         {/* Sidebar */}
+
         <Box
           sx={{
             minWidth: isMobile ? "100%" : "300px",
-            background: "linear-gradient(135deg, #170b68, #371edc)",
+            backgroundColor: "var(--bg-color)",
+            border: "1px solid var(--primary-color)",
             color: "#fff",
             p: 3,
             borderRadius: 2,
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)", // Elegant shadow
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between", // Profile info at top, Tabs at bottom
-            height: "100%", // Stretch sidebar for full height
+            justifyContent: "space-between",
+            height: "100%",
           }}
         >
-          {/* Profile Section */}
+          {/* Profile Info */}
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               gap: 3,
-              position: "relative", // Allows relative positioning for child elements
+              marginBottom: 2,
+              position: "relative",
             }}
           >
-            {/* Avatar with Edit Icon */}
+            {/* Avatar */}
             <Box sx={{ position: "relative", width: 120, height: 120 }}>
               <Avatar
+                src={user?.profileImageUrl}
                 alt={user?.name}
                 sx={{
                   width: "100%",
                   height: "100%",
                   border: "2px solid #fff",
-                  boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)", // Add subtle shadow to avatar
-                }}
-              >
-                {user?.name.charAt(0)}
-              </Avatar>
-              <IconButton
-                sx={{
-                  position: "absolute",
-                  bottom: 0,
-                  right: 0,
-                  backgroundColor: "#fff",
-                  color: "#371edc",
                   boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)",
-                  p: 1,
-                  "&:hover": {
-                    backgroundColor: "#371edc",
-                    color: "#fff",
-                  },
                 }}
-              >
-                <EditIcon />
-              </IconButton>
+              />
+              {/* Edit Icon */}
+              <Link to={`/dashboard/companies/edit/${user.id}`}>
+                {" "}
+                <IconButton
+                  sx={{
+                    position: "absolute",
+                    bottom: 0,
+                    right: 0,
+                    backgroundColor: "#fff",
+                    color: "var(--primary-color)",
+                    boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)",
+                    p: 1,
+                    "&:hover": {
+                      backgroundColor: "#371edc",
+                      color: "#fff",
+                    },
+                  }}
+                >
+                  <EditIcon />
+                </IconButton>
+              </Link>
             </Box>
-            {/* Admin Info */}
+            {/* Company Name */}
             <Typography variant="h5" fontWeight="bold" textAlign="center">
               {user?.name}
             </Typography>
@@ -115,15 +117,14 @@ const AdminProfile = () => {
               textAlign="center"
               sx={{
                 backgroundColor: "#fff",
-                color: "#371edc",
+                color: "var(--primary-color)",
                 px: 2,
                 py: 0.5,
                 borderRadius: 1,
                 fontWeight: "bold",
-                marginBottom: 4, // Add gap between role and tabs
               }}
             >
-              {admin.role.charAt(0).toUpperCase() + admin.role.slice(1)}
+              Admin
             </Typography>
           </Box>
 
@@ -134,40 +135,40 @@ const AdminProfile = () => {
             orientation={isMobile ? "horizontal" : "vertical"}
             sx={{
               "& .MuiTab-root": {
-                display: "flex", // Flexbox for icon and text alignment
-                flexDirection: "row", // Icon and text side-by-side
-                alignItems: "center", // Center items vertically
-                gap: 1, // Space between icon and text
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 1,
                 color: "#fff",
                 minHeight: "40px",
-                padding: "8px 16px", // Increase padding for touch-friendly design
-                borderRadius: 2, // Rounded corners for tabs
+                padding: "8px 16px",
+                borderRadius: 2,
                 "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.2)", // Subtle hover effect
+                  backgroundColor: "rgba(255, 255, 255, 0.2)",
                 },
               },
               "& .Mui-selected": {
                 color: "#fff !important",
                 fontWeight: "bold",
-                backgroundColor: "rgba(255, 255, 255, 0.3)", // Highlight active tab
+                backgroundColor: "rgba(255, 255, 255, 0.3)",
               },
             }}
             TabIndicatorProps={{
-              style: { backgroundColor: "transparent" }, // Remove indicator line
+              style: { backgroundColor: "transparent" },
             }}
           >
             <Tab
               sx={{
-                display: "flex", // Flex for icon and text alignment
-                gap: 1, // Space between icon and text
+                display: "flex",
+                gap: 1,
               }}
               icon={<InfoIcon />}
               label="Overview"
             />
             <Tab
               sx={{
-                display: "flex", // Flex for icon and text alignment
-                gap: 1, // Space between icon and text
+                display: "flex",
+                gap: 1,
               }}
               icon={<DetailsIcon />}
               label="Details"
@@ -176,32 +177,53 @@ const AdminProfile = () => {
         </Box>
 
         {/* Content Area */}
-        <Card sx={{ flexGrow: 1, boxShadow: 3, p: 3 }}>
+        <Card
+          sx={{
+            flexGrow: 1,
+            boxShadow: 3,
+            p: 3,
+            backgroundColor: "var(--bg-color)",
+            border: "1px solid var(--primary-color)",
+          }}
+        >
           {tabValue === 0 && (
             <>
-              {/* <Typography variant="h6" sx={{ color: 'var(--primary-color)' }} gutterBottom fontWeight="bold">
-                Personal Information
-              </Typography> */}
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <Typography
                     variant="subtitle2"
-                    color="textSecondary"
-                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 1,
+                      color: "var(--primary-text-color)",
+                    }}
                   >
-                    <EmailIcon sx={{ color: "#371edc" }} /> Email
+                    <EmailIcon sx={{ color: "var(--primary-color)" }} /> Email
                   </Typography>
-                  <Typography sx={{ mt: 2 }}>{user?.email}</Typography>
+                  <Typography
+                    sx={{ mt: 2, color: "var(--primary-text-color)" }}
+                  >
+                    {user?.email}
+                  </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Typography
                     variant="subtitle2"
-                    color="textSecondary"
-                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 1,
+                      color: "var(--primary-text-color)",
+                    }}
                   >
-                    <DetailsIcon sx={{ color: "#371edc" }} /> Role
+                    <DetailsIcon sx={{ color: "var(--primary-color)" }} /> Role
                   </Typography>
-                  <Typography sx={{ mt: 2 }}>{admin.role}</Typography>
+                  <Typography
+                    sx={{ mt: 2, color: "var(--primary-text-color)" }}
+                  >
+                    Admin
+                  </Typography>
                 </Grid>
               </Grid>
             </>
@@ -215,12 +237,33 @@ const AdminProfile = () => {
                   <Typography
                     sx={{ display: "flex", alignItems: "center", gap: 1 }}
                   >
-                    <LockIcon sx={{ color: "#371edc" }} /> Account Settings
+                    <LockIcon sx={{ color: "var(--primary-color)" }} /> Password
+                    Settings
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>
-                    Account Deleted: {admin.isDeleted ? "Yes" : "No"}
+                    Needs Password Change:{" "}
+                    {user?.needsPasswordChange ? "Yes" : "No"}
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={
+                    <ExpandMoreIcon sx={{ color: "var(--primary-color)" }} />
+                  }
+                >
+                  <Typography
+                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                  >
+                    <VerifiedUserIcon sx={{ color: "var(--primary-color)" }} />{" "}
+                    Account Status
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography>
+                    Status: {user?.status === "active" ? "Active" : "Inactive"}
                   </Typography>
                 </AccordionDetails>
               </Accordion>

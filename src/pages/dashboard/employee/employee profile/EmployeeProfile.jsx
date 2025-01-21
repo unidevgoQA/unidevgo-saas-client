@@ -7,7 +7,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import LockIcon from "@mui/icons-material/Lock";
-import PersonIcon from "@mui/icons-material/Person";
 import PhoneIcon from "@mui/icons-material/Phone";
 import WorkIcon from "@mui/icons-material/Work";
 import {
@@ -29,29 +28,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../../../providers/AuthProviders";
 
 const EmployeeProfile = () => {
-    const { user } = useContext(AuthContext); // Use AuthContext
-
-    console.log(user)
-  const employee = {
-    id: "EMP00190",
-    name: "Mark",
-    email: "mark@johnsonera.com",
-    password: "passwordAlice123",
-    needsPasswordChange: false,
-    role: "employee",
-    designation: "HR Specialist",
-    companyId: "67890",
-    joiningDate: "2021-06-15T00:00:00.000Z",
-    gender: "female",
-    profileImageUrl: "https://example.com/profile-images/alicejohnson.jpg",
-    address: "789 Pine Street, Gotham City, USA",
-    contactNumber: "+11234567890",
-    isDeleted: false,
-    performanceRating: "Exceeds Expectations",
-    department: "Human Resources",
-    supervisor: "John Doe",
-    skills: ["Conflict Resolution", "Employee Engagement", "HR Analytics"],
-  };
+  const { user } = useContext(AuthContext);
 
   const [tabValue, setTabValue] = React.useState(0);
   const theme = useTheme();
@@ -62,7 +39,7 @@ const EmployeeProfile = () => {
   };
 
   return (
-    <Box sx={{ p: 3, backgroundColor: "#f9f9f9" }}>
+    <Box sx={{ p: 3, backgroundColor: "var(--bg-color)" }}>
       <Box
         sx={{
           display: "flex",
@@ -74,15 +51,16 @@ const EmployeeProfile = () => {
         <Box
           sx={{
             minWidth: isMobile ? "100%" : "300px",
-            background: "linear-gradient(135deg, #170b68, #371edc)",
-            color: "#fff",
+            backgroundColor: "var(--bg-color)",
+            border: "1px solid var(--primary-color)",
+            color: "var(--primary-text-color)",
             p: 3,
             borderRadius: 2,
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)", // Add shadow for depth
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between", // Push content to top and bottom
-            height: "100%", // Full height for proper positioning
+            justifyContent: "space-between",
+            height: "100%",
           }}
         >
           <Box
@@ -93,7 +71,7 @@ const EmployeeProfile = () => {
               gap: 3,
             }}
           >
-            {/* Avatar with Edit Icon */}
+            {/* Avatar */}
             <Box sx={{ position: "relative", width: 120, height: 120 }}>
               <Avatar
                 src={user?.profileImageUrl}
@@ -111,11 +89,11 @@ const EmployeeProfile = () => {
                   bottom: 0,
                   right: 0,
                   backgroundColor: "#fff",
-                  color: "#371edc",
+                  color: "var(--primary-color)",
                   boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)",
                   p: 1,
                   "&:hover": {
-                    backgroundColor: "#371edc",
+                    backgroundColor: "var(--primary-color)",
                     color: "#fff",
                   },
                 }}
@@ -132,7 +110,7 @@ const EmployeeProfile = () => {
               textAlign="center"
               sx={{
                 backgroundColor: "#fff",
-                color: "#371edc",
+                color: "var(--primary-color)",
                 px: 2,
                 py: 0.5,
                 borderRadius: 1,
@@ -143,7 +121,7 @@ const EmployeeProfile = () => {
             </Typography>
           </Box>
 
-          {/* Tabs at the Bottom */}
+          {/* Tabs */}
           <Tabs
             value={tabValue}
             onChange={handleTabChange}
@@ -151,26 +129,26 @@ const EmployeeProfile = () => {
             sx={{
               mt: 3,
               "& .MuiTab-root": {
-                display: "flex", // Flex container for icon and label
-                flexDirection: "row", // Icon and label side by side
-                alignItems: "center", // Center items vertically
-                gap: 1, // Space between icon and label
-                color: "#fff",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 1,
+                color: "var(--primary-text-color)",
                 minHeight: "40px",
-                padding: "8px 16px", // Add padding for more space
-                borderRadius: 2, // Rounded corners for tabs
+                padding: "8px 16px",
+                borderRadius: 2,
                 "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.2)", // Add hover effect
+                  backgroundColor: "rgba(255, 255, 255, 0.2)",
                 },
               },
               "& .Mui-selected": {
-                color: "#fff !important",
+                color: "var(--primary-text-color) !important",
                 fontWeight: "bold",
-                backgroundColor: "rgba(255, 255, 255, 0.3)", // Highlight for selected tab
+                backgroundColor: "rgba(255, 255, 255, 0.3)",
               },
             }}
             TabIndicatorProps={{
-              style: { backgroundColor: "transparent" }, // Remove the indicator line
+              style: { backgroundColor: "transparent" },
             }}
           >
             <Tab icon={<InfoIcon />} label="Overview" />
@@ -179,140 +157,118 @@ const EmployeeProfile = () => {
         </Box>
 
         {/* Content Area */}
-        <Card sx={{ flexGrow: 1, boxShadow: 3, p: 3 }}>
+        <Card
+          sx={{
+            flexGrow: 1,
+            boxShadow: 3,
+            p: 3,
+            backgroundColor: "var(--bg-color)",
+            border: "1px solid var(--primary-color)",
+          }}
+        >
           {tabValue === 0 && (
-            <>
-              {/* <Typography variant="h4" sx={{ color: 'var(--primary-color)' }} gutterBottom fontWeight="bold">
-                Personal Information
-              </Typography> */}
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <Typography
-                    fontWeight="bold"
-                    variant="subtitle2"
-                    color="textSecondary"
-                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                  >
-                    <EmailIcon sx={{ color: "#371edc" }} /> Email
-                  </Typography>
-                  <Typography sx={{ mt: 2 }}>{user?.email}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography
-                    fontWeight="bold"
-                    variant="subtitle2"
-                    color="textSecondary"
-                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                  >
-                    <PhoneIcon sx={{ color: "#371edc" }} /> Contact Number
-                  </Typography>
-                  <Typography sx={{ mt: 2 }}>
-                    {user?.contactNumber}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography
-                    fontWeight="bold"
-                    variant="subtitle2"
-                    color="textSecondary"
-                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                  >
-                    <HomeIcon sx={{ color: "#371edc" }} /> Address
-                  </Typography>
-                  <Typography sx={{ mt: 2 }}>{user?.address}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography
-                    fontWeight="bold"
-                    variant="subtitle2"
-                    color="textSecondary"
-                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                  >
-                    <WorkIcon sx={{ color: "#371edc" }} /> Designation
-                  </Typography>
-                  <Typography sx={{ mt: 2 }}>{user?.designation}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography
-                    fontWeight="bold"
-                    variant="subtitle2"
-                    color="textSecondary"
-                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                  >
-                    <CalendarTodayIcon sx={{ color: "#371edc" }} /> Joining Date
-                  </Typography>
-                  <Typography sx={{ mt: 2 }}>
-                    {new Date(user?.joiningDate).toLocaleDateString()}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography
-                    fontWeight="bold"
-                    variant="subtitle2"
-                    color="textSecondary"
-                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                  >
-                    <PersonIcon sx={{ color: "#371edc" }} /> Gender
-                  </Typography>
-                  <Typography sx={{ mt: 2 }}>{user?.gender}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography
-                    fontWeight="bold"
-                    variant="subtitle2"
-                    color="textSecondary"
-                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                  >
-                    <BadgeIcon sx={{ color: "#371edc" }} /> Department
-                  </Typography>
-                  <Typography sx={{ mt: 2 }}>{employee.department}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography
-                    fontWeight="bold"
-                    variant="subtitle2"
-                    color="textSecondary"
-                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                  >
-                    <BadgeIcon sx={{ color: "#371edc" }} /> Supervisor
-                  </Typography>
-                  <Typography sx={{ mt: 2 }}>{employee.supervisor}</Typography>
-                </Grid>
+            <Grid container spacing={6}>
+              <Grid item xs={12} sm={6}>
+                <Typography
+                  fontWeight="bold"
+                  variant="subtitle2"
+                  color="var(--primary-text-color)"
+                  sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                >
+                  <EmailIcon sx={{ color: "var(--primary-color)" }} /> Email
+                </Typography>
+                <Typography sx={{ mt: 2, color: "var(--primary-text-color)" }}>
+                  {user?.email}
+                </Typography>
               </Grid>
-            </>
+              <Grid item xs={12} sm={6}>
+                <Typography
+                  fontWeight="bold"
+                  variant="subtitle2"
+                  color="var(--primary-text-color)"
+                  sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                >
+                  <PhoneIcon sx={{ color: "var(--primary-color)" }} /> Phone
+                </Typography>
+                <Typography sx={{ mt: 2, color: "var(--primary-text-color)" }}>
+                  {user?.contactNumber}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Typography
+                  fontWeight="bold"
+                  variant="subtitle2"
+                  color="var(--primary-text-color)"
+                  sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                >
+                  <HomeIcon sx={{ color: "var(--primary-color)" }} /> Address
+                </Typography>
+                <Typography sx={{ mt: 2, color: "var(--primary-text-color)" }}>
+                  {user?.address}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Typography
+                  fontWeight="bold"
+                  variant="subtitle2"
+                  color="var(--primary-text-color)"
+                  sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                >
+                  <WorkIcon sx={{ color: "var(--primary-color)" }} /> Department
+                </Typography>
+                <Typography sx={{ mt: 2, color: "var(--primary-text-color)" }}>
+                  {user?.designation}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Typography
+                  fontWeight="bold"
+                  variant="subtitle2"
+                  color="var(--primary-text-color)"
+                  sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                >
+                  <CalendarTodayIcon sx={{ color: "var(--primary-color)" }} />
+                  Joining Date
+                </Typography>
+                <Typography sx={{ mt: 2, color: "var(--primary-text-color)" }}>
+                  {user?.joiningDate}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Typography
+                  fontWeight="bold"
+                  variant="subtitle2"
+                  color="var(--primary-text-color)"
+                  sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                >
+                  <BadgeIcon sx={{ color: "var(--primary-color)" }} /> Employee
+                  ID
+                </Typography>
+                <Typography sx={{ mt: 2, color: "var(--primary-text-color)" }}>
+                  {user?.id}
+                </Typography>
+              </Grid>
+            </Grid>
           )}
           {tabValue === 1 && (
             <Box>
               <Accordion>
                 <AccordionSummary
-                  expandIcon={<ExpandMoreIcon sx={{ color: "#371edc" }} />}
+                  expandIcon={
+                    <ExpandMoreIcon sx={{ color: "var(--primary-color)" }} />
+                  }
                 >
                   <Typography
                     sx={{ display: "flex", alignItems: "center", gap: 1 }}
                   >
-                    <LockIcon sx={{ color: "#371edc" }} /> Password Settings
+                    <LockIcon sx={{ color: "var(--primary-color)" }} /> Password
+                    Settings
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography>
-                    Needs Password Change:{" "}
+                  <Typography sx={{ color: "var(--primary-text-color)" }}>
+                    Needs Password Change: {" "}
                     {user?.needsPasswordChange ? "Yes" : "No"}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon sx={{ color: "#371edc" }} />}
-                >
-                  <Typography
-                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                  >
-                    <DetailsIcon sx={{ color: "#371edc" }} /> Account Status
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    Account Deleted: {user?.isDeleted ? "Yes" : "No"}
                   </Typography>
                 </AccordionDetails>
               </Accordion>

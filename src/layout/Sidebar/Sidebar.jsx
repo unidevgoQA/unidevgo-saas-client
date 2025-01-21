@@ -144,8 +144,8 @@ const Sidebar = ({ isDrawerOpen }) => {
           boxSizing: "border-box",
           marginTop: "20px",
           color: "var(--primary-color)",
-          background: "linear-gradient(135deg, #170b68, #371edc)",
-          borderRight: "2px solid var(--primary-color)",
+          backgroundColor: "var(--bg-color)",
+          borderRight: "1px solid var(--primary-color)",
           transition: "width 0.3s ease",
           "@media (max-width: 600px)": {
             width: collapsedDrawerWidth,
@@ -225,12 +225,13 @@ const Sidebar = ({ isDrawerOpen }) => {
                 alignItems: "center",
                 textAlign: "center",
                 gap: 1,
-                background: "linear-gradient(#371edc,rgb(8, 8, 126))",
+                backgroundColor: "var(--bg-color)",
+                border: "1px solid var(--primary-color)",
                 borderRadius: "8px",
                 p: 1,
                 boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
                 "&:hover": {
-                  backgroundColor: "#f0f0f0",
+                  backgroundColor: "var(--primary-color)",
                   color: "#000",
                 },
                 "@media (max-width: 600px)": {

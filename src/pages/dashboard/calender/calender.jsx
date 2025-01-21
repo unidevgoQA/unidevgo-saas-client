@@ -3,14 +3,14 @@ import interactionPlugin from "@fullcalendar/interaction";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import {
-    Box,
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    TextField,
-    Typography,
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+  Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import "./calender.css";
@@ -40,13 +40,15 @@ const Calendar = () => {
       <Typography
         sx={{
           fontWeight: 700,
-          background: "linear-gradient(#371edc, #170b68)",
-          color: "#fff",
+          backgroundColor: "var(--bg-color)",
+          border: "1px solid var(--primary-color)",
+          color : '#fff',
           padding: "10px 20px",
           margin: "20px",
-          borderRadius: "10px",
+          borderRadius: "5px",
         }}
-        variant="h4"
+        variant="h5"
+        align="left"
       >
         Calender
       </Typography>

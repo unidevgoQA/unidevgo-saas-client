@@ -35,9 +35,10 @@ import {
 const StyledSearchBox = styled(TextField)({
   marginBottom: "1.5rem",
   width: "100%",
-  maxWidth: "510px",
-  background: "white",
-  borderRadius: "10px",
+  maxWidth: "495px",
+  background: "var(--bg-dark-blue-color)",
+  color: '#fff',  // This sets the color of the typed text
+  borderRadius: "5px",
   padding: "10px 15px",
   boxShadow: "0 4px 10px rgba(0, 0, 0, 0.27)",
   "& .MuiOutlinedInput-root": {
@@ -45,14 +46,21 @@ const StyledSearchBox = styled(TextField)({
     "& fieldset": {
       border: "none",
     },
+    "& input": {
+      color: "#fff",  // This makes the typed text color white
+    },
+    "& input::placeholder": {
+      color: "#fff",  // This sets the placeholder text color to white
+    },
   },
 });
 
+
 const StyledCard = styled(Card)({
-  background: "linear-gradient(#371edc, #170b68)",
-  color: "white",
+  background: "var(--bg-dark-blue-color)",
+  color : '#fff',
   padding: "10px",
-  borderRadius: "10px",
+  borderRadius: "5px",
   boxShadow: "0 6px 20px rgba(0, 0, 0, 0.2)",
   overflow: "hidden",
 });
@@ -104,11 +112,12 @@ const AllCompanies = () => {
       <Typography
         sx={{
           fontWeight: 700,
-          background: "linear-gradient(#371edc, #170b68)",
-          color: "#fff",
+          backgroundColor: "var(--bg-color)",
+          border: "1px solid var(--primary-color)",
+          color : '#fff',
           padding: "10px 20px",
           marginBottom: "20px",
-          borderRadius: "10px",
+          borderRadius: "5px",
         }}
         variant="h5"
         align="left"
@@ -133,7 +142,7 @@ const AllCompanies = () => {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <FaSearch style={{ color: "#371edc" }} />
+                <FaSearch  style={{ color: "var(--primary-color)" , fontSize : '24px'}} />
               </InputAdornment>
             ),
           }}
@@ -143,7 +152,7 @@ const AllCompanies = () => {
             <Link to={"/register"}>
               <IconButton
                 style={{
-                  backgroundColor: "#371edc",
+                  backgroundColor: "var(--primary-color)",
                   color: "white",
                   borderRadius: "50%",
                 }}
