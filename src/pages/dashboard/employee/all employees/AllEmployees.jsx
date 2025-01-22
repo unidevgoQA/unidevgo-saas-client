@@ -38,9 +38,10 @@ import { AuthContext } from "../../../../providers/AuthProviders";
 const StyledSearchBox = styled(TextField)({
   marginBottom: "1.5rem",
   width: "100%",
-  maxWidth: "510px",
-  background: "white",
-  borderRadius: "10px",
+  maxWidth: "495px",
+  background: "var(--bg-dark-blue-color)",
+  color: "#fff",
+  borderRadius: "5px",
   padding: "10px 15px",
   boxShadow: "0 4px 10px rgba(0, 0, 0, 0.27)",
   "& .MuiOutlinedInput-root": {
@@ -48,23 +49,20 @@ const StyledSearchBox = styled(TextField)({
     "& fieldset": {
       border: "none",
     },
+    "& input": {
+      color: "#fff",
+    },
+    "& input::placeholder": {
+      color: "#fff",
+    },
   },
 });
 
-const ActionBar = styled(Box)({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: "1rem 0",
-  flexWrap: "wrap",
-  gap: "10px",
-});
-
 const StyledCard = styled(Card)({
-  background: "linear-gradient(#371edc, #170b68)",
-  color: "white",
+  background: "var(--bg-dark-blue-color)",
+  color: "#fff",
   padding: "10px",
-  borderRadius: "10px",
+  borderRadius: "5px",
   boxShadow: "0 6px 20px rgba(0, 0, 0, 0.2)",
   overflow: "hidden",
 });
@@ -79,92 +77,11 @@ const IconText = styled(Box)({
   },
 });
 
-// const employees = [
-//   {
-//     id: "EMP00193",
-//     name: "John Doe",
-//     email: "john.doe@company.com",
-//     password: "passwordJohn123",
-//     needsPasswordChange: false,
-//     role: "employee",
-//     designation: "Data Analyst",
-//     companyId: "56789",
-//     joiningDate: "2020-02-15T00:00:00.000Z",
-//     gender: "male",
-//     profileImageUrl: "https://example.com/profile-images/johndoe.jpg",
-//     address: "456 Oak Street, Metropolis, USA",
-//     contactNumber: "+11234567893",
-//     isDeleted: false,
-//   },
-//   {
-//     id: "EMP00194",
-//     name: "Emily Davis",
-//     email: "emily.davis@company.com",
-//     password: "passwordEmily123",
-//     needsPasswordChange: false,
-//     role: "employee",
-//     designation: "HR Manager",
-//     companyId: "56789",
-//     joiningDate: "2018-07-22T00:00:00.000Z",
-//     gender: "female",
-//     profileImageUrl: "https://example.com/profile-images/emilydavis.jpg",
-//     address: "789 Pine Road, Gotham, USA",
-//     contactNumber: "+11234567894",
-//     isDeleted: false,
-//   },
-//   {
-//     id: "EMP00195",
-//     name: "Michael Brown",
-//     email: "michael.brown@company.com",
-//     password: "passwordMichael123",
-//     needsPasswordChange: false,
-//     role: "employee",
-//     designation: "Project Manager",
-//     companyId: "56789",
-//     joiningDate: "2016-05-18T00:00:00.000Z",
-//     gender: "male",
-//     profileImageUrl: "https://example.com/profile-images/michaelbrown.jpg",
-//     address: "321 Maple Avenue, Star City, USA",
-//     contactNumber: "+11234567895",
-//     isDeleted: false,
-//   },
-//   {
-//     id: "EMP00196",
-//     name: "Sophia Martinez",
-//     email: "sophia.martinez@company.com",
-//     password: "passwordSophia123",
-//     needsPasswordChange: false,
-//     role: "employee",
-//     designation: "Marketing Specialist",
-//     companyId: "56789",
-//     joiningDate: "2021-03-12T00:00:00.000Z",
-//     gender: "female",
-//     profileImageUrl: "https://example.com/profile-images/sophiamartinez.jpg",
-//     address: "654 Birch Street, Central City, USA",
-//     contactNumber: "+11234567896",
-//     isDeleted: false,
-//   },
-//   {
-//     id: "EMP00197",
-//     name: "David Wilson",
-//     email: "david.wilson@company.com",
-//     password: "passwordDavid123",
-//     needsPasswordChange: false,
-//     role: "employee",
-//     designation: "UI/UX Designer",
-//     companyId: "56789",
-//     joiningDate: "2022-08-05T00:00:00.000Z",
-//     gender: "male",
-//     profileImageUrl: "https://example.com/profile-images/davidwilson.jpg",
-//     address: "987 Cedar Drive, Smallville, USA",
-//     contactNumber: "+11234567897",
-//     isDeleted: false,
-//   },
-// ];
-
 const AllEmployees = () => {
   const { user } = useContext(AuthContext);
-  const { data: employeesDataById , isLoading} = useGetAllEmployeesQuery(user?.id);
+  const { data: employeesDataById, isLoading } = useGetAllEmployeesQuery(
+    user?.id
+  );
 
   const [deleteEmployee, { isSuccess, isLoading: deleteEmployeeLoading }] =
     useDeleteEmployeeMutation();
@@ -172,7 +89,7 @@ const AllEmployees = () => {
   const [selected, setSelected] = useState([]);
   const isMobile = useMediaQuery("(max-width:768px)");
 
-  const employees = employeesDataById?.data || []; // Fallback to an empty array if data is undefined
+  const employees = employeesDataById?.data || [];
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value.toLowerCase());
@@ -230,11 +147,12 @@ const AllEmployees = () => {
       <Typography
         sx={{
           fontWeight: 700,
-          background: "linear-gradient(#371edc, #170b68)",
+          backgroundColor: "var(--bg-color)",
+          border: "1px solid var(--primary-color)",
           color: "#fff",
           padding: "10px 20px",
           marginBottom: "20px",
-          borderRadius: "10px",
+          borderRadius: "5px",
         }}
         variant="h5"
         align="left"
@@ -242,16 +160,26 @@ const AllEmployees = () => {
         All Employees
       </Typography>
 
-      <ActionBar>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: "10px",
+        }}
+      >
         <StyledSearchBox
-          placeholder="Search employees..."
+          placeholder="Search Employees..."
           variant="outlined"
           size="small"
           onChange={handleSearch}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <FaSearch style={{ color: "#371edc" }} />
+                <FaSearch
+                  style={{ color: "var(--primary-color)", fontSize: "24px" }}
+                />
               </InputAdornment>
             ),
           }}
@@ -260,7 +188,7 @@ const AllEmployees = () => {
           <Link to={`/dashboard/employees/add`}>
             <IconButton
               style={{
-                backgroundColor: "#371edc",
+                backgroundColor: "var(--primary-color)",
                 color: "white",
                 borderRadius: "50%",
               }}
@@ -269,7 +197,7 @@ const AllEmployees = () => {
             </IconButton>
           </Link>
         </Tooltip>
-      </ActionBar>
+      </Box>
 
       <Grid container spacing={3}>
         {filteredEmployees.map((employee) => (
@@ -285,19 +213,15 @@ const AllEmployees = () => {
                   }}
                 >
                   <Avatar
-                    sx={{
-                      bgcolor: "#ffffff",
-                      color: "#371edc",
-                      width: "60px",
-                      height: "60px",
-                      fontSize: "1.5rem",
-                      borderRadius: "10px",
-                    }}
                     src={employee.profileImageUrl}
                     alt={employee.name}
-                  >
-                    {!employee.profileImageUrl && employee.name.charAt(0)}
-                  </Avatar>
+                    sx={{
+                      width: "60px",
+                      height: "60px",
+                      borderRadius: "10px",
+                      border: "2px solid white",
+                    }}
+                  />
                   <Typography variant="h6" sx={{ fontWeight: "bold" }}>
                     {employee.name}
                   </Typography>
@@ -331,7 +255,7 @@ const AllEmployees = () => {
                 />
                 <Box>
                   <Tooltip title="Edit">
-                    <Link to={`/dashboard/employees/edit/${employee?.id}`}>
+                    <Link to={`/dashboard/employees/edit/${employee.id}`}>
                       <IconButton
                         style={{
                           color: "white",
@@ -345,7 +269,7 @@ const AllEmployees = () => {
                     </Link>
                   </Tooltip>
                   <Tooltip title="Details">
-                    <Link to={`/dashboard/employees/details/${employee?.id}`}>
+                    <Link to={`/dashboard/employees/details/${employee.id}`}>
                       <IconButton
                         style={{
                           color: "white",
@@ -360,7 +284,7 @@ const AllEmployees = () => {
                   </Tooltip>
                   <Tooltip title="Delete">
                     <IconButton
-                      onClick={() => handleDelete(employee?.id)}
+                      onClick={() => handleDelete(employee.id)}
                       style={{
                         color: "white",
                         backgroundColor: "rgba(255, 255, 255, 0.2)",

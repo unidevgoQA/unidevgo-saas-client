@@ -1,5 +1,3 @@
-/* Add this CSS to your global stylesheet or use a CSS-in-JS solution */
-
 /* FullCalendar header buttons */
 
 .css-1vba8ai {
@@ -7,7 +5,7 @@
   padding: 30px;
   background-color: var(--bg-color) !important;
   border-radius: 5px !important;
-  box-shadow: 0px 1px 8px rgb(0 0 0) !important;
+  box-shadow: 0px 0px 5px rgb(18 94 163) !important;
   border: 1px solid var(--bg-color) !important ;
 }
 
@@ -51,4 +49,12 @@
   color: var(--primary-text-color) !important;
   font-weight: bold !important;
   font-size: 1.5rem !important;
+}
+
+/* Calender numbers color */
+.fc .fc-daygrid-day-number {
+  padding: 4px;
+  position: relative;
+  z-index: 4;
+  color: #fff !important;
 }

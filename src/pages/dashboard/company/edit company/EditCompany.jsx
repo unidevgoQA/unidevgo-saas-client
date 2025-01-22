@@ -158,10 +158,8 @@ const EditCompany = () => {
     <Box
       sx={{
         width: "100%",
-        minHeight: "100vh",
-        borderRadius: "10px",
-        backgroundColor: "#f5f7fb",
-        padding: "30px 20px",
+        borderRadius: "5px",
+        padding: "50px 10px",
         boxSizing: "border-box",
       }}
     >
@@ -169,7 +167,7 @@ const EditCompany = () => {
         <Box
           sx={{
             backgroundColor: "#ffffff",
-            borderRadius: "10px",
+            borderRadius: "5px",
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
             padding: "30px",
             "@media (max-width: 600px)": {

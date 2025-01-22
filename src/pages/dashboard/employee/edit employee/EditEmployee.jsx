@@ -131,10 +131,8 @@ const EditEmployee = () => {
     <Box
       sx={{
         width: "100%",
-        minHeight: "100vh",
-        backgroundColor: "#f5f7fb",
-        padding: "30px 20px",
-        borderRadius: "10px",
+        padding: "50px 20px",
+        borderRadius: "5px",
         boxSizing: "border-box",
       }}
     >
@@ -142,7 +140,7 @@ const EditEmployee = () => {
         <Box
           sx={{
             backgroundColor: "#ffffff",
-            borderRadius: "10px",
+            borderRadius: "5px",
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
             padding: "30px",
             "@media (max-width: 600px)": {

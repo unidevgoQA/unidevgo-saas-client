@@ -114,12 +114,6 @@ const Sidebar = ({ isDrawerOpen }) => {
       path: "work-progress",
       role: "employee",
     },
-    // {
-    //   text: "Attendance",
-    //   icon: <FiCalendar />,
-    //   path: "/attendance-management",
-    //   role: "employee",
-    // },
     {
       text: "Calendar",
       icon: <FiCalendar />,
@@ -138,7 +132,6 @@ const Sidebar = ({ isDrawerOpen }) => {
       sx={{
         width: isDrawerOpen ? drawerWidth : collapsedDrawerWidth,
         flexShrink: 0,
-
         "& .MuiDrawer-paper": {
           width: isDrawerOpen ? drawerWidth : collapsedDrawerWidth,
           boxSizing: "border-box",
@@ -234,10 +227,15 @@ const Sidebar = ({ isDrawerOpen }) => {
                   backgroundColor: "var(--primary-color)",
                   color: "#000",
                 },
+                "&.Mui-selected": {
+                  backgroundColor: "var(--primary-color)",
+                  color: "#000",  // Optional: Modify text color when selected
+                },
                 "@media (max-width: 600px)": {
                   p: 1,
                 },
               }}
+              selected={window.location.pathname === item.path}
             >
               <ListItemIcon
                 sx={{

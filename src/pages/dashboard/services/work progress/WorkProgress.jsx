@@ -22,16 +22,15 @@ import {
 } from "../../../../features/work progress/workProgressApi";
 import { AuthContext } from "../../../../providers/AuthProviders";
 
-const StyledCard = styled(Card)(({ theme }) => ({
-  background: "linear-gradient(135deg, #371edc, #170b68)",
-  color: "white",
-  borderRadius: "10px",
-  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-  height: "100%",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
-}));
+const StyledCard = styled(Card)({
+  background: "var(--bg-dark-blue-color)",
+  color : '#fff',
+  padding: "10px",
+  borderRadius: "5px",
+  boxShadow: "0 6px 20px rgba(0, 0, 0, 0.2)",
+  overflow: "hidden",
+});
+
 
 const FilterButton = styled(Button)(({ theme }) => ({
   textTransform: "none",
@@ -41,10 +40,10 @@ const FilterButton = styled(Button)(({ theme }) => ({
   padding: "5px 15px",
   borderRadius: "5px",
   "&:hover": {
-    backgroundColor: "#5948CE",
+    backgroundColor: "var(--bg-dark-blue-color)",
   },
   "&.active": {
-    backgroundColor: "#5948CE",
+    backgroundColor: "var(--bg-dark-blue-color)",
   },
 }));
 
@@ -52,20 +51,14 @@ const WorkProgress = () => {
   const { user } = useContext(AuthContext);
   const [filterStatus, setFilterStatus] = useState("all");
 
-  const [
-    startProgress,
-    { isLoading: progressStartLoading },
-  ] = useStartProgressMutation();
-  const [
-    stopProgress,
-    { isLoading: progressStopLoading },
-  ] = useStopProgressMutation();
-  const [
-    deleteProgress,
-    { isSuccess: progressDeleteSuccess },
-  ] = useDeleteProgressMutation();
+  const [startProgress, { isLoading: progressStartLoading }] =
+    useStartProgressMutation();
+  const [stopProgress, { isLoading: progressStopLoading }] =
+    useStopProgressMutation();
+  const [deleteProgress, { isSuccess: progressDeleteSuccess }] =
+    useDeleteProgressMutation();
 
-  const { data } = useGetProgressByEmployeeQuery(user?.id);
+  const { data } = useGetProgressByEmployeeQuery(user?.id , {pollingInterval : 2000});
   const progressData = data?.data;
 
   const handleStart = async () => {
@@ -76,7 +69,7 @@ const WorkProgress = () => {
 
     try {
       const response = await startProgress(newProgress).unwrap();
-      console.log(response)
+      console.log(response);
       toast(response?.message, { id: "start-progress" });
     } catch (error) {
       console.error("Error starting progress:", error);
@@ -88,7 +81,7 @@ const WorkProgress = () => {
       employeeId: user?.id,
     };
     console.log(stopData);
-  
+
     try {
       const response = await stopProgress(stopData).unwrap();
       toast(response?.message, { id: "stop-progress" });
@@ -96,7 +89,7 @@ const WorkProgress = () => {
       console.error("Error stopping progress:", error);
     }
   };
-  
+
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this progress?")) {
       deleteProgress(id);
@@ -124,13 +117,15 @@ const WorkProgress = () => {
       <Typography
         sx={{
           fontWeight: 700,
-          background: "linear-gradient(#371edc, #170b68)",
+          backgroundColor: "var(--bg-color)",
+          border: "1px solid var(--primary-color)",
           color: "#fff",
           padding: "10px 20px",
           marginBottom: "20px",
-          borderRadius: "10px",
+          borderRadius: "5px",
         }}
-        variant="h4"
+        variant="h5"
+        align="left"
       >
         Work Progress
       </Typography>
@@ -163,8 +158,9 @@ const WorkProgress = () => {
             sx={{
               backgroundColor: "var(--primary-color)",
               color: "white",
-              borderRadius: "10px",
-              "&:hover": { backgroundColor: "#5948CE" },
+              borderRadius: "5px",
+            
+              "&:hover": { backgroundColor: "var(--bg-dark-blue-color)" },
             }}
           >
             <FaPlay />
@@ -189,7 +185,7 @@ const WorkProgress = () => {
                     <Avatar
                       sx={{
                         bgcolor: "#ffffff",
-                        color: "#371edc",
+                        color: "var(--primary-color)",
                         width: "60px",
                         height: "60px",
                         fontSize: "1.5rem",
