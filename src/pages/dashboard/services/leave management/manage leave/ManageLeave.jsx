@@ -63,7 +63,8 @@ const ManageLeave = () => {
   const leaves = data?.data || [];
 
   const [deleteLeave, { isSuccess, isLoading }] = useDeleteLeaveMutation();
-  const [updateLeaveStatus] = useUpdateLeaveStatusMutation();
+  const [updateLeaveStatus, { isSuccess: leaveUpdateSuccess }] =
+    useUpdateLeaveStatusMutation();
 
   const handleStatusFilter = (status) => {
     setFilterStatus(status);
@@ -97,12 +98,33 @@ const ManageLeave = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success("Deleted Successfully");
+      toast.success("Delete Successfully", {
+        style: {
+          background: "var(--primary-color)",
+          color: "#ffffff",
+          borderRadius: "5px",
+          padding: "10px",
+        },
+      });
     }
     if (isLoading) {
       toast.loading("Loading...");
     }
   }, [isSuccess, isLoading]);
+
+  
+  useEffect(() => {
+    if (leaveUpdateSuccess) {
+      toast.success("Status Updated", {
+        style: {
+          background: "var(--primary-color)",
+          color: "#ffffff",
+          borderRadius: "5px",
+          padding: "10px",
+        },
+      });
+    }
+  }, [leaveUpdateSuccess]);
 
   return (
     <Box sx={{ padding: "1rem" }}>
@@ -137,7 +159,9 @@ const ManageLeave = () => {
             sx={{
               textTransform: "none",
               backgroundColor:
-                filterStatus === "all" ? "var(--bg-dark-blue-color)" : "var(--primary-color)",
+                filterStatus === "all"
+                  ? "var(--bg-dark-blue-color)"
+                  : "var(--primary-color)",
               color: "white",
               fontWeight: "600",
               padding: "5px 15px",
@@ -154,7 +178,9 @@ const ManageLeave = () => {
             sx={{
               textTransform: "none",
               backgroundColor:
-              filterStatus === "pending" ? "var(--bg-dark-blue-color)" : "var(--primary-color)",
+                filterStatus === "pending"
+                  ? "var(--bg-dark-blue-color)"
+                  : "var(--primary-color)",
               color: "white",
               fontWeight: "600",
               padding: "5px 15px",
@@ -171,7 +197,9 @@ const ManageLeave = () => {
             sx={{
               textTransform: "none",
               backgroundColor:
-              filterStatus === "accepted" ? "var(--bg-dark-blue-color)" : "var(--primary-color)",
+                filterStatus === "accepted"
+                  ? "var(--bg-dark-blue-color)"
+                  : "var(--primary-color)",
               color: "white",
               fontWeight: "600",
               padding: "5px 15px",
@@ -189,7 +217,7 @@ const ManageLeave = () => {
               textTransform: "none",
               backgroundColor:
                 filterStatus === "rejected"
-                  ?"var(--bg-dark-blue-color)"
+                  ? "var(--bg-dark-blue-color)"
                   : "var(--primary-color)",
               color: "white",
               fontWeight: "600",
@@ -234,7 +262,9 @@ const ManageLeave = () => {
                   </Typography>
                 </Box>
                 <IconText>
-                  <Typography variant="body2">Leave Type : {leave.leaveType}</Typography>
+                  <Typography variant="body2">
+                    Leave Type : {leave.leaveType}
+                  </Typography>
                 </IconText>
                 <IconText>
                   <Typography variant="body2">

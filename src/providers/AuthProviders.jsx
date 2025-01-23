@@ -41,19 +41,26 @@ const AuthProviders = ({ children }) => {
 
       // Set API endpoint based on role
       let apiUrl;
+
+      // Get base URL from environment variable
+      const baseUrl = import.meta.env.VITE_BASE_URL;
+
+      if (!baseUrl) {
+        throw new Error("Base URL is not defined in environment variables");
+      }
+
       if (role === "company") {
-        apiUrl = "http://localhost:5500/api/v1/companies/login";
+        apiUrl = `${baseUrl}api/v1/companies/login`;
       } else if (role === "employee") {
-        apiUrl = "http://localhost:5500/api/v1/employees/login";
+        apiUrl = `${baseUrl}api/v1/employees/login`;
       } else if (role === "admin") {
-        apiUrl = "http://localhost:5500/api/v1/admins/login";
+        apiUrl = `${baseUrl}api/v1/admins/login`;
       } else {
         throw new Error("Invalid role selected");
       }
 
       // Make API call
       const response = await axios.post(apiUrl, { email, password });
-
 
       if (response.data.success) {
         const { token, profile, role, message } = response.data;
@@ -68,10 +75,10 @@ const AuthProviders = ({ children }) => {
         setUserRole(role);
         toast.success(response.data.message, {
           style: {
-            background: 'var(--primary-color)', // Set background color
-            color: '#ffffff', // Set text color
-            borderRadius: '8px', // Optional: add rounded corners
-            padding: '10px', // Optional: add padding
+            background: "var(--primary-color)", 
+            color: "#ffffff", 
+            borderRadius: "5px", 
+            padding: "10px", 
           },
         });
 
@@ -106,7 +113,7 @@ const AuthProviders = ({ children }) => {
     logoutUser,
     loading,
     setLoading,
-    userRole
+    userRole,
   };
 
   return (

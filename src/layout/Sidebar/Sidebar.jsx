@@ -95,6 +95,12 @@ const Sidebar = ({ isDrawerOpen }) => {
       path: "calender",
       role: "admin",
     },
+    {
+      text: "Leave Manage",
+      icon: <FiClipboard />,
+      path: "leave/manage",
+      role: "admin",
+    },
     // Employee Menu Items
     {
       text: "Profile",

@@ -133,7 +133,7 @@ const AllEmployees = () => {
           minHeight: "100vh",
         }}
       >
-        <CircularProgress color="var(--primary-color)" size={50} />
+        <CircularProgress color="var(--text-white-color)" size={50} />
       </Box>
     );
   }

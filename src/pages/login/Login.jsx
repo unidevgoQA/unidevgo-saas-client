@@ -47,7 +47,7 @@ const Login = () => {
       alignItems="center"
       sx={{
         minHeight: "100vh",
-        background: "linear-gradient(#371edc, #170b68);",
+        background: "var(--bg-color)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         padding: "20px",
@@ -56,7 +56,7 @@ const Login = () => {
       <Box
         sx={{
           backgroundColor: "#ffffff",
-          borderRadius: "10px",
+          borderRadius: "5px",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
           padding: "30px",
           width: "100%",
@@ -67,7 +67,7 @@ const Login = () => {
           sx={{
             fontFamily: "Poppins, serif",
             fontWeight: 700,
-            color: "#371edc",
+            color: "var(--primary-color)",
             marginBottom: "10px",
           }}
           variant="h4"
@@ -90,7 +90,7 @@ const Login = () => {
             sx={{
               fontWeight: "600",
               textAlign: "center",
-              background: "#371edc",
+              background: "var(--primary-color)",
               borderRadius: "5px",
               color: "#fff",
               padding: "8px 0px",
@@ -130,7 +130,7 @@ const Login = () => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <AiOutlineMail size={20} color="#371edc" />
+                  <AiOutlineMail size={20} color="var(--primary-color)" />
                 </InputAdornment>
               ),
             }}
@@ -154,7 +154,7 @@ const Login = () => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <AiOutlineLock size={20} color="#371edc" />
+                  <AiOutlineLock size={20} color="var(--primary-color)" />
                 </InputAdornment>
               ),
             }}
@@ -175,14 +175,14 @@ const Login = () => {
             variant="contained"
             fullWidth
             sx={{
-              backgroundColor: "#371edc",
+              backgroundColor: "var(--primary-color)",
               color: "#ffffff",
               fontWeight: "600",
               textTransform: "none",
               padding: "10px",
               borderRadius: "5px",
               "&:hover": {
-                backgroundColor: "#2c1bb6",
+                backgroundColor: "var(--bg-dark-blue-color)",
               },
             }}
             disabled={loading || !role || !!errors.email || !!errors.password} // Disable if no role, email, or password is invalid
@@ -203,7 +203,7 @@ const Login = () => {
             sx={{
               textTransform: "none",
               fontWeight: "600",
-              color: "#371edc",
+              color: "var(--primary-color)",
               "&:hover": {
                 textDecoration: "underline",
               },

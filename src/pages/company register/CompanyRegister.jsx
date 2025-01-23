@@ -57,9 +57,13 @@ const CompanyRegister = () => {
       },
     };
 
+      // Get base URL from environment variable
+      const baseUrl = import.meta.env.VITE_BASE_URL;
+
+
     try {
       const response = await axios.post(
-        "http://localhost:5500/api/v1/companies/create-company",
+        `${baseUrl}api/v1/companies/create-company`,
         requestData,
         {
           headers: {
@@ -90,7 +94,7 @@ const CompanyRegister = () => {
       <Container maxWidth="md">
         <Box
           sx={{
-            backgroundColor: "var(--bg-dark-blue-color)",
+            backgroundColor: "var(--text-white-color)",
             border: "1px solid var(--primary-color)",
             borderRadius: "5px",
             boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.2)",
@@ -101,7 +105,7 @@ const CompanyRegister = () => {
             sx={{
               fontFamily: "Poppins, sans-serif",
               fontWeight: 700,
-              color: "var(--text-white-color)",
+              color: "var(--primary-color)",
               marginBottom: "20px",
               textAlign: "center",
             }}
@@ -113,7 +117,7 @@ const CompanyRegister = () => {
             sx={{
               fontFamily: "Poppins, sans-serif",
               fontWeight: 500,
-              color: "var(--text-white-color)",
+              color: "var(--primary-color)",
               marginBottom: "30px",
               textAlign: "center",
             }}
@@ -130,38 +134,17 @@ const CompanyRegister = () => {
                   <InputAdornment position="start">
                     <AiOutlineShop
                       size={20}
-                      style={{ color: "var(--text-white-color)" }}
+                      style={{ color: "var(--primary-color)" }}
                     />
                   </InputAdornment>
                 ),
-                style: { color: "var(--text-white-color)" },
               }}
               {...register("name", { required: "Company Name is required" })}
               error={!!errors.name}
               helperText={errors.name?.message}
               sx={{
                 marginBottom: "20px",
-                "& .MuiOutlinedInput-root": {
-                  color: "var(--text-white-color)",
-                  "& fieldset": {
-                    borderColor: "var(--text-white-color)",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "var(--text-white-color)",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "var(--text-white-color)",
-                  },
-                },
-                "& .MuiInputLabel-root": {
-                  color: "var(--text-white-color)",
-                },
-                "& .MuiInputLabel-root.Mui-focused": {
-                  color: "var(--text-white-color)",
-                },
-                "& .MuiFormHelperText-root": {
-                  color: "var(--text-white-color)",
-                },
+              
               }}
             />
 
@@ -174,11 +157,10 @@ const CompanyRegister = () => {
                   <InputAdornment position="start">
                     <AiOutlineMail
                       size={20}
-                      style={{ color: "var(--text-white-color)" }}
+                      style={{ color: "var(--primary-color)" }}
                     />
                   </InputAdornment>
                 ),
-                style: { color: "var(--text-white-color)" },
               }}
               {...register("email", {
                 required: "Email is required",
@@ -191,27 +173,7 @@ const CompanyRegister = () => {
               helperText={errors.email?.message}
               sx={{
                 marginBottom: "20px",
-                "& .MuiOutlinedInput-root": {
-                  color: "var(--text-white-color)",
-                  "& fieldset": {
-                    borderColor: "var(--text-white-color)",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "var(--text-white-color)",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "var(--text-white-color)",
-                  },
-                },
-                "& .MuiInputLabel-root": {
-                  color: "var(--text-white-color)",
-                },
-                "& .MuiInputLabel-root.Mui-focused": {
-                  color: "var(--text-white-color)",
-                },
-                "& .MuiFormHelperText-root": {
-                  color: "var(--text-white-color)",
-                },
+              
               }}
             />
 
@@ -225,11 +187,11 @@ const CompanyRegister = () => {
                   <InputAdornment position="start">
                     <AiOutlineLock
                       size={20}
-                      style={{ color: "var(--text-white-color)" }}
+                      style={{ color: "var(--primary-color)" }}
                     />
                   </InputAdornment>
                 ),
-                style: { color: "var(--text-white-color)" },
+              
               }}
               {...register("password", {
                 required: "Password is required",
@@ -242,27 +204,6 @@ const CompanyRegister = () => {
               helperText={errors.password?.message}
               sx={{
                 marginBottom: "20px",
-                "& .MuiOutlinedInput-root": {
-                  color: "var(--text-white-color)",
-                  "& fieldset": {
-                    borderColor: "var(--text-white-color)",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "var(--text-white-color)",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "var(--text-white-color)",
-                  },
-                },
-                "& .MuiInputLabel-root": {
-                  color: "var(--text-white-color)",
-                },
-                "& .MuiInputLabel-root.Mui-focused": {
-                  color: "var(--text-white-color)",
-                },
-                "& .MuiFormHelperText-root": {
-                  color: "var(--text-white-color)",
-                },
               }}
             />
 
@@ -275,38 +216,17 @@ const CompanyRegister = () => {
                   <InputAdornment position="start">
                     <AiOutlineHome
                       size={20}
-                      style={{ color: "var(--text-white-color)" }}
+                      style={{ color: "var(--primary-color)" }}
                     />
                   </InputAdornment>
                 ),
-                style: { color: "var(--text-white-color)" },
+              
               }}
               {...register("address", { required: "Address is required" })}
               error={!!errors.address}
               helperText={errors.address?.message}
               sx={{
                 marginBottom: "20px",
-                "& .MuiOutlinedInput-root": {
-                  color: "var(--text-white-color)",
-                  "& fieldset": {
-                    borderColor: "var(--text-white-color)",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "var(--text-white-color)",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "var(--text-white-color)",
-                  },
-                },
-                "& .MuiInputLabel-root": {
-                  color: "var(--text-white-color)",
-                },
-                "& .MuiInputLabel-root.Mui-focused": {
-                  color: "var(--text-white-color)",
-                },
-                "& .MuiFormHelperText-root": {
-                  color: "var(--text-white-color)",
-                },
               }}
             />
 
@@ -319,11 +239,11 @@ const CompanyRegister = () => {
                   <InputAdornment position="start">
                     <AiOutlinePhone
                       size={20}
-                      style={{ color: "var(--text-white-color)" }}
+                      style={{ color: "var(--primary-color)" }}
                     />
                   </InputAdornment>
                 ),
-                style: { color: "var(--text-white-color)" },
+        
               }}
               {...register("contactNumber", {
                 required: "Contact Number is required",
@@ -336,27 +256,6 @@ const CompanyRegister = () => {
               helperText={errors.contactNumber?.message}
               sx={{
                 marginBottom: "20px",
-                "& .MuiOutlinedInput-root": {
-                  color: "var(--text-white-color)",
-                  "& fieldset": {
-                    borderColor: "var(--text-white-color)",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "var(--text-white-color)",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "var(--text-white-color)",
-                  },
-                },
-                "& .MuiInputLabel-root": {
-                  color: "var(--text-white-color)",
-                },
-                "& .MuiInputLabel-root.Mui-focused": {
-                  color: "var(--text-white-color)",
-                },
-                "& .MuiFormHelperText-root": {
-                  color: "var(--text-white-color)",
-                },
               }}
             />
 
@@ -371,9 +270,9 @@ const CompanyRegister = () => {
                 fontWeight: "600",
                 textTransform: "none",
                 padding: "12px",
-                borderRadius: "8px",
+                borderRadius: "5px",
                 "&:hover": {
-                  backgroundColor: "#2c1bb6",
+                  backgroundColor: "var(--bg-dark-blue-color)",
                 },
               }}
             >

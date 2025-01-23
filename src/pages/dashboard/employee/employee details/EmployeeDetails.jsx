@@ -32,29 +32,7 @@ const EmployeeDetails = () => {
   const { id } = useParams();
 
   const { data } = useGetSingleEmployeeQuery(id);
-  const user = data?.data;
-
-  console.log(data);
-  const employee = {
-    id: "EMP00190",
-    name: "Mark",
-    email: "mark@johnsonera.com",
-    password: "passwordAlice123",
-    needsPasswordChange: false,
-    role: "employee",
-    designation: "HR Specialist",
-    companyId: "67890",
-    joiningDate: "2021-06-15T00:00:00.000Z",
-    gender: "female",
-    profileImageUrl: "https://example.com/profile-images/alicejohnson.jpg",
-    address: "789 Pine Street, Gotham City, USA",
-    contactNumber: "+11234567890",
-    isDeleted: false,
-    performanceRating: "Exceeds Expectations",
-    department: "Human Resources",
-    supervisor: "John Doe",
-    skills: ["Conflict Resolution", "Employee Engagement", "HR Analytics"],
-  };
+  const user = data?.data || {};
 
   const [tabValue, setTabValue] = React.useState(0);
   const theme = useTheme();

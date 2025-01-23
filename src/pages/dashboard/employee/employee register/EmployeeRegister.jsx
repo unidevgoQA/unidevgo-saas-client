@@ -71,7 +71,7 @@ const EmployeeRegister = () => {
     <Grid
       container
       justifyContent="center"
-      alignItems="center"
+      alignItems="left"
       sx={{
         background: "var(--bg-color)",
         padding: "50px 20px",
@@ -80,7 +80,7 @@ const EmployeeRegister = () => {
       <Container maxWidth="xl">
         <Box
           sx={{
-            backgroundColor: "var(--bg-dark-blue-color)",
+            backgroundColor: "var(--text-white-color)",
             border: "1px solid var(--primary-color)",
             borderRadius: "5px",
             boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.2)",
@@ -91,9 +91,9 @@ const EmployeeRegister = () => {
             sx={{
               fontFamily: "Poppins, sans-serif",
               fontWeight: 700,
-              color: "var(--text-white-color)",
-              marginBottom: "20px",
-              textAlign: "center",
+              color: "var(--primary-color)",
+              marginBottom: "40px",
+              textAlign: "left",
             }}
             variant="h4"
           >
@@ -105,13 +105,13 @@ const EmployeeRegister = () => {
                 {
                   name: "name",
                   label: "Full Name",
-                  icon: <AiOutlineUser size={20} style={{ color: "var(--text-white-color)" }} />,
+                  icon: <AiOutlineUser size={20} style={{ color: "var(--primary-color)" }} />,
                   validation: { required: "Full Name is required" },
                 },
                 {
                   name: "email",
                   label: "Email Address",
-                  icon: <AiOutlineMail size={20} style={{ color: "var(--text-white-color)" }} />,
+                  icon: <AiOutlineMail size={20} style={{ color: "var(--primary-color)" }} />,
                   validation: {
                     required: "Email is required",
                     pattern: {
@@ -124,7 +124,7 @@ const EmployeeRegister = () => {
                   name: "password",
                   label: "Password",
                   type: "password",
-                  icon: <AiOutlineLock size={20} style={{ color: "var(--text-white-color)" }} />,
+                  icon: <AiOutlineLock size={20} style={{ color: "var(--primary-color)" }} />,
                   validation: {
                     required: "Password is required",
                     minLength: {
@@ -136,7 +136,7 @@ const EmployeeRegister = () => {
                 {
                   name: "designation",
                   label: "Designation",
-                  icon: <AiOutlineUser size={20} style={{ color: "var(--text-white-color)" }} />,
+                  icon: <AiOutlineUser size={20} style={{ color: "var(--primary-color)" }} />,
                   validation: { required: "Designation is required" },
                 },
                 {
@@ -148,7 +148,7 @@ const EmployeeRegister = () => {
                 {
                   name: "contactNumber",
                   label: "Contact Number",
-                  icon: <AiOutlinePhone size={20} style={{ color: "var(--text-white-color)" }} />,
+                  icon: <AiOutlinePhone size={20} style={{ color: "var(--primary-color)" }} />,
                   validation: {
                     required: "Contact Number is required",
                     pattern: {
@@ -160,7 +160,7 @@ const EmployeeRegister = () => {
                 {
                   name: "address",
                   label: "Address",
-                  icon: <AiOutlineHome size={20} style={{ color: "var(--text-white-color)" }} />,
+                  icon: <AiOutlineHome size={20} style={{ color: "var(--primary-color)" }} />,
                   validation: { required: "Address is required" },
                 },
                 {
@@ -168,7 +168,7 @@ const EmployeeRegister = () => {
                   label: "Gender",
                   select: true,
                   options: ["Male", "Female", "Other"],
-                  icon: <FaGenderless size={20} style={{ color: "var(--text-white-color)" }} />,
+                  icon: <FaGenderless size={20} style={{ color: "var(--primary-color)" }} />,
                   validation: { required: "Gender is required" },
                 },
               ].map(
@@ -191,7 +191,7 @@ const EmployeeRegister = () => {
                                   {icon}
                                 </InputAdornment>
                               ),
-                              style: { color: "var(--text-white-color)" },
+                            
                             }
                           : undefined
                       }
@@ -199,29 +199,6 @@ const EmployeeRegister = () => {
                       {...register(name, validation)}
                       error={!!errors[name]}
                       helperText={errors[name]?.message}
-                      sx={{
-                        "& .MuiOutlinedInput-root": {
-                          color: "var(--text-white-color)",
-                          "& fieldset": {
-                            borderColor: "var(--text-white-color)",
-                          },
-                          "&:hover fieldset": {
-                            borderColor: "var(--text-white-color)",
-                          },
-                          "&.Mui-focused fieldset": {
-                            borderColor: "var(--text-white-color)",
-                          },
-                        },
-                        "& .MuiInputLabel-root": {
-                          color: "var(--text-white-color)",
-                        },
-                        "& .MuiInputLabel-root.Mui-focused": {
-                          color: "var(--text-white-color)",
-                        },
-                        "& .MuiFormHelperText-root": {
-                          color: "var(--text-white-color)",
-                        },
-                      }}
                     >
                       {select &&
                         options.map((option, idx) => (
@@ -244,10 +221,10 @@ const EmployeeRegister = () => {
                 fontWeight: "600",
                 textTransform: "none",
                 padding: "12px",
-                borderRadius: "8px",
+                borderRadius: "5px",
                 marginTop: "20px",
                 "&:hover": {
-                  backgroundColor: "#2c1bb6",
+                  backgroundColor: "var(--bg-dark-blue-color)",
                 },
               }}
             >

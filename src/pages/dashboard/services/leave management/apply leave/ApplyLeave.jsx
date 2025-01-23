@@ -53,7 +53,14 @@ const ApplyLeave = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success("Leave Applied Successfully", { id: "apply-leave" });
+      toast.success("Apply Successfully", {
+        style: {
+          background: "var(--primary-color)", 
+          color: "#ffffff", 
+          borderRadius: "5px", 
+          padding: "10px", 
+        },
+      });
     }
   }, [isSuccess]);
 
@@ -67,7 +74,7 @@ const ApplyLeave = () => {
       <Container maxWidth="xl">
         <Box
           sx={{
-            backgroundColor: "var(--bg-dark-blue-color)",
+            backgroundColor: "var(--text-white-color)",
             borderRadius: "5px",
             padding: "30px",
             border: "1px solid var(--primary-color)",
@@ -76,20 +83,20 @@ const ApplyLeave = () => {
         >
           <Typography
             variant="h4"
-            align="center"
+            align="left"
             sx={{
               fontWeight: 700,
-              color: "var(--text-white-color)",
+              color: "var(--primary-color)",
               marginBottom: "10px",
             }}
           >
             Apply Leave
           </Typography>
           <Typography
-            align="center"
+            align="left"
             sx={{
               fontWeight: 500,
-              color: "var(--text-white-color)",
+              color: "var(--primary-color)",
               marginBottom: "30px",
             }}
           >
@@ -109,7 +116,7 @@ const ApplyLeave = () => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <AiOutlineClockCircle size={20} color="var(--text-white-color)" />
+                        <AiOutlineClockCircle size={20} color="var(--primary-color)" />
                       </InputAdornment>
                     ),
                   }}
@@ -118,29 +125,7 @@ const ApplyLeave = () => {
                   })}
                   error={!!errors.leaveFrom}
                   helperText={errors.leaveFrom?.message}
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      color: "var(--text-white-color)",
-                      "& fieldset": {
-                        borderColor: "var(--text-white-color)",
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "var(--text-white-color)",
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "var(--text-white-color)",
-                      },
-                    },
-                    "& .MuiInputLabel-root": {
-                      color: "var(--text-white-color)",
-                    },
-                    "& .MuiInputLabel-root.Mui-focused": {
-                      color: "var(--text-white-color)",
-                    },
-                    "& .MuiFormHelperText-root": {
-                      color: "var(--text-white-color)",
-                    },
-                  }}
+                 
                 />
               </Grid>
 
@@ -155,7 +140,7 @@ const ApplyLeave = () => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <AiOutlineClockCircle size={20} color="var(--text-white-color)" />
+                        <AiOutlineClockCircle size={20} color="var(--primary-color)" />
                       </InputAdornment>
                     ),
                   }}
@@ -164,29 +149,6 @@ const ApplyLeave = () => {
                   })}
                   error={!!errors.leaveTo}
                   helperText={errors.leaveTo?.message}
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      color: "var(--text-white-color)",
-                      "& fieldset": {
-                        borderColor: "var(--text-white-color)",
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "var(--text-white-color)",
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "var(--text-white-color)",
-                      },
-                    },
-                    "& .MuiInputLabel-root": {
-                      color: "var(--text-white-color)",
-                    },
-                    "& .MuiInputLabel-root.Mui-focused": {
-                      color: "var(--text-white-color)",
-                    },
-                    "& .MuiFormHelperText-root": {
-                      color: "var(--text-white-color)",
-                    },
-                  }}
                 />
               </Grid>
 
@@ -200,7 +162,7 @@ const ApplyLeave = () => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <AiOutlineNumber size={20} color="var(--text-white-color)" />
+                        <AiOutlineNumber size={20} color="var(--primary-color)" />
                       </InputAdornment>
                     ),
                   }}
@@ -209,29 +171,6 @@ const ApplyLeave = () => {
                   })}
                   error={!!errors.totalDays}
                   helperText={errors.totalDays?.message}
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      color: "var(--text-white-color)",
-                      "& fieldset": {
-                        borderColor: "var(--text-white-color)",
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "var(--text-white-color)",
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "var(--text-white-color)",
-                      },
-                    },
-                    "& .MuiInputLabel-root": {
-                      color: "var(--text-white-color)",
-                    },
-                    "& .MuiInputLabel-root.Mui-focused": {
-                      color: "var(--text-white-color)",
-                    },
-                    "& .MuiFormHelperText-root": {
-                      color: "var(--text-white-color)",
-                    },
-                  }}
                 />
               </Grid>
 
@@ -244,7 +183,7 @@ const ApplyLeave = () => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <AiOutlineFieldTime size={20} color="var(--text-white-color)" />
+                        <AiOutlineFieldTime size={20} color="var(--primary-color))" />
                       </InputAdornment>
                     ),
                   }}
@@ -253,29 +192,6 @@ const ApplyLeave = () => {
                   })}
                   error={!!errors.leaveType}
                   helperText={errors.leaveType?.message}
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      color: "var(--text-white-color)",
-                      "& fieldset": {
-                        borderColor: "var(--text-white-color)",
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "var(--text-white-color)",
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "var(--text-white-color)",
-                      },
-                    },
-                    "& .MuiInputLabel-root": {
-                      color: "var(--text-white-color)",
-                    },
-                    "& .MuiInputLabel-root.Mui-focused": {
-                      color: "var(--text-white-color)",
-                    },
-                    "& .MuiFormHelperText-root": {
-                      color: "var(--text-white-color)",
-                    },
-                  }}
                 />
               </Grid>
             </Grid>
@@ -294,7 +210,7 @@ const ApplyLeave = () => {
                 padding: "10px",
                 borderRadius: "5px",
                 "&:hover": {
-                  backgroundColor: "var(--primary-color-dark)",
+                  backgroundColor: "var(--bg-dark-blue-color)",
                 },
               }}
             >
